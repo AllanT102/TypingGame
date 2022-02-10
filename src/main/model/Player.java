@@ -6,10 +6,11 @@ import java.util.List;
 
 public class Player {
 
-    String name;
-    Scoreboard sb;
+    private String name;
+    private Scoreboard sb;
 
-    // Constructs a new Player with given name, empty scoreboard, AND???????????
+    // REQUIRES: length of name cannot be zero
+    // EFFECTS: Constructs a new Player with given name, empty scoreboard
     public Player(String name) {
         this.name = name;
         sb = new Scoreboard();

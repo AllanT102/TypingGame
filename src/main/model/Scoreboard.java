@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Scoreboard {
 
-    ArrayList<Score> sb;
-    String sbAsString;
+    private ArrayList<Score> sb;
+    private String sbAsString;
 
     // Constructs a scoreboard that is initially empty
     public Scoreboard() {

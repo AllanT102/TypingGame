@@ -2,9 +2,9 @@ package model;
 
 public class Score {
 
-    int plScore;
-    int acc;
-    String results;
+    private int plScore;
+    private int acc;
+    private String results;
 
     // EFFECTS: constructs a score with initial score of 0;
     public Score() {
@@ -13,9 +13,9 @@ public class Score {
 
     // MODIFIES: this
     // EFFECTS: calculates score from given run by the product of
-    //          time it took to type paragraph and percentage accuracy * 1000
-    public void calculateScore(int time, int acc) {
-        this.plScore = time * acc * 1000;
+    //          percentage accuracy * 1000
+    public void calculateScore(int acc) {
+        this.plScore = acc * 1000;
     }
 
     // MODIFIES: this
@@ -27,8 +27,8 @@ public class Score {
     // REQUIRES: must have existing score and accuracy
     // EFFECTS: prints out a string that displays score and accuracy
     public String printResults() {
-        results = new String("Nice job! You got a score of " + getScore()
-                + ", and you had an accuracy of " + getAcc());
+        results = new String("Score: " + getScore()
+                + "Accuracy: " + getAcc());
         return results;
     }
 
