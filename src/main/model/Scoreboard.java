@@ -41,8 +41,12 @@ public class Scoreboard {
     public String getScoreboardAsString() {
         sbAsString = new String("Scoreboard: ");
         for (int i = 0; i < 6; i++) {
-            String newScore = new String(i + ". " + sb.get(i).getScore() + " Points ");
-            sbAsString.concat(newScore);
+            if (sb.size() - 1 < i) {
+                return sbAsString;
+            } else {
+                String newScore = new String(i + ". " + sb.get(i).getScore() + " Points \n");
+                sbAsString.concat(newScore);
+            }
         }
         return sbAsString;
     }

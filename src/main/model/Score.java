@@ -28,7 +28,7 @@ public class Score {
     // EFFECTS: prints out a string that displays score and accuracy
     public String printResults() {
         results = new String("Score: " + getScore()
-                + "Accuracy: " + getAcc());
+                + " Accuracy: " + getAcc());
         return results;
     }
 

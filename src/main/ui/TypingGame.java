@@ -3,6 +3,7 @@ package ui;
 import model.Paragraph;
 import model.Player;
 import model.Score;
+import model.Scoreboard;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -22,7 +23,7 @@ public class TypingGame {
 
     // Constructs a Typing Game
     // EFFECTS: creates a paragraph words on screen, constructs a score, and player
-    private TypingGame() {
+    public TypingGame() {
         runGame();
     }
 
@@ -35,19 +36,24 @@ public class TypingGame {
         init();
 
         while (keepGoing) {
-            playerCreationMenu();
             mainMenu();
             command = input.next();
 
-            if (command.equals("P")) {
-                startGame();
-            } else if (command.equals("S")) {
-                displayHighscores();
-            } else if (command.equals("Q")) {
+            if (command.equals("Q")) {
                 keepGoing = false;
+            } else {
+                processCommand(command);
             }
         }
         System.out.println("Thanks for playing!");
+    }
+
+    private void processCommand(String command) {
+        if (command.equals("P")) {
+            startGame();
+        } else if (command.equals("S")) {
+            displayHighscores();
+        }
     }
 
     // MODIFIES: this
@@ -55,48 +61,36 @@ public class TypingGame {
     private void init() {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+
+        paragraph = new Paragraph();
+        score = new Score();
+        playerCreationMenu();
     }
 
     private void startGame() {
-        paragraph = new Paragraph();
-        score = new Score();
-
-        System.out.println("\nType the following words as best and fast as you can! Press Enter when you are done!");
+        System.out.println("\nType the following words as best and fast as you can! Press Enter when you are done!\n");
         System.out.println(paragraph.getParagraphAsString());
         String typedParagraph = input.next();
         paragraph.setInputPara(typedParagraph);
 
-        // add user input "enter" so that program knows game is done
-
-
-
+        String endGame = input.nextLine();
         paragraph.getNumTypedCorrect(paragraph, paragraph.getParagraphAsString(), typedParagraph);
+
+        displayScore();
+
     }
 
-    private class EnterHandler implements ActionListener {
+    private void displayScore() {
+        score.calculateAccuracy(paragraph.getTotalChar(), paragraph.getTypedCorrect());
+        score.calculateScore(score.getAcc());
+        player.getScoreboard().addScore(score);
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-        }
-
-        // EFFECTS:
+        System.out.println("Congratulations! These are your results. \n" + score.printResults());
     }
-
-
-    private void endGame(KeyEvent ke){
-        if (ke.getKeyCode() == KeyEvent.VK_ENTER){
-            score.calculateAccuracy(paragraph.getTotalChar(), paragraph.getTypedCorrect());
-            score.calculateScore(score.getAcc());
-            
-            System.out.println("Congratulations! These are your results. \n" + score.printResults());
-        }
-    }
-
-    private void displayScore(){
-        }
 
     private void displayHighscores() {
+        System.out.println("Here are your top 5 scores: ");
+        player.getScoreboard().getScoreboardAsString();
     }
 
     // EFFECTS: displays player creation menu for user
@@ -119,6 +113,7 @@ public class TypingGame {
         System.out.println("\n Welcome " + player.getName());
         System.out.println("\n Press P to play");
         System.out.println("\n Press S to find your top 5 scores");
+        System.out.printf("\n Press Q if you are done playing\n");
     }
 
 

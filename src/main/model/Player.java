@@ -17,13 +17,11 @@ public class Player {
     }
 
     public String getName() {
-        return null;
+        return name;
     }
 
-
-    // MODIFIES: this
-    // EFFECTS: sets this player's name to given name
-    public void setName() {
+    public Scoreboard getScoreboard() {
+        return sb;
     }
 
     // EFFECTS : gets list of top 5 scores and returns it

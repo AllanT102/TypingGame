@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Paragraph {
 
-    private String[] allWords = {"hello", "cheese", "typing", "game", "final", "excellent", "missile", "configuration", "invaders",
-            "tank", "tired", "bubble tea", "model", "summer", "winter", "spring", "autumn", "sushi", "tree",
+    private String[] allWords = {"hello", "cheese", "typing", "game", "final", "excellent", "missile", "configuration",
+            "invaders", "tank", "tired", "bubble tea", "model", "summer", "winter", "spring", "autumn", "sushi", "tree",
             "Australia", "olympics", "Canada", "Space", "array", "computer", "science", "biology", "paragraph",
             "these", "are", "my", "words", "it", "doesn't", "make", "any", "sense", "but", "it's", "okay",
             "Vancouver"};
@@ -90,6 +90,9 @@ public class Paragraph {
     public void getNumTypedCorrect(Paragraph p, String orgPara, String inputPara) {
 
         for (int i = 0; i < p.getNumWords(); i++) {
+            if (convertStringToListWithChar(inputPara).size() - 1 < i) {
+                break;
+            }
             if (convertStringToListWithChar(orgPara).get(i) == convertStringToListWithChar(inputPara).get(i)) {
                 this.typedCorrect++;
             }
