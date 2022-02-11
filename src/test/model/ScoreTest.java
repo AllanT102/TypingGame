@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ScoreTest {
 
-    Score scoreTest;
+    private Score scoreTest;
 
     @BeforeEach
     void runBefore(){
@@ -59,6 +59,10 @@ public class ScoreTest {
     void testSetScore() {
         scoreTest.setScore(100);
         assertEquals(100, scoreTest.getScore());
+        scoreTest.setScore(0);
+        assertEquals(0, scoreTest.getScore());
+        scoreTest.setScore(1);
+        assertEquals(1, scoreTest.getScore());
     }
 
 }

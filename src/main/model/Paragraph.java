@@ -28,7 +28,6 @@ public class Paragraph {
         this.paragraphAsString = convertParaToString(paragraphAsList);
     }
 
-    // getters
     public List<String> getParagraphAsList() {
         return paragraphAsList;
     }

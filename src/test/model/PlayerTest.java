@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
-    Player pTest;
+    private Player pTest;
 
     @BeforeEach
     void runBefore() {

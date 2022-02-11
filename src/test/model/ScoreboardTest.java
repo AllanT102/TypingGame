@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ScoreboardTest {
 
-    Scoreboard sbTest;
-    Score s1;
-    Score s2;
-    Score s3;
-    Score s4;
-    Score s5;
+    private Scoreboard sbTest;
+    private Score s1;
+    private Score s2;
+    private Score s3;
+    private Score s4;
+    private Score s5;
 
     @BeforeEach
     void runBefore(){

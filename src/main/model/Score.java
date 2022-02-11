@@ -1,6 +1,6 @@
 package model;
 
-// represents an individual score that is achieved by the user after playing one typing game
+// Represents an individual score that is achieved by the user after playing one typing game
 public class Score {
 
     private double plScore;
@@ -24,6 +24,7 @@ public class Score {
         return this.acc;
     }
 
+    // REQUIRES: num >= 0
     // MODIFIES: this
     // EFFECTS: sets score to num, for tests
     public void setScore(double num) {
@@ -45,7 +46,7 @@ public class Score {
         this.acc = Math.round(tc / tl * 100);
     }
 
-    // REQUIRES: must have existing score and accuracy
+
     // EFFECTS: sets results
     public void setResults() {
         this.results = new String("Score: " + getScore()

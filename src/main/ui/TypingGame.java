@@ -6,6 +6,7 @@ import model.Score;
 import model.Scoreboard;
 import java.util.Scanner;
 
+// A typing game class where users can create a player, practice their typing skills, and view scores
 public class TypingGame {
 
     private Player player;
@@ -40,6 +41,8 @@ public class TypingGame {
         System.out.println("Thanks for playing!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("P")) {
             startGame();
@@ -59,6 +62,8 @@ public class TypingGame {
         playerCreationMenu();
     }
 
+    // MODIFIES: this
+    //EFFECTS: starts the typing game
     private void startGame() {
         paragraph = new Paragraph();
         score = new Score();
@@ -75,6 +80,8 @@ public class TypingGame {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays score and adds score to player history
     private void displayScore() {
         score.calculateAccuracy(paragraph.getTotalChar(),
                 paragraph.getNumTypedCorrect(paragraph, paragraph.getParagraphAsString(), paragraph.getInputPara()));
@@ -85,11 +92,13 @@ public class TypingGame {
         System.out.println("Congratulations! These are your results. \n" + score.getResults());
     }
 
+    // EFFECTS: displays top 5 scores of player
     private void displayHighscores() {
         System.out.println("Here are your top 5 scores: ");
         System.out.println(player.getScoreboard().convertScoreboardToString());
     }
 
+    // MODIFIES: this
     // EFFECTS: displays player creation menu for user
     private void playerCreationMenu() {
         System.out.println("Typing Game\n");
@@ -98,6 +107,7 @@ public class TypingGame {
     }
 
     // REQUIRES: input name must be at least 3 letters long
+    // MODIFIES: this
     // EFFECTS: creates player account
     private void createPlayer() {
         String name = input.next();
