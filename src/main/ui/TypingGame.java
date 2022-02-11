@@ -4,11 +4,6 @@ import model.Paragraph;
 import model.Player;
 import model.Score;
 import model.Scoreboard;
-
-import javax.swing.*;
-import java.awt.event.*;
-
-import java.security.Key;
 import java.util.Scanner;
 
 public class TypingGame {
@@ -17,9 +12,6 @@ public class TypingGame {
     private Score score;
     private Paragraph paragraph;
     private Scanner input;
-
-    private KeyListener kl;
-    private KeyEvent ke;
 
     // Constructs a Typing Game
     // EFFECTS: creates a paragraph words on screen, constructs a score, and player
@@ -53,6 +45,8 @@ public class TypingGame {
             startGame();
         } else if (command.equals("S")) {
             displayHighscores();
+        } else {
+            System.out.println("Selection is not valid");
         }
     }
 
@@ -62,12 +56,13 @@ public class TypingGame {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
 
-        paragraph = new Paragraph();
-        score = new Score();
         playerCreationMenu();
     }
 
     private void startGame() {
+        paragraph = new Paragraph();
+        score = new Score();
+
         System.out.println("\nType the following words as best and fast as you can! Press Enter when you are done!\n");
         System.out.println(paragraph.getParagraphAsString());
         String typedParagraph = input.next();
@@ -81,22 +76,24 @@ public class TypingGame {
     }
 
     private void displayScore() {
-        score.calculateAccuracy(paragraph.getTotalChar(), paragraph.getTypedCorrect());
+        score.calculateAccuracy(paragraph.getTotalChar(),
+                paragraph.getNumTypedCorrect(paragraph, paragraph.getParagraphAsString(), paragraph.getInputPara()));
         score.calculateScore(score.getAcc());
+        score.setResults();
         player.getScoreboard().addScore(score);
 
-        System.out.println("Congratulations! These are your results. \n" + score.printResults());
+        System.out.println("Congratulations! These are your results. \n" + score.getResults());
     }
 
     private void displayHighscores() {
         System.out.println("Here are your top 5 scores: ");
-        player.getScoreboard().getScoreboardAsString();
+        System.out.println(player.getScoreboard().convertScoreboardToString());
     }
 
     // EFFECTS: displays player creation menu for user
     private void playerCreationMenu() {
-        System.out.println("\n Typing Game");
-        System.out.println("\n Let's create your account first! Enter your username below!");
+        System.out.println("Typing Game\n");
+        System.out.println("Let's create your account first! Enter your username below!");
         createPlayer();
     }
 
@@ -105,15 +102,15 @@ public class TypingGame {
     private void createPlayer() {
         String name = input.next();
         player = new Player(name);
-        System.out.println("You have chosen the name " + player.getName());
+        System.out.println("You have chosen the name: \n" + player.getName());
     }
 
     // EFFECTS: displays player creation menu for user
     private void mainMenu() {
-        System.out.println("\n Welcome " + player.getName());
-        System.out.println("\n Press P to play");
-        System.out.println("\n Press S to find your top 5 scores");
-        System.out.printf("\n Press Q if you are done playing\n");
+        System.out.println("\nWelcome " + player.getName() + "!");
+        System.out.println("\nPress P to play\n");
+        System.out.println("Press S to find your top 5 scores\n");
+        System.out.printf("Press Q if you are done playing\n");
     }
 
 

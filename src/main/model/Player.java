@@ -1,9 +1,8 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
-
+// Represents the player account that has a name, and scoreboard
 public class Player {
 
     private String name;
@@ -24,13 +23,8 @@ public class Player {
         return sb;
     }
 
-    // EFFECTS : gets list of top 5 scores and returns it
-    public ArrayList<Score> getScoresAsList() {
-        return sb.getScoreboardAsList();
-    }
-
-    // EFFECTS: gets string of top 5 scores and returns it
-    public String getScoresAsString() {
-        return sb.getScoreboardAsString();
-    }
+//    // EFFECTS : gets list of top 5 scores and returns it
+//    public ArrayList<Score> getScoresAsList() {
+//        return sb.getScoreboardAsList();
+//    }
 }

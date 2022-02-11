@@ -1,10 +1,11 @@
 package model;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+// Represents the paragraph that the user will be typing and the paragraph that was typed by the user
 public class Paragraph {
 
     private String[] allWords = {"hello", "cheese", "typing", "game", "final", "excellent", "missile", "configuration",
@@ -19,65 +20,66 @@ public class Paragraph {
     private ArrayList<Character> paragraphAsListWithChar;
     private String paragraphAsString;
     private String inputPara;
-    private int typedCorrect;
+
+    // EFFECTS: constructs a paragraph as a list and as a string
+    public Paragraph() {
+        paragraphAsList = new ArrayList<>();
+        this.paragraphAsList = generateParagraph();
+        this.paragraphAsString = convertParaToString(paragraphAsList);
+    }
 
     // getters
+    public List<String> getParagraphAsList() {
+        return paragraphAsList;
+    }
+
     public String getParagraphAsString() {
         return paragraphAsString;
     }
 
-    public int getNumWords() {
-        return paragraphAsList.size();
-    }
-
-    public List<String> getParaAsList() {
-        return this.paragraphAsList;
-    }
-
-    // Constructs a paragraph
-    // EFFECTS: creates a paragraph as a list and as a string
-    public Paragraph() {
-        paragraphAsList = new ArrayList<>();
-        this.paragraphAsList = generateParagraph();
-        this.paragraphAsString = convertParaToString();
+    public String getInputPara() {
+        return inputPara;
     }
 
     // EFFECTS: gets total amount of characters in paragraph
     public int getTotalChar() {
-        return paragraphAsListWithChar.size();
+        return convertStringToListWithChar(paragraphAsString).size();
     }
 
-    // EFFECTS: gets number of characters that were typed correctly
-    public int getTypedCorrect() {
-        return typedCorrect;
-    }
 
     // MODIFIES: this
-    // EFFECTS: sets inputPara to the input paragraph
+    // EFFECTS: sets inputPara to the given string, used for tests
     public void setInputPara(String ip) {
         this.inputPara = ip;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets paragraph to the given string, used for tests
+    public void setParagraph(String s) {
+        this.paragraphAsString = s;
+    }
 
-    // EFFECTS: generates a list of words from wordBank, and list has to be of size 25, (24 by zero based indexing)
+
+    // EFFECTS: generates and returns a list of words from wordBank, and list has to be of size 25,
+    //          (24 by zero based indexing), there can be duplicate words
     public List<String> generateParagraph() {
         for (int i = 0; i < 25; i++) {
-            paragraphAsList.add(wordBank.get(i));
+            int random = (int) Math.floor(Math.random() * (allWords.length));
+            paragraphAsList.add(wordBank.get(random));
         }
         return paragraphAsList;
     }
 
-    // EFFECTS: converts the paragraph that is a list to a string
-    public String convertParaToString() {
+    // EFFECTS: returns and converts the paragraph that is a list of strings to one string connected by spaces
+    public String convertParaToString(List<String> p) {
         String stringPara = "";
-        for (String word : generateParagraph()) {
-            stringPara = stringPara + " " + word;
+        for (String word : p) {
+            stringPara = stringPara + word + " ";
         }
         return stringPara;
     }
 
-
-    // EFFECTS: creates list of characters within the paragraph
+    // EFFECTS: returns and converts the string to a list of individual characters
     public ArrayList<Character> convertStringToListWithChar(String p) {
         paragraphAsListWithChar = new ArrayList<>();
         for (char s : p.toCharArray()) {
@@ -86,17 +88,19 @@ public class Paragraph {
         return paragraphAsListWithChar;
     }
 
-    // EFFECTS: returns the number of characters typed correctly
-    public void getNumTypedCorrect(Paragraph p, String orgPara, String inputPara) {
-
-        for (int i = 0; i < p.getNumWords(); i++) {
+    // REQUIRES: orgPara must be the paragraph that is generated when instantiating p,
+    //           and the inputPara must be the paragraph that the user types
+    // EFFECTS: returns the number of characters typed correctly by comparing the user input to the actual paragraph
+    public double getNumTypedCorrect(Paragraph p, String orgPara, String inputPara) {
+        double typedCorrect = 0;
+        for (int i = 0; i < p.getTotalChar(); i++) {
             if (convertStringToListWithChar(inputPara).size() - 1 < i) {
-                break;
-            }
-            if (convertStringToListWithChar(orgPara).get(i) == convertStringToListWithChar(inputPara).get(i)) {
-                this.typedCorrect++;
+                return typedCorrect;
+            } else if (convertStringToListWithChar(orgPara).get(i) == convertStringToListWithChar(inputPara).get(i)) {
+                typedCorrect++;
             }
         }
+        return typedCorrect;
     }
 
 }

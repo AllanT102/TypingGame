@@ -1,24 +1,33 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
+
+// Represents the scoreboard that is attached to each player's account,
+// keeps a list of previous scores user has achieved
 public class Scoreboard {
 
     private ArrayList<Score> sb;
-    private String sbAsString;
 
-    // Constructs a scoreboard that is initially empty
+    // Constructs a scoreboard that initially has an empty list
     public Scoreboard() {
         sb = new ArrayList<>();
     }
+
+    public int getLength() {
+        return sb.size();
+    }
+
+    public ArrayList<Score> getScoreboardAsList() {
+        return sb;
+    }
+
 
     // MODIFIES: this
     // EFFECTS: resets the scoreboard
     public void resetScoreboard() {
         sb.clear();
     }
-
 
     // MODIFIES: this
     // EFFECTS: adds score to scoreboard (list of previous scores) and inserts it in the right spot in descending order
@@ -34,18 +43,14 @@ public class Scoreboard {
         return true;
     }
 
-    public ArrayList<Score> getScoreboardAsList() {
-        return sb;
-    }
-
-    public String getScoreboardAsString() {
-        sbAsString = new String("Scoreboard: ");
-        for (int i = 0; i < 6; i++) {
+    // EFFECTS: returns the scoreboard as a string
+    public String convertScoreboardToString() {
+        String sbAsString = "Scoreboard: \n";
+        for (int i = 0; i < 5; i++) {
             if (sb.size() - 1 < i) {
                 return sbAsString;
             } else {
-                String newScore = new String(i + ". " + sb.get(i).getScore() + " Points \n");
-                sbAsString.concat(newScore);
+                sbAsString = sbAsString + (i + 1) + ". " + sb.get(i).getScore() + " Points \n";
             }
         }
         return sbAsString;
