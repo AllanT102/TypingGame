@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an individual score that is achieved by the user after playing one typing game
-public class Score {
+public class Score implements Writable {
 
     private double plScore;
     private double acc;
@@ -53,6 +57,10 @@ public class Score {
                 + " Accuracy: " + getAcc() + "%");
     }
 
-
-
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Score", plScore + acc);
+        return json;
+    }
 }
