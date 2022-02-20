@@ -28,6 +28,12 @@ As a user, I want to be able to see the words that I need to type and the output
 As a user, I want to be able to see my percentage accuracy. 
 
 #### Phase 2
+
+As a user, I want to be able to save my player information so that I can see if I can get a higher score the 
+next time I play.
+
+As a user, I want to be able to load into the same player account the next time I play.
+
 #### Phase 3
 
 
