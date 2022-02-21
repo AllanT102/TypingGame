@@ -25,14 +25,16 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS opens writer; throws FileNotFoundException if destination file cannot be opened
     public void open() throws FileNotFoundException, IOException {
-        writer = new FileWriter(this.destination, false);
+        writer = new FileWriter(this.destination, true);
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of player to file
-    public void write(Player p) throws IOException {
+    public void write(Player p, JSONArray jsonArray) throws IOException {
         JSONObject json = p.toJson();
-        saveToFile(json.toString(TAB));
+        jsonArray.put(json);
+
+        saveToFile(jsonArray.toString(TAB));
     }
 
     // MODIFIES: this
@@ -43,12 +45,13 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes string to file
-    private void saveToFile(String json) throws IOException {
+    private void saveToFile(String jsonArray) throws IOException {
         jsonReader = new JsonReader(destination);
         String initialFileData = jsonReader.readFile(destination);
-
-        writer.write(initialFileData + json);
+        writer.write(jsonArray);
+//        writer.write(initialFileData + json);
     }
 }
 
 // SITE THIS a;sldjf;lasjd;flja;sldfj;alskdfj;lasdjfasdf
+// store json data as an array and acess each element to find player

@@ -4,6 +4,7 @@ import model.Paragraph;
 import model.Player;
 import model.Score;
 import model.Scoreboard;
+import org.json.JSONArray;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -21,10 +22,12 @@ public class TypingGame {
     private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private JSONArray jsonArray;
 
     // Constructs a Typing Game
     // EFFECTS: creates a paragraph words on screen, constructs a score, and player
-    public TypingGame() throws FileNotFoundException {
+    public TypingGame(JSONArray jsonArray) throws FileNotFoundException {
+        this.jsonArray = jsonArray;
         runGame();
     }
 
@@ -43,7 +46,7 @@ public class TypingGame {
             if (command.equals("Q")) {
                 try {
                     jsonWriter.open();
-                    jsonWriter.write(this.player);
+                    jsonWriter.write(this.player, jsonArray);
                     jsonWriter.close();
                     System.out.println("Player data has been saved! \n");
                 } catch (FileNotFoundException e) {
