@@ -48,6 +48,8 @@ public class TypingGame {
                     System.out.println("Player data has been saved! \n");
                 } catch (FileNotFoundException e) {
                     System.out.println("Unable to write to file: " + JSON_DATA);
+                } catch (IOException e) {
+                    System.out.println("Unable to read file!");
                 }
                 keepGoing = false;
             } else {
