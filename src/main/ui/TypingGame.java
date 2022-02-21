@@ -4,19 +4,27 @@ import model.Paragraph;
 import model.Player;
 import model.Score;
 import model.Scoreboard;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 // A typing game class where users can create a player, practice their typing skills, and view scores
 public class TypingGame {
-
+    private static final String JSON_DATA = "./data/player.json";
     private Player player;
     private Score score;
     private Paragraph paragraph;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // Constructs a Typing Game
     // EFFECTS: creates a paragraph words on screen, constructs a score, and player
-    public TypingGame() {
+    public TypingGame() throws FileNotFoundException {
         runGame();
     }
 
@@ -33,6 +41,14 @@ public class TypingGame {
             command = input.next();
 
             if (command.equals("Q")) {
+                try {
+                    jsonWriter.open();
+                    jsonWriter.write(this.player);
+                    jsonWriter.close();
+                    System.out.println("Player data has been saved! \n");
+                } catch (FileNotFoundException e) {
+                    System.out.println("Unable to write to file: " + JSON_DATA);
+                }
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -56,6 +72,8 @@ public class TypingGame {
     // MODIFIES: this
     // EFFECTS: initializes scanner system, and sets delimiter
     private void init() {
+        jsonReader = new JsonReader(JSON_DATA);
+        jsonWriter = new JsonWriter(JSON_DATA);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
 
@@ -102,9 +120,40 @@ public class TypingGame {
     // EFFECTS: displays player creation menu for user
     private void playerCreationMenu() {
         System.out.println("Typing Game\n");
-        System.out.println("Let's create your account first! Enter your username below!");
-        createPlayer();
+        System.out.println("Do you already have an account? Press Y if yes, N if no.");
+        String yn = input.next();
+
+        if (yn.equals("Y")) {
+            System.out.println("Type in your username!");
+            String existingName = input.next();
+            try {
+                loadPlayerData(existingName);
+                System.out.println("Welcome back, " + existingName);
+            } catch (IOException e) {
+                System.out.println("Player name is not found\n");
+                System.out.println("If you would like to try again, press T.\n"
+                        + "If you would like to create a new player, press N.");
+                String command = input.next();
+                processCreationCommand(command);
+            }
+        } else if (yn.equals("N")) {
+            System.out.println("No problem, let's create a new account for you. Enter below a username!");
+            createPlayer();
+        }
     }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command in player creation menu
+    private void processCreationCommand(String command) {
+        if (command.equals("T")) {
+            playerCreationMenu();
+        } else if (command.equals("N")) {
+            System.out.println("Let's create your account first! Enter your username below!");
+            createPlayer();
+        }
+    }
+
+
 
     // REQUIRES: input name must be at least 3 letters long
     // MODIFIES: this
@@ -121,6 +170,12 @@ public class TypingGame {
         System.out.println("\nPress P to play\n");
         System.out.println("Press S to find your top 5 scores\n");
         System.out.printf("Press Q if you are done playing\n");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads player data stored in JSON_DATA
+    private void loadPlayerData(String name) throws IOException {
+        jsonReader.read();
     }
 
 

@@ -2,11 +2,12 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import persistence.Writable;
 
 // Represents an individual score that is achieved by the user after playing one typing game
 public class Score implements Writable {
-
     private double plScore;
     private double acc;
     private String results;
@@ -35,6 +36,13 @@ public class Score implements Writable {
         this.plScore = num;
     }
 
+    // REQUIRES: accuracy  >= 0
+    // MODIFIES: this
+    // EFFECTS: sets accuracy to acc
+    public void setAcc(double acc) {
+        this.acc = acc;
+    }
+
     // REQUIRES: acc must be >= 0
     // MODIFIES: this
     // EFFECTS: calculates score from given run by the product of
@@ -60,7 +68,8 @@ public class Score implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Score", plScore + acc);
+        json.put("Score", plScore);
+        json.put("Accuracy", acc);
         return json;
     }
 }

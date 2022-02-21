@@ -32,7 +32,7 @@ public class Player implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Name", name);
-        json.put("Scoreboard", sbToJson());
+        json.put(name.toString(), sbToJson());
         return json;
     }
 
