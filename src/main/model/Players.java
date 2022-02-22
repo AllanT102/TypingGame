@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,32 @@ public class Players {
 
     // EFFECTS: constructs an empty list of players
     public Players() {
-        playerList = new ArrayList<Player>();
+        playerList = new ArrayList<>();
+    }
+
+    // EFFECTS: returns player at given index
+    public Player getPlayer(int i) {
+        return playerList.get(i);
+    }
+
+    // EFFECTS: returns size of array
+    public int length() {
+        return playerList.size();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds player to the end of the list
+    public void addPlayer(Player p) {
+        playerList.add(p);
+    }
+
+    // EFFECTS: returns playerList as a JSON array
+    public JSONArray toJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : playerList) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
     }
 }

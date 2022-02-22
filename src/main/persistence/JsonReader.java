@@ -1,9 +1,11 @@
 package persistence;
 
 import model.Player;
+import model.Players;
 import model.Score;
 import model.Scoreboard;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -16,17 +18,24 @@ import java.util.stream.Stream;
 // Represents a reader that reads player from JSON data stored in file
 public class JsonReader {
     private String source;
+    private Players allPlayers;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
         this.source = source;
+        this.allPlayers = new Players();
+    }
+
+    // EFFECTS: returns allPlayers in JSON_DATA
+    public Players getAllPlayers() {
+        return this.allPlayers;
     }
 
     // EFFECTS: reads player from file and returns it and throws IOException if an error occurs while reading data
-    public Player read() throws IOException {
+    public Players read() throws IOException, JSONException {
         String jsonData = readFile(source);
-        JSONObject jsonObject = new JSONObject(jsonData);
-        return parsePlayer(jsonObject);
+        JSONArray jsonArray = new JSONArray(jsonData);
+        return parsePlayers(jsonArray);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -43,12 +52,16 @@ public class JsonReader {
 
     // MIGHT NEED TO INPUT THE STRING NAME INSTEAD SO THAT WE CAN SAVE MULTIPLE PLAYERS! AND ALSO STORE SCORES
     // WITH KEY VALUE OF NAME
-    // EFFECTS: parses workroom from JSON object and returns it
-    private Player parsePlayer(JSONObject jsonObject) {
-        String name = jsonObject.getString("Name");
-        Player p = new Player(name);
-        addScores(p, jsonObject, name);
-        return p;
+    // EFFECTS: parses players from JSON object and returns it
+    private Players parsePlayers(JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject playerJson = jsonArray.getJSONObject(i);
+            String name = playerJson.getString("Name");
+            Player p = new Player(name);
+            addScores(p, playerJson, name);
+            allPlayers.addPlayer(p);
+        }
+        return allPlayers;
     }
 
     // MODIFIES: p

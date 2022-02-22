@@ -2,6 +2,7 @@ package persistence;
 
 
 import model.Player;
+import model.Players;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,14 +26,13 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS opens writer; throws FileNotFoundException if destination file cannot be opened
     public void open() throws FileNotFoundException, IOException {
-        writer = new FileWriter(this.destination, true);
+        writer = new FileWriter(this.destination, false);
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of player to file
-    public void write(Player p) throws IOException {
-        JSONObject json = p.toJson();
-
+    public void write(Players p) throws IOException {
+        JSONArray json = p.toJson();
         saveToFile(json.toString(TAB));
     }
 
@@ -45,8 +45,6 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes string to file
     private void saveToFile(String json) throws IOException {
-        jsonReader = new JsonReader(destination);
-        String initialFileData = jsonReader.readFile(destination);
         writer.write(json);
     }
 }

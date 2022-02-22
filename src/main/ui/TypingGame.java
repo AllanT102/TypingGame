@@ -1,21 +1,22 @@
 package ui;
 
-import model.Paragraph;
-import model.Player;
-import model.Score;
-import model.Scoreboard;
+import model.*;
+import model.exceptions.PlayerNotFoundException;
 import org.json.JSONArray;
+import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLOutput;
+import java.util.Locale;
 import java.util.Scanner;
 
 // A typing game class where users can create a player, practice their typing skills, and view scores
 public class TypingGame {
     private static final String JSON_DATA = "./data/player.json";
+    private Players allPlayers;
     private Player player;
     private Score score;
     private Paragraph paragraph;
@@ -44,7 +45,7 @@ public class TypingGame {
             if (command.equals("Q")) {
                 try {
                     jsonWriter.open();
-                    jsonWriter.write(this.player);
+                    jsonWriter.write(this.allPlayers);
                     jsonWriter.close();
                     System.out.println("Player data has been saved! \n");
                 } catch (FileNotFoundException e) {
@@ -77,6 +78,16 @@ public class TypingGame {
     private void init() {
         jsonReader = new JsonReader(JSON_DATA);
         jsonWriter = new JsonWriter(JSON_DATA);
+        allPlayers = new Players();
+
+        try {
+            loadAllPlayers();
+        } catch (IOException e) {
+            System.out.println("Error when loading players.");
+        } catch (JSONException e) {
+            // do nothing
+        }
+
         input = new Scanner(System.in);
         input.useDelimiter("\n");
 
@@ -132,10 +143,10 @@ public class TypingGame {
             try {
                 loadPlayerData(existingName);
                 System.out.println("Welcome back, " + existingName);
-            } catch (IOException e) {
-                System.out.println("Player name is not found\n");
+            } catch (PlayerNotFoundException e) {
+                System.out.println("Player name is not found!\n");
                 System.out.println("If you would like to try again, press T.\n"
-                        + "If you would like to create a new player, press N.");
+                        + "\nIf you would like to create a new player, press N.");
                 String command = input.next();
                 processCreationCommand(command);
             }
@@ -153,6 +164,10 @@ public class TypingGame {
         } else if (command.equals("N")) {
             System.out.println("Let's create your account first! Enter your username below!");
             createPlayer();
+        } else {
+            System.out.println("Invalid key, please try again");
+
+            playerCreationMenu();
         }
     }
 
@@ -164,6 +179,7 @@ public class TypingGame {
     private void createPlayer() {
         String name = input.next();
         player = new Player(name);
+        allPlayers.addPlayer(player);
         System.out.println("You have chosen the name: \n" + player.getName());
     }
 
@@ -176,9 +192,23 @@ public class TypingGame {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads player data stored in JSON_DATA
-    private void loadPlayerData(String name) throws IOException {
+    // EFFECTS: tries to find matching player name in allPlayers, if not found PlayerNotFoundException is thrown
+    private Boolean loadPlayerData(String name) {
+        for (int i = 0; i < allPlayers.length(); i++) {
+            String plName = allPlayers.getPlayer(i).getName();
+            if (name.equals(plName)) {
+                this.player = allPlayers.getPlayer(i);
+                return true;
+            }
+        }
+        throw new PlayerNotFoundException();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads all players stored in JSON_DATA, and adds each individual player to allPlayers
+    private void loadAllPlayers() throws IOException, JSONException {
         jsonReader.read();
+        this.allPlayers = jsonReader.getAllPlayers();
     }
 
 
