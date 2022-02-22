@@ -22,12 +22,10 @@ public class TypingGame {
     private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private JSONArray jsonArray;
 
     // Constructs a Typing Game
     // EFFECTS: creates a paragraph words on screen, constructs a score, and player
-    public TypingGame(JSONArray jsonArray) throws FileNotFoundException {
-        this.jsonArray = jsonArray;
+    public TypingGame() throws FileNotFoundException {
         runGame();
     }
 
@@ -46,7 +44,7 @@ public class TypingGame {
             if (command.equals("Q")) {
                 try {
                     jsonWriter.open();
-                    jsonWriter.write(this.player, jsonArray);
+                    jsonWriter.write(this.player);
                     jsonWriter.close();
                     System.out.println("Player data has been saved! \n");
                 } catch (FileNotFoundException e) {

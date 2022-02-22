@@ -30,11 +30,10 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of player to file
-    public void write(Player p, JSONArray jsonArray) throws IOException {
+    public void write(Player p) throws IOException {
         JSONObject json = p.toJson();
-        jsonArray.put(json);
 
-        saveToFile(jsonArray.toString(TAB));
+        saveToFile(json.toString(TAB));
     }
 
     // MODIFIES: this
@@ -45,11 +44,10 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes string to file
-    private void saveToFile(String jsonArray) throws IOException {
+    private void saveToFile(String json) throws IOException {
         jsonReader = new JsonReader(destination);
         String initialFileData = jsonReader.readFile(destination);
-        writer.write(jsonArray);
-//        writer.write(initialFileData + json);
+        writer.write(json);
     }
 }
 
