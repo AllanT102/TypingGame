@@ -24,6 +24,11 @@ public class Players {
         return playerList.size();
     }
 
+    // EFFECTS: returns whether or not player is in list
+    public Boolean contains(Player p) {
+        return playerList.contains(p);
+    }
+
     // MODIFIES: this
     // EFFECTS: adds player to the end of the list
     public void addPlayer(Player p) {

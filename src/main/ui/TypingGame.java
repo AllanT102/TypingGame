@@ -178,9 +178,25 @@ public class TypingGame {
     // EFFECTS: creates player account
     private void createPlayer() {
         String name = input.next();
+
+        while (!nameIsValid(name)) {
+            System.out.println("Sorry, that username has been taken, try again! Enter your username.\n");
+            name = input.next();
+        }
         player = new Player(name);
         allPlayers.addPlayer(player);
         System.out.println("You have chosen the name: \n" + player.getName());
+
+    }
+
+    // EFFECTS: checks if name is already in allPlayers
+    public Boolean nameIsValid(String name) {
+        for (int i = 0; i < allPlayers.length(); i++) {
+            if (name.equals(allPlayers.getPlayer(i).getName())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // EFFECTS: displays player creation menu for user
