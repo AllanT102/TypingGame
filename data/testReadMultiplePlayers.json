@@ -7,7 +7,7 @@
       },
       {
         "Score": 41000,
-        "Accuracy": 41
+        "Accuracy": 14
       },
       {
         "Score": 3000,
@@ -19,11 +19,11 @@
   {
     "Lebron James": [
       {
-        "Score": 100000,
-        "Accuracy": 100
+        "Score": 41000,
+        "Accuracy": 14
       },
       {
-        "Score": 41000,
+        "Score": 1234,
         "Accuracy": 41
       }
     ],
@@ -32,14 +32,27 @@
   {
     "Kobe Bryant": [
       {
+        "Score": 100000,
+        "Accuracy": 100
+      },
+      {
+        "Score": 41000,
+        "Accuracy": 14
+      }
+    ],
+    "Name": "Kobe Bryant"
+  },
+  {
+    "Stephen Curry": [
+      {
         "Score": 41000,
         "Accuracy": 41
       },
       {
-        "Score": 3000,
-        "Accuracy": 3
+        "Score": 1234,
+        "Accuracy": 41
       }
     ],
-    "Name": "Kobe Bryant"
+    "Name": "Stephen Curry"
   }
 ]

@@ -14,36 +14,48 @@ public class JsonReaderTest extends JsonTest {
     Scoreboard sb;
     Scoreboard sbLbj;
     Scoreboard sbKb;
+    Scoreboard sbCurr;
     Score s1;
     Score s2;
     Score s3;
+    Score s4;
+    Score s5;
 
     @BeforeEach
     void runBefore() {
         sb = new Scoreboard();
-
+        sbLbj = new Scoreboard();
+        sbKb = new Scoreboard();
+        sbCurr = new Scoreboard();
         s1 = new Score();
+        s2 = new Score();
+        s3 =  new Score();
+        s4 = new Score();
+        s5 = new Score();
+
         s1.setAcc(100);
         s1.setScore(100000);
-        sb.addScore(s1);
-
-        s2 = new Score();
-        s2.setAcc(41);
+        s2.setAcc(14);
         s2.setScore(41000);
-        sb.addScore(s2);
-
-        s3 =  new Score();
         s3.setAcc(3);
         s3.setScore(3000);
+        s4.setAcc(41);
+        s4.setScore(1234);
+        s5.setAcc(41);
+        s5.setScore(41000);
+
+        sb.addScore(s1);
+        sb.addScore(s2);
         sb.addScore(s3);
 
-        sbLbj = new Scoreboard();
-        sbLbj.addScore(s1);
+        sbLbj.addScore(s4);
         sbLbj.addScore(s2);
 
-        sbKb = new Scoreboard();
         sbKb.addScore(s2);
-        sbKb.addScore(s3);
+        sbKb.addScore(s1);
+
+        sbCurr.addScore(s5);
+        sbCurr.addScore(s4);
 
     }
 
@@ -94,16 +106,20 @@ public class JsonReaderTest extends JsonTest {
         JsonReader reader = new JsonReader("./data/testReadMultiplePlayers.json");
         try {
             Players p = reader.read();
-            assertEquals(3, p.length());
+            assertEquals(4, p.length());
             checkPlayer(p.getPlayer(0), "Allan", sb);
             checkPlayer(p.getPlayer(1), "Lebron James", sbLbj);
             checkPlayer(p.getPlayer(2), "Kobe Bryant", sbKb);
+            checkPlayer(p.getPlayer(3), "Stephen Curry", sbCurr);
 
             // testing checkScoreboard
             assertTrue(checkScoreboard(p.getPlayer(0), sb));
             assertFalse(checkScoreboard(p.getPlayer(0), sbLbj));
             assertFalse(checkScoreboard(p.getPlayer(1), sbKb));
             assertFalse(checkScoreboard(p.getPlayer(2), sb));
+            assertFalse(checkScoreboard(p.getPlayer(1), sbCurr));
+            assertFalse(checkScoreboard(p.getPlayer(2), sbCurr));
+
         } catch (IOException e) {
             fail("No IOException expected, couldn't read file");
         } catch (JSONException e) {

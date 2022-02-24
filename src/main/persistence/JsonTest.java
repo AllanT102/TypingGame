@@ -3,6 +3,8 @@ package persistence;
 import model.Player;
 import model.Score;
 import model.Scoreboard;
+
+import static java.lang.Math.max;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,10 +19,10 @@ public class JsonTest {
 
     // EFFECTS: checks each score within the scoreboard to see if scores match
     protected Boolean checkScoreboard(Player p, Scoreboard sb) {
-        for (int i = 0; i < p.getScoreboard().getLength(); i++) {
+        for (int i = 0; i < max(p.getScoreboard().getLength(), sb.getLength()); i++) {
             try {
                 if (getScoreAtIndex(i, p.getScoreboard()).getScore() != getScoreAtIndex(i, sb).getScore()
-                        && getScoreAtIndex(i, p.getScoreboard()).getAcc() != getScoreAtIndex(i, sb).getAcc()) {
+                        || getScoreAtIndex(i, p.getScoreboard()).getAcc() != getScoreAtIndex(i, sb).getAcc()) {
                     return false;
                 }
             } catch (IndexOutOfBoundsException e) {
