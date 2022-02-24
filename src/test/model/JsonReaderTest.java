@@ -98,9 +98,12 @@ public class JsonReaderTest extends JsonTest {
             checkPlayer(p.getPlayer(0), "Allan", sb);
             checkPlayer(p.getPlayer(1), "Lebron James", sbLbj);
             checkPlayer(p.getPlayer(2), "Kobe Bryant", sbKb);
+
+            // testing checkScoreboard
             assertTrue(checkScoreboard(p.getPlayer(0), sb));
             assertFalse(checkScoreboard(p.getPlayer(0), sbLbj));
             assertFalse(checkScoreboard(p.getPlayer(1), sbKb));
+            assertFalse(checkScoreboard(p.getPlayer(2), sb));
         } catch (IOException e) {
             fail("No IOException expected, couldn't read file");
         } catch (JSONException e) {

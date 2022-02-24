@@ -14,11 +14,6 @@ public class Players {
         playerList = new ArrayList<>();
     }
 
-    // EFFECTS: returns player list
-    public List<Player> getPlayers() {
-        return this.playerList;
-    }
-
     // EFFECTS: returns player at given index
     public Player getPlayer(int i) {
         return playerList.get(i);
@@ -28,12 +23,6 @@ public class Players {
     public int length() {
         return playerList.size();
     }
-
-    // EFFECTS: returns whether or not player is in list
-    public Boolean contains(Player p) {
-        return playerList.contains(p);
-    }
-
 
 
     // MODIFIES: this
