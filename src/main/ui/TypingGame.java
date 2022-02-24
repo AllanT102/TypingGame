@@ -1,8 +1,6 @@
 package ui;
 
 import model.*;
-import model.exceptions.PlayerNotFoundException;
-import org.json.JSONArray;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -138,32 +136,37 @@ public class TypingGame {
         if (yn.equals("Y")) {
             System.out.println("Type in your username!");
             String existingName = input.next();
-            try {
+
+            if (loadPlayerData(existingName)) {
                 loadPlayerData(existingName);
                 System.out.println("Welcome back, " + existingName);
-            } catch (PlayerNotFoundException e) {
+            } else {
                 System.out.println("Player name is not found!\n");
                 System.out.println("If you would like to try again, press T.\n"
-                        + "\nIf you would like to create a new player, press N.");
+                        + "\nIf you would like to create a new player, press Y.");
                 String command = input.next();
                 processCreationCommand(command);
             }
         } else if (yn.equals("N")) {
             System.out.println("No problem, let's create a new account for you. Enter below a username!");
             createPlayer();
+        } else {
+            System.out.println("Invalid selection. \n");
+            playerCreationMenu();
         }
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes user command in player creation menu
     private void processCreationCommand(String command) {
         if (command.equals("T")) {
             playerCreationMenu();
-        } else if (command.equals("N")) {
+        } else if (command.equals("Y")) {
             System.out.println("Let's create your account first! Enter your username below!");
             createPlayer();
         } else {
-            System.out.println("Invalid key, please try again");
+            System.out.println("Invalid key, please try again\n");
 
             playerCreationMenu();
         }
@@ -206,7 +209,7 @@ public class TypingGame {
     }
 
     // MODIFIES: this
-    // EFFECTS: tries to find matching player name in allPlayers, if not found PlayerNotFoundException is thrown
+    // EFFECTS: tries to find matching player name in allPlayers
     private Boolean loadPlayerData(String name) {
         for (int i = 0; i < allPlayers.length(); i++) {
             String plName = allPlayers.getPlayer(i).getName();
@@ -215,7 +218,7 @@ public class TypingGame {
                 return true;
             }
         }
-        throw new PlayerNotFoundException();
+        return false;
     }
 
     // MODIFIES: this

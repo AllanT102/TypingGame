@@ -1,7 +1,17 @@
-[{
-    "Allan": [{
-        "Score": 3000,
-        "Accuracy": 3
-    }],
-    "Name": "Allan"
-}]
+[
+    {
+        "Allan": [{
+            "Score": 3000,
+            "Accuracy": 3
+        }],
+        "Name": "Allan"
+    },
+    {
+        "I am creator.": [],
+        "Name": "I am creator."
+    },
+    {
+        "asdf": [],
+        "Name": "asdf"
+    }
+]
