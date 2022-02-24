@@ -34,6 +34,8 @@ public class Player implements Writable {
         this.sb = sb;
     }
 
+    // Parts of method taken from Workroom class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -42,6 +44,8 @@ public class Player implements Writable {
         return json;
     }
 
+    // Parts of method taken from Workroom class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     public JSONArray sbToJson() {
         JSONArray jsArray = new JSONArray();
 

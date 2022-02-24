@@ -65,6 +65,8 @@ public class Score implements Writable {
                 + " Accuracy: " + getAcc() + "%");
     }
 
+    // Parts of method taken from Thingy class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

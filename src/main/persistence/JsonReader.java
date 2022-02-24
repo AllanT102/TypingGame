@@ -31,6 +31,8 @@ public class JsonReader {
         return this.allPlayers;
     }
 
+    // Method taken from JSONReader class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: reads player from file and returns it and throws IOException if an error occurs while reading data
     public Players read() throws IOException, JSONException {
         String jsonData = readFile(source);
@@ -38,6 +40,8 @@ public class JsonReader {
         return parsePlayers(jsonArray);
     }
 
+    // Method taken from JSONReader class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: reads source file as string and returns it
     protected String readFile(String source) throws IOException, JSONException {
         StringBuilder contentBuilder = new StringBuilder();

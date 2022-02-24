@@ -31,6 +31,8 @@ public class Players {
         playerList.add(p);
     }
 
+    // Parts of method taken from workroom class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // EFFECTS: returns playerList as a JSON array
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();
