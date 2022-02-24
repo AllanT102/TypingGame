@@ -1,0 +1,45 @@
+[
+    {
+        "Allan": [
+            {
+                "Score": 100000,
+                "Accuracy": 100
+            },
+            {
+                "Score": 41000,
+                "Accuracy": 41
+            },
+            {
+                "Score": 3000,
+                "Accuracy": 3
+            }
+        ],
+        "Name": "Allan"
+    },
+    {
+        "Lebron James": [
+            {
+                "Score": 100000,
+                "Accuracy": 100
+            },
+            {
+                "Score": 41000,
+                "Accuracy": 41
+            }
+        ],
+        "Name": "Lebron James"
+    },
+    {
+        "Kobe Bryant": [
+            {
+                "Score": 41000,
+                "Accuracy": 41
+            },
+            {
+                "Score": 3000,
+                "Accuracy": 3
+            }
+        ],
+        "Name": "Kobe Bryant"
+    }
+]

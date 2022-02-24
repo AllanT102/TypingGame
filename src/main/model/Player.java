@@ -28,6 +28,12 @@ public class Player implements Writable {
         return sb;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the player's scoreboard to be the given scoreboard
+    public void setScoreboard(Scoreboard sb) {
+        this.sb = sb;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

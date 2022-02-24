@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 public class JsonWriter {
     private static final int TAB = 4;
     private FileWriter writer;
-    private JsonReader jsonReader;
     private String destination;
 
     // EFFECTS: constructs writer to write to destination file
@@ -24,8 +23,8 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS opens writer; throws FileNotFoundException if destination file cannot be opened
-    public void open() throws FileNotFoundException, IOException {
+    // EFFECTS opens writer; throws IOException if destination file cannot be opened
+    public void open() throws IOException {
         writer = new FileWriter(this.destination, false);
     }
 
@@ -48,6 +47,3 @@ public class JsonWriter {
         writer.write(json);
     }
 }
-
-// SITE THIS a;sldjf;lasjd;flja;sldfj;alskdfj;lasdjfasdf
-// store json data as an array and acess each element to find player

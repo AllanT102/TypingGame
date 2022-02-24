@@ -1,9 +1,11 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ScoreTest {
 
@@ -63,6 +65,19 @@ public class ScoreTest {
         assertEquals(0, scoreTest.getScore());
         scoreTest.setScore(1);
         assertEquals(1, scoreTest.getScore());
+    }
+
+    @Test
+    void testSetAcc() {
+        scoreTest.setAcc(10);
+        assertEquals(10, scoreTest.getAcc());
+    }
+
+    @Test
+    void testToJson() {
+        scoreTest.setScore(100);
+        scoreTest.setAcc(100);
+        assertTrue(scoreTest.toJson() instanceof JSONObject);
     }
 
 }

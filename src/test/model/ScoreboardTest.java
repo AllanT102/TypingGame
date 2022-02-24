@@ -104,5 +104,4 @@ public class ScoreboardTest {
                 "4. 1500.0 Points \n" +
                 "5. 1000.0 Points \n", sbTest.convertScoreboardToString());
     }
-
 }
