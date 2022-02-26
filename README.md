@@ -32,7 +32,7 @@ As a user, I want to be able to see my percentage accuracy.
 As a user, I want to be able to save my player information so that I can see if I can get a higher score the 
 next time I play whenever I quit the game. It will automatically save for me. 
 
-As a user, I want to be able to load into the same player account the next time I play..
+As a user, I want to be able to load into the same player account the next time I play.
 
 
 
