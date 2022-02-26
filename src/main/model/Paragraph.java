@@ -69,7 +69,7 @@ public class Paragraph {
         return paragraphAsList;
     }
 
-    // EFFECTS: returns and converts the paragraph that is a list of strings to one string connected by spaces
+    // EFFECTS: returns and converts the paragraph that is a list of strings to one string connected by space
     public String convertParaToString(List<String> p) {
         String stringPara = "";
         for (String word : p) {
