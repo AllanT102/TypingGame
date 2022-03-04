@@ -7,8 +7,6 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.Locale;
 import java.util.Scanner;
 
 // A typing game class where users can create a player, practice their typing skills, and view scores
