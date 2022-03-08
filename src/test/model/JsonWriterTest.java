@@ -61,7 +61,7 @@ public class JsonWriterTest extends JsonTest {
     void testInvalidFileName() {
         try {
             Players p = new Players();
-            JsonWriter writer = new JsonWriter("./non\nexistantfilename");
+            JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             writer.write(p);
             writer.close();
