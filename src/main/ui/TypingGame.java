@@ -73,7 +73,6 @@ public class TypingGame {
         jsonReader = new JsonReader(JSON_DATA);
         jsonWriter = new JsonWriter(JSON_DATA);
         allPlayers = new Players();
-
         try {
             loadAllPlayers();
         } catch (IOException e) {
@@ -103,7 +102,6 @@ public class TypingGame {
         paragraph.getNumTypedCorrect(paragraph, paragraph.getParagraphAsString(), typedParagraph);
 
         displayScore();
-
     }
 
     // MODIFIES: this

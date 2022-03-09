@@ -42,7 +42,7 @@ public class Paragraph {
 
     // EFFECTS: gets total amount of characters in paragraph
     public int getTotalChar() {
-        return convertStringToListWithChar(paragraphAsString).size();
+        return convertStringToListWithChar(paragraphAsString.trim()).size();
     }
 
 
@@ -93,7 +93,7 @@ public class Paragraph {
     public double getNumTypedCorrect(Paragraph p, String orgPara, String inputPara) {
         double typedCorrect = 0;
         for (int i = 0; i < p.getTotalChar(); i++) {
-            if (convertStringToListWithChar(inputPara).size() - 1 < i) {
+            if (convertStringToListWithChar(inputPara.trim()).size() - 1 < i) {
                 return typedCorrect;
             } else if (convertStringToListWithChar(orgPara).get(i) == convertStringToListWithChar(inputPara).get(i)) {
                 typedCorrect++;
@@ -101,6 +101,8 @@ public class Paragraph {
         }
         return typedCorrect;
     }
+
+
 
 }
 
