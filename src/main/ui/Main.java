@@ -9,8 +9,8 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            new TypingGame();
-        } catch (FileNotFoundException e) {
+            new LoadInScreen();
+        } catch (Error e) {
             System.out.println("Unable to run application: file not found!");
         }
     }
