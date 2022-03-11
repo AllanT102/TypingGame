@@ -1,6 +1,9 @@
 package ui;
 
-import model.*;
+import model.Paragraph;
+import model.Player;
+import model.Players;
+import model.Score;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -10,7 +13,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // A typing game class where users can create a player, practice their typing skills, and view scores
-public class TypingGame {
+public class TypingGameDuplicate {
     private static final String JSON_DATA = "./data/player.json";
     private Players allPlayers;
     private Player player;
@@ -19,24 +22,51 @@ public class TypingGame {
     private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private LoadInScreen loadInScreen;
 
     // Constructs a Typing Game
     // EFFECTS: creates a paragraph words on screen, constructs a score, and player
-    public TypingGame() throws FileNotFoundException {
+    public TypingGameDuplicate() throws FileNotFoundException {
         runGame();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runGame() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(this.allPlayers);
-            jsonWriter.close();
-            new LoadInScreen();
-        } catch (IOException e) {
-            System.out.println("Unable to read file!");
+        boolean keepGoing = true;
+        String command = null;
+
+        init();
+
+        while (keepGoing) {
+            mainMenu();
+            command = input.next();
+
+            if (command.equals("Q")) {
+                try {
+                    jsonWriter.open();
+                    jsonWriter.write(this.allPlayers);
+                    jsonWriter.close();
+                    System.out.println("Player data has been saved! \n");
+                } catch (IOException e) {
+                    System.out.println("Unable to read file!");
+                }
+                keepGoing = false;
+            } else {
+                processCommand(command);
+            }
+        }
+        System.out.println("Thanks for playing!");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command
+    private void processCommand(String command) {
+        if (command.equals("P")) {
+            startGame();
+        } else if (command.equals("S")) {
+            displayHighscores();
+        } else {
+            System.out.println("Selection is not valid");
         }
     }
 
@@ -57,7 +87,7 @@ public class TypingGame {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
 
-//        playerCreationMenu();
+        playerCreationMenu();
     }
 
     // MODIFIES: this
@@ -97,37 +127,67 @@ public class TypingGame {
 
     // MODIFIES: this
     // EFFECTS: displays player creation menu for user
-    private void signIn(String existingName) {
-        if (loadPlayerData(existingName)) {
-            loadPlayerData(existingName);
+    private void playerCreationMenu() {
+        System.out.println("Typing Game\n");
+        System.out.println("Do you already have an account? Press Y if yes, N if no.");
+        String yn = input.next();
+
+        if (yn.equals("Y")) {
+            System.out.println("Type in your username!");
+            String existingName = input.next();
+
+            if (loadPlayerData(existingName)) {
+                loadPlayerData(existingName);
+                System.out.println("Welcome back, " + existingName);
+            } else {
+                System.out.println("Player name is not found!\n");
+                System.out.println("If you would like to try again, press T.\n"
+                        + "\nIf you would like to create a new player, press Y.");
+                String command = input.next();
+                processCreationCommand(command);
+            }
+        } else if (yn.equals("N")) {
+            System.out.println("No problem, let's create a new account for you. Enter below a username!");
+            createPlayer();
+        } else {
+            System.out.println("Invalid selection. \n");
+            playerCreationMenu();
         }
     }
+
 
     // MODIFIES: this
-    // EFFECTS: creates player account, checks if player name is already taken
-    private void signUp(String newName) {
+    // EFFECTS: processes user command in player creation menu
+    private void processCreationCommand(String command) {
+        if (command.equals("T")) {
+            playerCreationMenu();
+        } else if (command.equals("Y")) {
+            System.out.println("Let's create your account first! Enter your username below!");
+            createPlayer();
+        } else {
+            System.out.println("Invalid key, please try again\n");
 
-        while (!nameIsValid(newName)) {
-            // DONT KNow whAT to do here yet
+            playerCreationMenu();
         }
-        player = new Player(newName);
-        allPlayers.addPlayer(player);
     }
-//
-//    // MODIFIES: this
-//    // EFFECTS: processes user command in player creation menu
-//    private void processCreationCommand(String command) {
-//        if (command.equals("T")) {
-//            playerCreationMenu();
-//        } else if (command.equals("Y")) {
-//            System.out.println("Let's create your account first! Enter your username below!");
-//            createPlayer();
-//        } else {
-//            System.out.println("Invalid key, please try again\n");
-//
-//            playerCreationMenu();
-//        }
-//    }
+
+
+
+    // REQUIRES: input name must be at least 3 letters long
+    // MODIFIES: this
+    // EFFECTS: creates player account
+    private void createPlayer() {
+        String name = input.next();
+
+        while (!nameIsValid(name)) {
+            System.out.println("Sorry, that username has been taken, try again! Enter your username.\n");
+            name = input.next();
+        }
+        player = new Player(name);
+        allPlayers.addPlayer(player);
+        System.out.println("You have chosen the name: \n" + player.getName());
+
+    }
 
     // EFFECTS: checks if name is already in allPlayers
     public Boolean nameIsValid(String name) {

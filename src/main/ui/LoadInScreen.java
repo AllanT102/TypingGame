@@ -4,11 +4,13 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static java.awt.Color.*;
 
 
-public class LoadInScreen {
+public class LoadInScreen implements ActionListener {
     private int width = 500;
     private int height = 500;
     private int userFieldW = 90;
@@ -19,13 +21,14 @@ public class LoadInScreen {
 
     private JPanel panel;
     private JFrame frame;
+    private Login login;
 
     public LoadInScreen() {
         panel = new JPanel();
         frame = new JFrame();
         frame.setSize(width, height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        frame.setResizable(false);
         frame.add(panel);
         panel.setLayout(null);
         Border border = new TitledBorder(new LineBorder(Color.black, borderThickness));
@@ -35,27 +38,29 @@ public class LoadInScreen {
         makeUsername();
         makeUsernameTextField();
         makeLoginButton();
+        makeSignUpButton();
+
+        frame.setVisible(true);
+    }
+
+    // MODIFIES: this, team
+    // EFFECTS: sets setLogin
+    public void setLogin(Login login) {
+        if (this.login != login) {
+            removeLogin();
+            this.login = login;
+            this.login.setLoadInScreen(this);
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: creates login button
-    private void makeLoginButton() {
-        JButton button = new JButton("Login");
-        button.setForeground(blue);
-        button.setOpaque(true);
-        button.setBounds(panel.getComponent(2).getX() + textFieldW / 2, height / 2
-                - borderThickness - textFieldH / 2 + textFieldH + 10, userFieldW, userFieldH);
-        panel.add(button);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates username text field
-    private void makeUsernameTextField() {
-        JTextField username = new JTextField();
-        username.setBounds(width / 2 - borderThickness - userFieldW / 2,
-                height / 2 - borderThickness - textFieldH / 2, textFieldW, textFieldH);
-        username.setOpaque(true);
-        panel.add(username);
+    // EFFECTS: removes team from this office
+    public void removeLogin() {
+        if (this.login != null) {
+            Login oldL = this.login;
+            this.login = null;
+            oldL.removeLoadInScreen();
+        }
     }
 
     // MODIFIES: this
@@ -79,5 +84,63 @@ public class LoadInScreen {
         title.setForeground(black);
         title.setBackground(lightGray);
         panel.add(title);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: makes
+    public void makeLoginMessage(String loginMessage) {
+        JLabel message = new JLabel(loginMessage, SwingConstants.CENTER);
+        message.setName("message");
+        message.setBounds(width - 100, height - 100, 100, 100);
+        panel.add(message);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates username text field
+    private void makeUsernameTextField() {
+        JTextField username = new JTextField();
+        username.setName("username");
+        username.setBounds(width / 2 - borderThickness - userFieldW / 2,
+                height / 2 - borderThickness - textFieldH / 2, textFieldW, textFieldH);
+        username.setOpaque(true);
+        panel.add(username);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: makes sign up button
+    private void makeSignUpButton() {
+        JButton button = new JButton("Don't have an account? Sign up!");
+        button.setName("sign up");
+        button.setActionCommand("sign up");
+        button.setForeground(blue);
+        button.setBounds(width / 2 - 180, height  * 3 / 4, 350, userFieldH);
+        button.addActionListener(this);
+        panel.add(button);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates login button
+    private void makeLoginButton() {
+        JButton button = new JButton("Login");
+        button.setName("login");
+        button.setActionCommand("login");
+        button.setForeground(blue);
+        button.setBounds(panel.getComponent(2).getX() + textFieldW / 2, height / 2
+                - borderThickness - textFieldH / 2 + textFieldH + 10, userFieldW, userFieldH);
+        button.addActionListener(this);
+        panel.add(button);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String username = panel.getComponent(2).getName();
+        String action = e.getActionCommand();
+
+        if (action == "login") {
+            login.signIn(username);
+            System.out.println("succesful!");
+        } else if (action == "sign up") {
+            System.out.println("sign up pressed");
+        }
     }
 }
