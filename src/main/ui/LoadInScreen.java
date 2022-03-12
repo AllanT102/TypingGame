@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -98,7 +99,7 @@ public class LoadInScreen implements ActionListener {
     // MODIFIES: this
     // EFFECTS: creates username text field
     private void makeUsernameTextField() {
-        JTextField username = new JTextField();
+        JTextComponent username = new JTextField();
         username.setName("username");
         username.setBounds(width / 2 - borderThickness - userFieldW / 2,
                 height / 2 - borderThickness - textFieldH / 2, textFieldW, textFieldH);
@@ -133,14 +134,20 @@ public class LoadInScreen implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String username = panel.getComponent(2).getName();
+        JTextField textField = (JTextField) panel.getComponent(2);
+        String username = textField.getText();
         String action = e.getActionCommand();
 
-        if (action == "login") {
+        if (action.equals("login")) {
             login.signIn(username);
+            System.out.println(username);
             System.out.println("succesful!");
-        } else if (action == "sign up") {
+        } else if (action.equals("sign up")) {
             System.out.println("sign up pressed");
         }
     }
 }
+
+
+
+// HAVE TO ADD WHEN EXIT IS CLICKED, AUTO SAVE FILE!
