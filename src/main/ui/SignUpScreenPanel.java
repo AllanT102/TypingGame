@@ -18,7 +18,6 @@ public class SignUpScreenPanel extends PreGamePanel {
         makeLoginOptionButtonOne("Already have an account? Login here!", "login");
         makeLoginOptionButtonTwo("Sign up", "sign up");
         makeLoginMessage("");
-        setVisible(false);
     }
 
     // MODIFIES: this

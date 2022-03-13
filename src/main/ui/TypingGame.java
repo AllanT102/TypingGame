@@ -50,18 +50,17 @@ public class TypingGame extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets loadInScreen and adds to frame
+    // EFFECTS: sets signUpScreen but doesn't add to frame yet
     protected void setSignUpScreen(SignUpScreenPanel l) {
         if (this.signUpScreen != l) {
             removeSignUpScreen();
             this.signUpScreen = l;
             this.signUpScreen.setGame(this);
-            add(l);
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: removes loadInScreen
+    // EFFECTS: removes signUpScreen
     protected void removeSignUpScreen() {
         if (this.signUpScreen != null) {
             SignUpScreenPanel oldS = this.signUpScreen;

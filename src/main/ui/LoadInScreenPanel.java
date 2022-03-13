@@ -91,9 +91,7 @@ public class LoadInScreenPanel extends PreGamePanel {
             }
         } else if (action.equals("sign up")) {
             this.game.getLoadInScreen().setVisible(false);
-            System.out.println(game.getSignUpScreen().isVisible());
-            this.game.getSignUpScreen().setVisible(true);
-            System.out.println(game.getSignUpScreen().isVisible());
+            game.getContentPane().add(game.getSignUpScreen());
         }
     }
 }
