@@ -10,5 +10,6 @@ public class TypingGamePanel extends JPanel {
     public TypingGamePanel() {
         super();
         this.setLayout(null);
+        this.setBackground(black);
     }
 }

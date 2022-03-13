@@ -20,22 +20,13 @@ public class LoadInScreen extends JPanel implements ActionListener {
     private int textFieldH = 25;
     private int borderThickness = 10;
 
-    private JPanel panel;
-    private JFrame frame;
-    private Login login;
+    private TypingGame game;
     private TypingGamePanel gamePanel;
+    private Login login;
 
     public LoadInScreen() {
-        panel = new JPanel();
-        frame = new JFrame();
-        gamePanel = new TypingGamePanel();
-        frame.setSize(width, height);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.add(panel);
-        panel.setLayout(null);
-        Border border = new TitledBorder(new LineBorder(Color.black, borderThickness));
-        frame.getRootPane().setBorder(border);
+        super();
+        setLayout(null);
 
         makeTitle();
         makeUsername();
@@ -43,12 +34,29 @@ public class LoadInScreen extends JPanel implements ActionListener {
         makeLoginButton();
         makeSignUpButton();
         makeLoginMessage("");
-
-
-        frame.setVisible(true);
     }
 
-    // MODIFIES: this, team
+    // MODIFIES: this
+    // EFFECTS: sets TypingGame
+    public void setGame(TypingGame game) {
+        if (this.game != game) {
+            removeGame();
+            this.game = game;
+            this.game.setLoadInScreen(this);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes TypingGame
+    public void removeGame() {
+        if (this.game != null) {
+            TypingGame oldGame = this.game;
+            this.game = null;
+            oldGame.removeLoadInScreen();
+        }
+    }
+
+    // MODIFIES: this
     // EFFECTS: sets setLogin
     public void setLogin(Login login) {
         if (this.login != login) {
@@ -76,7 +84,7 @@ public class LoadInScreen extends JPanel implements ActionListener {
                 height / 2 - borderThickness - userFieldH / 2, userFieldW, userFieldH);
         label.setFont(new Font("Serif", Font.BOLD, 20));
         label.setOpaque(true);
-        panel.add(label);
+        this.add(label);
     }
 
     // MODIFIES: this
@@ -88,7 +96,7 @@ public class LoadInScreen extends JPanel implements ActionListener {
         title.setOpaque(true);
         title.setForeground(black);
         title.setBackground(lightGray);
-        panel.add(title);
+        this.add(title);
     }
 
     // MODIFIES: this
@@ -96,8 +104,8 @@ public class LoadInScreen extends JPanel implements ActionListener {
     public void makeLoginMessage(String loginMessage) {
         JLabel message = new JLabel(loginMessage, SwingConstants.LEFT);
         message.setName("message");
-        message.setBounds(panel.getComponent(2).getX(), height - 200, textFieldW, textFieldH);
-        panel.add(message);
+        message.setBounds(this.getComponent(2).getX(), height - 200, textFieldW, textFieldH);
+        this.add(message);
     }
 
     // MODIFIES: this
@@ -108,7 +116,7 @@ public class LoadInScreen extends JPanel implements ActionListener {
         username.setBounds(width / 2 - borderThickness - userFieldW / 2,
                 height / 2 - borderThickness - textFieldH / 2, textFieldW, textFieldH);
         username.setOpaque(true);
-        panel.add(username);
+        this.add(username);
     }
 
     // MODIFIES: this
@@ -120,7 +128,7 @@ public class LoadInScreen extends JPanel implements ActionListener {
         button.setForeground(blue);
         button.setBounds(width / 2 - 180, height  * 3 / 4, 350, userFieldH);
         button.addActionListener(this);
-        panel.add(button);
+        this.add(button);
     }
 
     // MODIFIES: this
@@ -130,16 +138,16 @@ public class LoadInScreen extends JPanel implements ActionListener {
         button.setName("login");
         button.setActionCommand("login");
         button.setForeground(blue);
-        button.setBounds(panel.getComponent(2).getX() + textFieldW / 2, height / 2
+        button.setBounds(this.getComponent(2).getX() + textFieldW / 2, height / 2
                 - borderThickness - textFieldH / 2 + textFieldH + 10, userFieldW, userFieldH);
         button.addActionListener(this);
-        panel.add(button);
+        this.add(button);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JTextField textField = (JTextField) panel.getComponent(2);
-        JLabel successMessage = (JLabel) panel.getComponent(5);
+        JTextField textField = (JTextField) this.getComponent(2);
+        JLabel successMessage = (JLabel) this.getComponent(5);
         String username = textField.getText();
         String action = e.getActionCommand();
 
@@ -147,9 +155,11 @@ public class LoadInScreen extends JPanel implements ActionListener {
             Boolean success = login.signIn(username);
             if (success) {
                 successMessage.setText("Login successful!");
-                frame.getContentPane().removeAll();
-                frame.getContentPane().add(gamePanel);
-                frame.revalidate();
+                game.getContentPane().removeAll();
+
+                gamePanel = new TypingGamePanel();
+                game.getContentPane().add(gamePanel);
+                game.revalidate();
             } else {
                 successMessage.setText("Login failed, try again!");
                 System.out.println("bye");
