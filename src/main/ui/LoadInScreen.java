@@ -11,19 +11,14 @@ import java.awt.event.ActionListener;
 import static java.awt.Color.*;
 
 
-public class LoadInScreen extends JPanel implements ActionListener {
-    private int width = 500;
-    private int height = 500;
-    private int userFieldW = 90;
-    private int userFieldH = 25;
-    private int textFieldW = 165;
-    private int textFieldH = 25;
-    private int borderThickness = 10;
-
+public class LoadInScreen extends PreGamePanel {
     private TypingGame game;
     private TypingGamePanel gamePanel;
     private Login login;
 
+
+    // Constructs the load in screen
+    // EFFECTS: sets up the panel with pregame login options
     public LoadInScreen() {
         super();
         setLayout(null);
@@ -85,27 +80,6 @@ public class LoadInScreen extends JPanel implements ActionListener {
         label.setFont(new Font("Serif", Font.BOLD, 20));
         label.setOpaque(true);
         this.add(label);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates title
-    private void makeTitle() {
-        JLabel title = new JLabel("TYPING GAME", SwingConstants.CENTER);
-        title.setFont(new Font("Serif", Font.BOLD, 40));
-        title.setBounds(0, height / 5, width, 100);
-        title.setOpaque(true);
-        title.setForeground(black);
-        title.setBackground(lightGray);
-        this.add(title);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: makes
-    public void makeLoginMessage(String loginMessage) {
-        JLabel message = new JLabel(loginMessage, SwingConstants.LEFT);
-        message.setName("message");
-        message.setBounds(this.getComponent(2).getX(), height - 200, textFieldW, textFieldH);
-        this.add(message);
     }
 
     // MODIFIES: this
