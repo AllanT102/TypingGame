@@ -15,7 +15,7 @@ public class Login {
     private Player player;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private LoadInScreen loadInScreen;
+    private LoadInScreenPanel loadInScreen;
 
     public Login() {
         jsonReader = new JsonReader(JSON_DATA);
@@ -44,7 +44,7 @@ public class Login {
 
     // MODIFIES: this, team
     // EFFECTS: sets loadInScreen
-    public void setLoadInScreen(LoadInScreen loadInScreen) {
+    protected void setLoadInScreen(LoadInScreenPanel loadInScreen) {
         if (this.loadInScreen != loadInScreen) {
             removeLoadInScreen();
             this.loadInScreen = loadInScreen;
@@ -54,9 +54,9 @@ public class Login {
 
     // MODIFIES: this
     // EFFECTS: removes team from this office
-    public void removeLoadInScreen() {
+    protected void removeLoadInScreen() {
         if (this.loadInScreen != null) {
-            LoadInScreen oldLIS = this.loadInScreen;
+            LoadInScreenPanel oldLIS = this.loadInScreen;
             this.loadInScreen = null;
             oldLIS.removeLogin();
         }

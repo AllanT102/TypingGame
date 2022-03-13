@@ -12,39 +12,69 @@ public class TypingGame extends JFrame {
     private int height = 500;
     private int borderThickness = 10;
 
-    private LoadInScreen loadInScreen;
+    private LoadInScreenPanel loadInScreen;
+    private SignUpScreenPanel signUpScreen;
 
     // constructs main window
     // EFFECTS: sets up window in which Typing Game will be played and sign up/ login page will be
-    public TypingGame(LoadInScreen loadInScreen) {
+    public TypingGame() {
         super("Typing Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(width, height);
         setResizable(false);
         Border border = new TitledBorder(new LineBorder(Color.black, borderThickness));
         this.getRootPane().setBorder(border);
-        this.add(loadInScreen);
-        setVisible(true);
     }
 
+
+
     // MODIFIES: this
-    // EFFECTS: sets loadInScreen
-    public void setLoadInScreen(LoadInScreen l) {
+    // EFFECTS: sets loadInScreen and adds to frame
+    protected void setLoadInScreen(LoadInScreenPanel l) {
         if (this.loadInScreen != l) {
             removeLoadInScreen();
             this.loadInScreen = l;
             this.loadInScreen.setGame(this);
+            add(l);
         }
     }
 
     // MODIFIES: this
     // EFFECTS: removes loadInScreen
-    public void removeLoadInScreen() {
+    protected void removeLoadInScreen() {
         if (this.loadInScreen != null) {
-            LoadInScreen oldL = this.loadInScreen;
+            LoadInScreenPanel oldL = this.loadInScreen;
             this.loadInScreen = null;
             oldL.removeGame();
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets loadInScreen and adds to frame
+    protected void setSignUpScreen(SignUpScreenPanel l) {
+        if (this.signUpScreen != l) {
+            removeSignUpScreen();
+            this.signUpScreen = l;
+            this.signUpScreen.setGame(this);
+            add(l);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes loadInScreen
+    protected void removeSignUpScreen() {
+        if (this.signUpScreen != null) {
+            SignUpScreenPanel oldS = this.signUpScreen;
+            this.signUpScreen = null;
+            oldS.removeGame();
+        }
+    }
+
+    public LoadInScreenPanel getLoadInScreen() {
+        return loadInScreen;
+    }
+
+    public SignUpScreenPanel getSignUpScreen() {
+        return signUpScreen;
+    }
 }

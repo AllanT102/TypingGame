@@ -1,20 +1,28 @@
 package ui;
 
 public class SetUp {
-    private LoadInScreen loadInScreen;
+    private LoadInScreenPanel loadInScreen;
+    private SignUpScreenPanel signUpScreen;
     private Login login;
     private TypingGame game;
 
+
     // EFFECTS: class to handle setup of loading screen
     public SetUp() {
-        loadInScreen = new LoadInScreen();
+        loadInScreen = new LoadInScreenPanel();
+        signUpScreen = new SignUpScreenPanel();
         login = new Login();
-        game = new TypingGame(loadInScreen);
+        game = new TypingGame();
+
+        loadInScreen.setLogin(this.login);
+        login.setLoadInScreen(this.loadInScreen);
+
+        game.setSignUpScreen(this.signUpScreen);
+        signUpScreen.setGame(this.game);
 
         game.setLoadInScreen(this.loadInScreen);
         loadInScreen.setGame(this.game);
 
-        loadInScreen.setLogin(this.login);
-        login.setLoadInScreen(this.loadInScreen);
+        game.setVisible(true);
     }
 }
