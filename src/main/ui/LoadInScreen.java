@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import static java.awt.Color.*;
 
 
-public class LoadInScreen implements ActionListener {
+public class LoadInScreen extends JPanel implements ActionListener {
     private int width = 500;
     private int height = 500;
     private int userFieldW = 90;
@@ -23,10 +23,12 @@ public class LoadInScreen implements ActionListener {
     private JPanel panel;
     private JFrame frame;
     private Login login;
+    private TypingGamePanel gamePanel;
 
     public LoadInScreen() {
         panel = new JPanel();
         frame = new JFrame();
+        gamePanel = new TypingGamePanel();
         frame.setSize(width, height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -41,6 +43,7 @@ public class LoadInScreen implements ActionListener {
         makeLoginButton();
         makeSignUpButton();
         makeLoginMessage("");
+
 
         frame.setVisible(true);
     }
@@ -144,7 +147,9 @@ public class LoadInScreen implements ActionListener {
             Boolean success = login.signIn(username);
             if (success) {
                 successMessage.setText("Login successful!");
-                System.out.println("hi");
+                frame.getContentPane().removeAll();
+                frame.getContentPane().add(gamePanel);
+                frame.revalidate();
             } else {
                 successMessage.setText("Login failed, try again!");
                 System.out.println("bye");
