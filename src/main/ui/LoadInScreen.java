@@ -40,6 +40,7 @@ public class LoadInScreen implements ActionListener {
         makeUsernameTextField();
         makeLoginButton();
         makeSignUpButton();
+        makeLoginMessage("");
 
         frame.setVisible(true);
     }
@@ -80,7 +81,7 @@ public class LoadInScreen implements ActionListener {
     private void makeTitle() {
         JLabel title = new JLabel("TYPING GAME", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 40));
-        title.setBounds(0, height / 5, 500, 100);
+        title.setBounds(0, height / 5, width, 100);
         title.setOpaque(true);
         title.setForeground(black);
         title.setBackground(lightGray);
@@ -90,9 +91,9 @@ public class LoadInScreen implements ActionListener {
     // MODIFIES: this
     // EFFECTS: makes
     public void makeLoginMessage(String loginMessage) {
-        JLabel message = new JLabel(loginMessage, SwingConstants.CENTER);
+        JLabel message = new JLabel(loginMessage, SwingConstants.LEFT);
         message.setName("message");
-        message.setBounds(width - 100, height - 100, 100, 100);
+        message.setBounds(panel.getComponent(2).getX(), height - 200, textFieldW, textFieldH);
         panel.add(message);
     }
 
@@ -135,13 +136,19 @@ public class LoadInScreen implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JTextField textField = (JTextField) panel.getComponent(2);
+        JLabel successMessage = (JLabel) panel.getComponent(5);
         String username = textField.getText();
         String action = e.getActionCommand();
 
         if (action.equals("login")) {
-            login.signIn(username);
-            System.out.println(username);
-            System.out.println("succesful!");
+            Boolean success = login.signIn(username);
+            if (success) {
+                successMessage.setText("Login successful!");
+                System.out.println("hi");
+            } else {
+                successMessage.setText("Login failed, try again!");
+                System.out.println("bye");
+            }
         } else if (action.equals("sign up")) {
             System.out.println("sign up pressed");
         }

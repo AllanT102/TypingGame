@@ -21,12 +21,18 @@ public class Login {
         jsonReader = new JsonReader(JSON_DATA);
         jsonWriter = new JsonWriter(JSON_DATA);
         allPlayers = new Players();
-        loadData();
+        try {
+            loadAllPlayers();
+        } catch (IOException e) {
+            System.out.println("Error when loading players.");
+        } catch (JSONException e) {
+            // do nothing
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: processes user input
-    private void loadData() {
+    // EFFECTS: saves user data ie. player information
+    private void saveData() {
         try {
             jsonWriter.open();
             jsonWriter.write(this.allPlayers);
@@ -59,14 +65,13 @@ public class Login {
 
     // MODIFIES: this
     // EFFECTS: displays player creation menu for user
-    public void signIn(String existingName) {
-        if (loadPlayerData(existingName)) {
-            loadPlayerData(existingName);
-            loadInScreen.makeLoginMessage("Login, successful!");
-            System.out.println("player found");
+    public boolean signIn(String existingName) {
+        Boolean playerCreated = loadPlayerData(existingName);
+        if (playerCreated) {
+            return true;
         } else {
             loadInScreen.makeLoginMessage("Login failed, try again!");
-            System.out.println("player not found");
+            return false;
         }
     }
 
