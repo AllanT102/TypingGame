@@ -1,5 +1,10 @@
 package ui;
 
+import javax.swing.*;
+import java.awt.*;
+
+import static java.awt.Color.black;
+
 public class SetUp {
     private LoadInScreenPanel loadInScreen;
     private SignUpScreenPanel signUpScreen;
@@ -9,10 +14,11 @@ public class SetUp {
 
     // EFFECTS: class to handle setup of loading screen
     public SetUp() {
-        loadInScreen = new LoadInScreenPanel();
-        signUpScreen = new SignUpScreenPanel();
-        login = new Login();
         game = new TypingGame();
+        login = new Login();
+
+        loadInScreen = game.getLoadInScreen();
+        signUpScreen = game.getSignUpScreen();
 
         loadInScreen.setLogin(this.login);
         login.setLoadInScreen(this.loadInScreen);
@@ -22,7 +28,5 @@ public class SetUp {
 
         game.setLoadInScreen(this.loadInScreen);
         loadInScreen.setGame(this.game);
-
-        game.setVisible(true);
     }
 }

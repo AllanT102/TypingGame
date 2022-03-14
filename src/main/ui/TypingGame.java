@@ -24,9 +24,12 @@ public class TypingGame extends JFrame {
         setResizable(false);
         Border border = new TitledBorder(new LineBorder(Color.black, borderThickness));
         this.getRootPane().setBorder(border);
+
+        loadInScreen = new LoadInScreenPanel();
+        signUpScreen = new SignUpScreenPanel();
+        add(loadInScreen);
+        setVisible(true);
     }
-
-
 
     // MODIFIES: this
     // EFFECTS: sets loadInScreen and adds to frame
@@ -35,7 +38,7 @@ public class TypingGame extends JFrame {
             removeLoadInScreen();
             this.loadInScreen = l;
             this.loadInScreen.setGame(this);
-            add(l);
+            this.loadInScreen.setVisible(true);
         }
     }
 
@@ -50,12 +53,13 @@ public class TypingGame extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets signUpScreen but doesn't add to frame yet
+    // EFFECTS: sets signUpScreen and adds to frame, but visibility is false
     protected void setSignUpScreen(SignUpScreenPanel l) {
         if (this.signUpScreen != l) {
             removeSignUpScreen();
             this.signUpScreen = l;
             this.signUpScreen.setGame(this);
+            this.signUpScreen.setVisible(false);
         }
     }
 

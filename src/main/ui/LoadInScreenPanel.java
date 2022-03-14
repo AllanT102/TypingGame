@@ -1,14 +1,8 @@
 package ui;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.*;
-import javax.swing.text.JTextComponent;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import static java.awt.Color.*;
 
 
 public class LoadInScreenPanel extends PreGamePanel {
@@ -90,8 +84,8 @@ public class LoadInScreenPanel extends PreGamePanel {
                 System.out.println("bye");
             }
         } else if (action.equals("sign up")) {
-            this.game.getLoadInScreen().setVisible(false);
-            game.getContentPane().add(game.getSignUpScreen());
+            game.getLoadInScreen().setVisible(false);
+            game.getSignUpScreen().setVisible(true);
         }
     }
 }
