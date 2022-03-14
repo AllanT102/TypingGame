@@ -23,6 +23,9 @@ public class SetUp {
         loadInScreen.setLogin(this.login);
         login.setLoadInScreen(this.loadInScreen);
 
+        signUpScreen.setLogin(this.login);
+        login.setSignUpScreen(this.signUpScreen);
+
         game.setSignUpScreen(this.signUpScreen);
         signUpScreen.setGame(this.game);
 

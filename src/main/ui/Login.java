@@ -16,6 +16,7 @@ public class Login {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private LoadInScreenPanel loadInScreen;
+    private SignUpScreenPanel signUpScreen;
 
     public Login() {
         jsonReader = new JsonReader(JSON_DATA);
@@ -62,6 +63,26 @@ public class Login {
         }
     }
 
+    // MODIFIES: this, team
+    // EFFECTS: sets signUpScreen
+    protected void setSignUpScreen(SignUpScreenPanel signUpScreen) {
+        if (this.signUpScreen != signUpScreen) {
+            removeSignUpScreen();
+            this.signUpScreen = signUpScreen;
+            this.signUpScreen.setLogin(this);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes team from this office
+    protected void removeSignUpScreen() {
+        if (this.signUpScreen != null) {
+            SignUpScreenPanel oldLIS = this.signUpScreen;
+            this.signUpScreen = null;
+            oldLIS.removeLogin();
+        }
+    }
+
 
     // MODIFIES: this
     // EFFECTS: displays player creation menu for user
@@ -77,13 +98,15 @@ public class Login {
 
     // MODIFIES: this
     // EFFECTS: creates player account, checks if player name is already taken
-    public void signUp(String newName) {
+    public Boolean signUp(String newName) {
 
-        while (!nameIsValid(newName)) {
-            // DONT KNow whAT to do here yet
+        if (!nameIsValid(newName)) {
+            return false;
+        } else {
+            player = new Player(newName);
+            allPlayers.addPlayer(player);
+            return true;
         }
-        player = new Player(newName);
-        allPlayers.addPlayer(player);
     }
 
     // EFFECTS: checks if name is already in allPlayers

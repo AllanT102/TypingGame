@@ -18,6 +18,7 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
     protected int borderThickness = 10;
 
     protected TypingGame game;
+    protected Login login;
     protected TypingGamePanel gamePanel;
 
     public PreGamePanel() {
@@ -64,7 +65,7 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
     protected void makeLoginMessage(String loginMessage) {
         JLabel message = new JLabel(loginMessage, SwingConstants.LEFT);
         message.setName("message");
-        message.setBounds(this.getComponent(2).getX(), height - 200, textFieldW, textFieldH);
+        message.setBounds(this.getComponent(2).getX(), height - 200, textFieldW + 100, textFieldH);
         this.add(message);
     }
 

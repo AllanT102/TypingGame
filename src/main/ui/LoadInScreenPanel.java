@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 
 
 public class LoadInScreenPanel extends PreGamePanel {
-    private Login login;
-
 
     // Constructs the load in screen
     // EFFECTS: sets up the panel with pregame login options
