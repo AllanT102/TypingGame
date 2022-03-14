@@ -12,8 +12,11 @@ public class TypingGame extends JFrame {
     private int height = 500;
     private int borderThickness = 10;
 
+    private JPanel screens;
     private LoadInScreenPanel loadInScreen;
     private SignUpScreenPanel signUpScreen;
+    private TypingGamePanel typingGamePanel;
+    private CardLayout cl;
 
     // constructs main window
     // EFFECTS: sets up window in which Typing Game will be played and sign up/ login page will be
@@ -25,9 +28,20 @@ public class TypingGame extends JFrame {
         Border border = new TitledBorder(new LineBorder(Color.black, borderThickness));
         this.getRootPane().setBorder(border);
 
+        cl = new CardLayout();
+        screens = new JPanel();
         loadInScreen = new LoadInScreenPanel();
         signUpScreen = new SignUpScreenPanel();
-        add(loadInScreen);
+        typingGamePanel = new TypingGamePanel();
+
+
+        screens.setLayout(cl);
+        screens.add(loadInScreen, "loadInScreen");
+        screens.add(signUpScreen, "signUpScreen");
+        screens.add(typingGamePanel, "typingGamePanel");
+
+        cl.show(screens, "loadInScreen");
+        add(screens);
         setVisible(true);
     }
 
@@ -79,5 +93,13 @@ public class TypingGame extends JFrame {
 
     public SignUpScreenPanel getSignUpScreen() {
         return signUpScreen;
+    }
+
+    public CardLayout getCl() {
+        return cl;
+    }
+
+    public JPanel getScreens() {
+        return screens;
     }
 }

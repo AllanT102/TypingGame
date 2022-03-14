@@ -74,18 +74,12 @@ public class LoadInScreenPanel extends PreGamePanel {
         if (action.equals("login")) {
             Boolean success = login.signIn(username);
             if (success) {
-                successMessage.setText("Login successful!");
-                game.getContentPane().removeAll();
-                gamePanel = new TypingGamePanel();
-                game.getContentPane().add(gamePanel);
-                game.revalidate();
+                game.getCl().show(game.getScreens(), "typingGamePanel");
             } else {
                 successMessage.setText("Login failed, try again!");
-                System.out.println("bye");
             }
         } else if (action.equals("sign up")) {
-            game.getLoadInScreen().setVisible(false);
-            game.getSignUpScreen().setVisible(true);
+            game.getCl().show(game.getScreens(), "signUpScreen");
         }
     }
 }

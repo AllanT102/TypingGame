@@ -45,8 +45,7 @@ public class SignUpScreenPanel extends PreGamePanel {
         String action = e.getActionCommand();
 
         if (action.equals("login")) {
-            game.getSignUpScreen().setVisible(false);
-            game.getLoadInScreen().setVisible(true);
+            game.getCl().show(game.getScreens(), "loadInScreen");
         } else if (action.equals("sign up")) {
             System.out.println("sign up pressed");
         }
