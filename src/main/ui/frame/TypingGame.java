@@ -1,4 +1,8 @@
-package ui;
+package ui.frame;
+
+import ui.panels.LoadInScreenPanel;
+import ui.panels.SignUpScreenPanel;
+import ui.panels.TypingGamePanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -47,7 +51,7 @@ public class TypingGame extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: sets loadInScreen and adds to frame
-    protected void setLoadInScreen(LoadInScreenPanel l) {
+    public void setLoadInScreen(LoadInScreenPanel l) {
         if (this.loadInScreen != l) {
             removeLoadInScreen();
             this.loadInScreen = l;
@@ -58,7 +62,7 @@ public class TypingGame extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: removes loadInScreen
-    protected void removeLoadInScreen() {
+    public void removeLoadInScreen() {
         if (this.loadInScreen != null) {
             LoadInScreenPanel oldL = this.loadInScreen;
             this.loadInScreen = null;
@@ -68,7 +72,7 @@ public class TypingGame extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: sets signUpScreen and adds to frame, but visibility is false
-    protected void setSignUpScreen(SignUpScreenPanel l) {
+    public void setSignUpScreen(SignUpScreenPanel l) {
         if (this.signUpScreen != l) {
             removeSignUpScreen();
             this.signUpScreen = l;
@@ -79,7 +83,7 @@ public class TypingGame extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: removes signUpScreen
-    protected void removeSignUpScreen() {
+    public void removeSignUpScreen() {
         if (this.signUpScreen != null) {
             SignUpScreenPanel oldS = this.signUpScreen;
             this.signUpScreen = null;
@@ -93,6 +97,10 @@ public class TypingGame extends JFrame {
 
     public SignUpScreenPanel getSignUpScreen() {
         return signUpScreen;
+    }
+
+    public TypingGamePanel getTypingGamePanel() {
+        return typingGamePanel;
     }
 
     public CardLayout getCl() {

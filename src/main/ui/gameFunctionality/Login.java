@@ -1,13 +1,15 @@
-package ui;
+package ui.gameFunctionality;
 
 import model.Player;
 import model.Players;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import ui.panels.LoadInScreenPanel;
+import ui.panels.SignUpScreenPanel;
+import ui.panels.TypingGamePanel;
 
 import java.io.IOException;
-
 
 public class Login {
     private static final String JSON_DATA = "./data/player.json";
@@ -17,6 +19,7 @@ public class Login {
     private JsonReader jsonReader;
     private LoadInScreenPanel loadInScreen;
     private SignUpScreenPanel signUpScreen;
+    private TypingGamePanel gamePanel;
 
     public Login() {
         jsonReader = new JsonReader(JSON_DATA);
@@ -45,7 +48,7 @@ public class Login {
 
     // MODIFIES: this, team
     // EFFECTS: sets loadInScreen
-    protected void setLoadInScreen(LoadInScreenPanel loadInScreen) {
+    public void setLoadInScreen(LoadInScreenPanel loadInScreen) {
         if (this.loadInScreen != loadInScreen) {
             removeLoadInScreen();
             this.loadInScreen = loadInScreen;
@@ -55,7 +58,7 @@ public class Login {
 
     // MODIFIES: this
     // EFFECTS: removes team from this office
-    protected void removeLoadInScreen() {
+    public void removeLoadInScreen() {
         if (this.loadInScreen != null) {
             LoadInScreenPanel oldLIS = this.loadInScreen;
             this.loadInScreen = null;
@@ -65,7 +68,7 @@ public class Login {
 
     // MODIFIES: this, team
     // EFFECTS: sets signUpScreen
-    protected void setSignUpScreen(SignUpScreenPanel signUpScreen) {
+    public void setSignUpScreen(SignUpScreenPanel signUpScreen) {
         if (this.signUpScreen != signUpScreen) {
             removeSignUpScreen();
             this.signUpScreen = signUpScreen;
@@ -75,7 +78,7 @@ public class Login {
 
     // MODIFIES: this
     // EFFECTS: removes team from this office
-    protected void removeSignUpScreen() {
+    public void removeSignUpScreen() {
         if (this.signUpScreen != null) {
             SignUpScreenPanel oldLIS = this.signUpScreen;
             this.signUpScreen = null;
@@ -83,9 +86,29 @@ public class Login {
         }
     }
 
+    // MODIFIES: this, team
+    // EFFECTS: sets gamePanel
+    public void setGamePanel(TypingGamePanel gamePanel) {
+        if (this.gamePanel != gamePanel) {
+            removeGamePanel();
+            this.gamePanel = gamePanel;
+            this.gamePanel.setLogin(this);
+        }
+    }
 
     // MODIFIES: this
-    // EFFECTS: displays player creation menu for user
+    // EFFECTS: removes gamePanel
+    public void removeGamePanel() {
+        if (this.gamePanel != null) {
+            TypingGamePanel oldG = this.gamePanel;
+            this.gamePanel = null;
+            oldG.removeLogin();
+        }
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: returns whether or not the name is valid
     public boolean signIn(String existingName) {
         Boolean playerCreated = loadPlayerData(existingName);
         if (playerCreated) {
@@ -97,9 +120,8 @@ public class Login {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates player account, checks if player name is already taken
+    // EFFECTS: creates player account, checks if player name is already taken, and adds to list of players
     public Boolean signUp(String newName) {
-
         if (!nameIsValid(newName)) {
             return false;
         } else {
@@ -137,5 +159,13 @@ public class Login {
     public void loadAllPlayers() throws IOException, JSONException {
         jsonReader.read();
         this.allPlayers = jsonReader.getAllPlayers();
+    }
+
+    public Players getAllPlayers() {
+        return allPlayers;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

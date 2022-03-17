@@ -1,13 +1,14 @@
-package ui;
+package ui.gameFunctionality;
 
-import javax.swing.*;
-import java.awt.*;
-
-import static java.awt.Color.black;
+import ui.frame.TypingGame;
+import ui.panels.LoadInScreenPanel;
+import ui.panels.SignUpScreenPanel;
+import ui.panels.TypingGamePanel;
 
 public class SetUp {
     private LoadInScreenPanel loadInScreen;
     private SignUpScreenPanel signUpScreen;
+    private TypingGamePanel gamePanel;
     private Login login;
     private TypingGame game;
 
@@ -19,6 +20,7 @@ public class SetUp {
 
         loadInScreen = game.getLoadInScreen();
         signUpScreen = game.getSignUpScreen();
+        gamePanel = game.getTypingGamePanel();
 
         loadInScreen.setLogin(this.login);
         login.setLoadInScreen(this.loadInScreen);
@@ -31,5 +33,8 @@ public class SetUp {
 
         game.setLoadInScreen(this.loadInScreen);
         loadInScreen.setGame(this.game);
+
+        login.setGamePanel(this.gamePanel);
+        gamePanel.setLogin(this.login);
     }
 }

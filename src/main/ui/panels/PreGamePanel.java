@@ -1,4 +1,7 @@
-package ui;
+package ui.panels;
+
+import ui.gameFunctionality.Login;
+import ui.frame.TypingGame;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -6,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 import static java.awt.Color.*;
-import static java.awt.Color.blue;
 
 public abstract class PreGamePanel extends JPanel implements ActionListener {
     protected int width = 500;
@@ -19,7 +21,6 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
 
     protected TypingGame game;
     protected Login login;
-    protected TypingGamePanel gamePanel;
 
     public PreGamePanel() {
         super();
@@ -62,7 +63,7 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: makes login message
-    protected void makeLoginMessage(String loginMessage) {
+    public void makeLoginMessage(String loginMessage) {
         JLabel message = new JLabel(loginMessage, SwingConstants.LEFT);
         message.setName("message");
         message.setBounds(this.getComponent(2).getX(), height - 200, textFieldW + 100, textFieldH);
@@ -91,6 +92,5 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         this.add(button);
     }
-
 
 }

@@ -1,8 +1,6 @@
 package ui;
 
-import org.json.JSONArray;
-
-import java.io.FileNotFoundException;
+import ui.gameFunctionality.SetUp;
 
 public class Main {
 
