@@ -1,6 +1,7 @@
 package ui.frame;
 
 import ui.panels.LoadInScreenPanel;
+import ui.panels.ScoreboardPanel;
 import ui.panels.SignUpScreenPanel;
 import ui.panels.TypingGamePanel;
 
@@ -37,7 +38,6 @@ public class TypingGame extends JFrame {
         loadInScreen = new LoadInScreenPanel();
         signUpScreen = new SignUpScreenPanel();
         typingGamePanel = new TypingGamePanel();
-
 
         screens.setLayout(cl);
         screens.add(loadInScreen, "loadInScreen");

@@ -21,6 +21,9 @@ public class TypingGamePanel extends JPanel implements ActionListener {
     private JButton quitButton;
     private JButton playButton;
     private JButton highscoreButton;
+    private JPanel gameScreens;
+    private CardLayout menuCL;
+    private ScoreboardPanel scoreboardScreen;
 
     // Constructs the game panel
     // EFFECTS: sets up the game and play screen
@@ -31,6 +34,13 @@ public class TypingGamePanel extends JPanel implements ActionListener {
         for (Component c : countdown.getCountdownIcons()) {
             this.add(c);
         }
+
+        menuCL = new CardLayout();
+        gameScreens = new JPanel();
+        scoreboardScreen = new ScoreboardPanel();
+        gameScreens.setLayout(menuCL);
+        gameScreens.add(scoreboardScreen, "scoreboard");
+        add(gameScreens);
     }
 
     // Called when player is instantiated
@@ -110,6 +120,11 @@ public class TypingGamePanel extends JPanel implements ActionListener {
             this.quitButton.setVisible(false);
             countdown.startCountdown();
             countdown.getTimer().start();
+        } else if (action.equals("Highscores")) {
+            this.menuCL.show(gameScreens, "scoreboard");
+            System.out.println("=presed");
         }
     }
+
+
 }
