@@ -44,15 +44,10 @@ public class Scoreboard {
     }
 
     // EFFECTS: returns the scoreboard as a string
-    public String convertScoreboardToString() {
-        String sbAsString = "Scoreboard: \n";
-        for (int i = 0; i < 5; i++) {
-            if (sb.size() - 1 < i) {
-                return sbAsString;
-            } else {
-                sbAsString = sbAsString + (i + 1) + ". " + sb.get(i).getScore() + " Points \n";
-            }
-        }
+    public String convertScoreboardToString(int i) {
+        String sbAsString = "";
+        sbAsString = sbAsString + (i + 1) + ". " + sb.get(i).getScore() + " Points, "
+                + sb.get(i).getAcc() + "% Accuracy";
         return sbAsString;
     }
 

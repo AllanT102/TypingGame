@@ -84,24 +84,12 @@ public class ScoreboardTest {
     @Test
     void testConvertScoreboardToString(){
         sbTest.addScore(s1);
-        assertEquals("Scoreboard: \n" + "1. 1000.0 Points \n",
-                sbTest.convertScoreboardToString());
+        assertEquals("1. 1000.0 Points, 0.0% Accuracy",
+                sbTest.convertScoreboardToString(0));
         sbTest.addScore(s2);
         sbTest.addScore(s3);
-        sbTest.addScore(s4);
-        sbTest.addScore(s5);
-        assertEquals("Scoreboard: \n" +
-                "1. 3000.0 Points \n" +
-                "2. 2000.0 Points \n" +
-                "3. 2000.0 Points \n" +
-                "4. 1500.0 Points \n" +
-                "5. 1000.0 Points \n", sbTest.convertScoreboardToString());
+        assertEquals("2. 1500.0 Points, 0.0% Accuracy", sbTest.convertScoreboardToString(1));
         sbTest.addScore(s1);
-        assertEquals("Scoreboard: \n" +
-                "1. 3000.0 Points \n" +
-                "2. 2000.0 Points \n" +
-                "3. 2000.0 Points \n" +
-                "4. 1500.0 Points \n" +
-                "5. 1000.0 Points \n", sbTest.convertScoreboardToString());
+        assertEquals("3. 1000.0 Points, 0.0% Accuracy", sbTest.convertScoreboardToString(2));
     }
 }

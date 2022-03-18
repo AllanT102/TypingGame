@@ -2,55 +2,31 @@ package ui.panels;
 
 import model.Player;
 import ui.gameFunctionality.Login;
-import ui.misc.Countdown;
-
-import static java.awt.Color.*;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class TypingGamePanel extends JPanel implements ActionListener {
-    protected int width = 500;
-    protected int height = 500;
-
+public class TypingGamePanel extends JPanel {
     private Login login;
     private Player player;
-    private Countdown countdown;
-    private JButton quitButton;
-    private JButton playButton;
-    private JButton highscoreButton;
-    private JPanel gameScreens;
     private CardLayout menuCL;
-    private ScoreboardPanel scoreboardScreen;
+    private MenuPanel menuPanel;
+    private ScoreboardPanel sbPanel;
+
 
     // Constructs the game panel
     // EFFECTS: sets up the game and play screen
     public TypingGamePanel() {
         super();
-        this.setLayout(null);
-        this.countdown = new Countdown();
-        for (Component c : countdown.getCountdownIcons()) {
-            this.add(c);
-        }
-
         menuCL = new CardLayout();
-        gameScreens = new JPanel();
-        scoreboardScreen = new ScoreboardPanel();
-        gameScreens.setLayout(menuCL);
-        gameScreens.add(scoreboardScreen, "scoreboard");
-        add(gameScreens);
-    }
+        this.setLayout(menuCL);
 
-    // Called when player is instantiated
-    // MODIFIES: this
-    // EFFECTS: sets up the game and play screen
-    public void init() {
-        setWelcomeMessage();
-        setPlayButton();
-        setHighscoreButton();
-        setQuitButton();
+        menuPanel = new MenuPanel(this);
+        sbPanel = new ScoreboardPanel(this);
+
+        add(menuPanel, "menu panel");
+        add(sbPanel, "scoreboard");
+        menuCL.show(this, "menu panel");
+        setVisible(true);
     }
 
     // MODIFIES: this
@@ -77,54 +53,19 @@ public class TypingGamePanel extends JPanel implements ActionListener {
         this.player = player;
     }
 
-    public JButton makeButton(String name, int ycoord) {
-        JButton button = new JButton(name);
-        button.setActionCommand(name);
-        button.setBounds(width / 2 - 180, ycoord, 350, 50);
-        button.addActionListener(this);
-        button.setBackground(black);
-        button.setForeground(white);
-        button.setOpaque(true);
-        this.add(button);
-        return button;
+    public MenuPanel getMenuPanel() {
+        return this.menuPanel;
     }
 
-    public void setPlayButton() {
-        this.playButton = makeButton("Play", 100);
+    public ScoreboardPanel getSbPanel() {
+        return sbPanel;
     }
 
-    public void setHighscoreButton() {
-        this.highscoreButton = makeButton("Highscores", 200);
+    public CardLayout getMenuCL() {
+        return menuCL;
     }
 
-    public void setQuitButton() {
-        this.quitButton = makeButton("Quit", 300);
+    public Player getPlayer() {
+        return player;
     }
-
-    public void setWelcomeMessage() {
-        JLabel welcomeMessage = new JLabel("Welcome, " + this.player.getName() + "!", SwingConstants.CENTER);
-        welcomeMessage.setFont(new Font("Serif", Font.BOLD, 25));
-        welcomeMessage.setBounds(0, 10, width, 30);
-        welcomeMessage.setForeground(black);
-        welcomeMessage.setBackground(lightGray);
-        welcomeMessage.setOpaque(true);
-        this.add(welcomeMessage);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String action = e.getActionCommand();
-        if (action.equals("Play")) {
-            this.playButton.setVisible(false);
-            this.highscoreButton.setVisible(false);
-            this.quitButton.setVisible(false);
-            countdown.startCountdown();
-            countdown.getTimer().start();
-        } else if (action.equals("Highscores")) {
-            this.menuCL.show(gameScreens, "scoreboard");
-            System.out.println("=presed");
-        }
-    }
-
-
 }

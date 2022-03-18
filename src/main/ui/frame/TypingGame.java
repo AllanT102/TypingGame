@@ -1,9 +1,6 @@
 package ui.frame;
 
-import ui.panels.LoadInScreenPanel;
-import ui.panels.ScoreboardPanel;
-import ui.panels.SignUpScreenPanel;
-import ui.panels.TypingGamePanel;
+import ui.panels.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -39,10 +36,12 @@ public class TypingGame extends JFrame {
         signUpScreen = new SignUpScreenPanel();
         typingGamePanel = new TypingGamePanel();
 
+
         screens.setLayout(cl);
         screens.add(loadInScreen, "loadInScreen");
         screens.add(signUpScreen, "signUpScreen");
         screens.add(typingGamePanel, "typingGamePanel");
+
 
         cl.show(screens, "loadInScreen");
         add(screens);

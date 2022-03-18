@@ -76,7 +76,7 @@ public class LoadInScreenPanel extends PreGamePanel {
             if (success) {
                 game.getCl().show(game.getScreens(), "typingGamePanel");
                 game.getTypingGamePanel().setPlayer(login.getPlayer());
-                game.getTypingGamePanel().init();
+                game.getTypingGamePanel().getMenuPanel().init(login.getPlayer());
             } else {
                 successMessage.setText("Login failed, try again!");
             }

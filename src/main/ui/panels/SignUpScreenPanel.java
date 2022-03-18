@@ -77,7 +77,7 @@ public class SignUpScreenPanel extends PreGamePanel {
             } else {
                 game.getCl().show(game.getScreens(), "typingGamePanel");
                 game.getTypingGamePanel().setPlayer(login.getPlayer());
-                game.getTypingGamePanel().init();
+                game.getTypingGamePanel().getMenuPanel().init(login.getPlayer());
             }
         }
     }
