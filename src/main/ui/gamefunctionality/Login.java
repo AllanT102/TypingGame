@@ -1,4 +1,4 @@
-package ui.gameFunctionality;
+package ui.gamefunctionality;
 
 import model.Player;
 import model.Players;

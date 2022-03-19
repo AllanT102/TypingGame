@@ -1,7 +1,7 @@
 package ui.panels;
 
 import model.Player;
-import ui.gameFunctionality.Login;
+import ui.gamefunctionality.Login;
 import javax.swing.*;
 import java.awt.*;
 

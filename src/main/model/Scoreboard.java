@@ -18,6 +18,10 @@ public class Scoreboard {
         return sb.size();
     }
 
+    public Score get(int i) {
+        return sb.get(i);
+    }
+
     public ArrayList<Score> getScoreboardAsList() {
         return sb;
     }

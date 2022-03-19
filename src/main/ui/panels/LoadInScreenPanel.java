@@ -1,6 +1,6 @@
 package ui.panels;
 
-import ui.gameFunctionality.Login;
+import ui.gamefunctionality.Login;
 import ui.frame.TypingGame;
 
 import javax.swing.*;

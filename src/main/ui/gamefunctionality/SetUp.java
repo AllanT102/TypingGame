@@ -1,4 +1,4 @@
-package ui.gameFunctionality;
+package ui.gamefunctionality;
 
 import ui.frame.TypingGame;
 import ui.panels.LoadInScreenPanel;

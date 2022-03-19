@@ -1,6 +1,6 @@
 package ui;
 
-import ui.gameFunctionality.SetUp;
+import ui.gamefunctionality.SetUp;
 
 public class Main {
 
