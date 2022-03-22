@@ -11,6 +11,7 @@ public class TypingGamePanel extends JPanel {
     private CardLayout menuCL;
     private MenuPanel menuPanel;
     private ScoreboardPanel sbPanel;
+    private WordPanel wordPanel;
 
 
     // Constructs the game panel
@@ -22,9 +23,12 @@ public class TypingGamePanel extends JPanel {
 
         menuPanel = new MenuPanel(this);
         sbPanel = new ScoreboardPanel(this);
+        wordPanel = new WordPanel();
+
 
         add(menuPanel, "menu panel");
         add(sbPanel, "scoreboard");
+        add(wordPanel, "word panel");
         menuCL.show(this, "menu panel");
         setVisible(true);
     }
@@ -59,6 +63,10 @@ public class TypingGamePanel extends JPanel {
 
     public ScoreboardPanel getSbPanel() {
         return sbPanel;
+    }
+
+    public WordPanel getWordPanel() {
+        return wordPanel;
     }
 
     public CardLayout getMenuCL() {

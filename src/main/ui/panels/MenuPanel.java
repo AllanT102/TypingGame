@@ -15,7 +15,6 @@ public class MenuPanel extends JPanel implements ActionListener {
     protected int height = 500;
 
     private Player player;
-    private Countdown countdown;
     private JButton quitButton;
     private JButton playButton;
     private JButton highscoreButton;
@@ -27,10 +26,6 @@ public class MenuPanel extends JPanel implements ActionListener {
         super();
         this.typingGamePanel = t;
         this.setLayout(null);
-        this.countdown = new Countdown();
-        for (Component c : countdown.getCountdownIcons()) {
-            this.add(c);
-        }
     }
 
     // Called when player is instantiated
@@ -86,15 +81,19 @@ public class MenuPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action.equals("Play")) {
-            this.playButton.setVisible(false);
-            this.highscoreButton.setVisible(false);
-            this.quitButton.setVisible(false);
-            countdown.startCountdown();
-            countdown.getTimer().start();
+            typingGamePanel.getMenuCL().show(typingGamePanel, "word panel");
+            try {
+                typingGamePanel.getWordPanel().init();
+            } catch (InterruptedException exception) {
+                //
+            }
         } else if (action.equals("Highscores")) {
             typingGamePanel.getMenuCL().show(typingGamePanel, "scoreboard");
-            typingGamePanel.getSbPanel().createScoreboard();
-            System.out.println("=presed");
+            try {
+                typingGamePanel.getSbPanel().updateScoreboard();
+            } catch (Exception exception) {
+                typingGamePanel.getSbPanel().createScoreboard();
+            }
         }
     }
 }

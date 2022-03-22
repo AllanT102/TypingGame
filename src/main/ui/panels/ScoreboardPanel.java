@@ -18,8 +18,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     private TypingGamePanel typingGamePanel;
     private JPanel scoreTile;
     private JPanel accTile;
-    private JPanel numTile;
-    private JButton back;
+    private JPanel scoreboard;
 
     public ScoreboardPanel(TypingGamePanel t) {
         super();
@@ -48,7 +47,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
 
     // called after highscore button is clicked so that player is already assigned to class
     public void createScoreboard() {
-        JPanel scoreboard = new JPanel();
+        scoreboard = new JPanel();
         scoreboard.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
 
         scoreboard.add(createNumbersTile());
@@ -56,8 +55,15 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         scoreboard.add(createAccTile());
         addToScoreTile();
         addToAccTile();
-
         this.add(scoreboard);
+        addBackButton();
+    }
+
+    public void updateScoreboard() {
+        this.scoreTile.removeAll();
+        this.accTile.removeAll();
+        addToScoreTile();
+        addToAccTile();
     }
 
     public JPanel createPanel(int w) {
@@ -66,7 +72,6 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         panel.setMaximumSize(new Dimension(40, rowHeight));
         panel.setPreferredSize(new Dimension(w, tileHeight));
         panel.setAlignmentX(LEFT_ALIGNMENT);
-        panel.setBackground(blue);
         return panel;
     }
 
@@ -84,7 +89,6 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
 
     public JPanel createNumbersTile() {
         JPanel numberTile = createPanel(40);
-        this.numTile = numberTile;
         JLabel blankSpace = new JLabel("");
         blankSpace.setFont(rowFont);
         blankSpace.setPreferredSize(new Dimension(40, rowHeight));
@@ -92,7 +96,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         numberTile.add(blankSpace);
 
         for (int i = 0; i < 5; i++) {
-            JLabel number = new JLabel(Integer.toString(i + 1));
+            JLabel number = new JLabel(Integer.toString(i + 1) + ".");
             number.setFont(rowFont);
             number.setPreferredSize(new Dimension(40, rowHeight));
             number.setMaximumSize(new Dimension(40, rowHeight));
@@ -119,7 +123,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         for (int i = 0; i < 5; i++) {
             try {
                 String acc = Double.toString(typingGamePanel.getPlayer().getScoreboard().get(i).getAcc());
-                createSubTile(accTile, acc);
+                createSubTile(accTile, acc + "%");
             } catch (IndexOutOfBoundsException e) {
                 // do nothing
             }
@@ -141,8 +145,22 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         tile.add(title);
     }
 
+    private void addBackButton() {
+        JButton button = new JButton("Back to Menu");
+        button.addActionListener(this);
+        button.setForeground(blue);
+        button.setActionCommand("back");
+        button.setAlignmentX(CENTER_ALIGNMENT);
+        button.setPreferredSize(new Dimension(200, 50));
+        button.setMaximumSize(new Dimension(200, 50));
+        this.add(button);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String action = e.getActionCommand();
+        if (action.equals("back")) {
+            typingGamePanel.getMenuCL().show(typingGamePanel, "menu panel");
+        }
     }
 }

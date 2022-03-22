@@ -35,9 +35,9 @@ public class Countdown {
         JLabel two = new JLabel(twoScaled);
         JLabel one = new JLabel(oneScaled);
 
-        three.setBounds(width / 2 - 55, height / 2 - 50, 100, 100);
-        two.setBounds(width / 2 - 55, height / 2 - 50, 100, 100);
-        one.setBounds(width / 2 - 55, height / 2 - 50, 100, 100);
+        three.setBounds(width / 2 - 60, height / 2 - 90, 100, 100);
+        two.setBounds(width / 2 - 60, height / 2 - 90, 100, 100);
+        one.setBounds(width / 2 - 60, height / 2 - 90, 100, 100);
 
         three.setVisible(false);
         two.setVisible(false);
@@ -53,20 +53,27 @@ public class Countdown {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (sec == 0) {
-                        countdownIcons.get(0).setVisible(false);
+                        countdownIcons.get(sec).setVisible(false);
                         timer.stop();
+
+//                        // notify your current thread that it can resume execution
+//                        synchronized (this) {
+//                            this.notify();
+//                        }
                     }
                     countdownIcons.get(sec - 1).setVisible(true);
-                    countdownIcons.get(sec).setVisible(false);
-                } catch (IndexOutOfBoundsException exception) {
-                    if (sec == 0) {
-                        timer.stop();
+                    if (sec < countdownIcons.size()) {
+                        countdownIcons.get(sec).setVisible(false);
                     }
+                    System.out.println(sec);
+                    sec--;
+                } catch (IndexOutOfBoundsException exception) {
+                    // do nothing
                 }
-                System.out.println(sec);
-                sec--;
             }
         });
+
+        System.out.println("hello");
     }
 
     public List<JComponent> getCountdownIcons() {
@@ -75,5 +82,9 @@ public class Countdown {
 
     public Timer getTimer() {
         return timer;
+    }
+
+    public int getSec() {
+        return sec;
     }
 }
