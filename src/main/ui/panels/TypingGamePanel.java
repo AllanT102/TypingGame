@@ -12,6 +12,7 @@ public class TypingGamePanel extends JPanel {
     private MenuPanel menuPanel;
     private ScoreboardPanel sbPanel;
     private WordPanel wordPanel;
+    private EndGamePanel endGamePanel;
 
 
     // Constructs the game panel
@@ -23,12 +24,9 @@ public class TypingGamePanel extends JPanel {
 
         menuPanel = new MenuPanel(this);
         sbPanel = new ScoreboardPanel(this);
-        wordPanel = new WordPanel();
-
 
         add(menuPanel, "menu panel");
         add(sbPanel, "scoreboard");
-        add(wordPanel, "word panel");
         menuCL.show(this, "menu panel");
         setVisible(true);
     }
@@ -51,6 +49,15 @@ public class TypingGamePanel extends JPanel {
             this.login = null;
             oldG.removeGamePanel();
         }
+    }
+
+    // called in sub panels to create new game text
+    public void setWordPanel() {
+        this.wordPanel = null;
+        WordPanel newWordPanel = new WordPanel(this);
+        this.wordPanel = newWordPanel;
+        add(newWordPanel, "word panel");
+        menuCL.show(this, "word panel");
     }
 
     public void setPlayer(Player player) {

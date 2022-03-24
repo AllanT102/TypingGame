@@ -2,14 +2,12 @@ package ui.panels;
 
 
 import model.Paragraph;
-import ui.misc.Countdown;
+import ui.gamefunctionality.Countdown;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.EventListener;
 
 import static java.awt.Color.*;
 
@@ -21,12 +19,14 @@ public class WordPanel extends JPanel {
     private Countdown countdown;
     private Paragraph paragraph;
     private JTextField textField;
+    private TypingGamePanel gamePanel;
+    private JLabel wordsToType;
 
-    public WordPanel() {
+    public WordPanel(TypingGamePanel gamePanel) {
         super();
         setLayout(null);
         paragraph = new Paragraph();
-
+        this.gamePanel = gamePanel;
         this.countdown = new Countdown();
         for (Component c : countdown.getCountdownIcons()) {
             this.add(c);
@@ -34,7 +34,7 @@ public class WordPanel extends JPanel {
         setVisible(true);
     }
 
-    public void init() throws InterruptedException {
+    public void init() {
         countdown.startCountdown();
         countdown.getTimer().start();
 //        // pause main thread until timer is notified
@@ -43,11 +43,16 @@ public class WordPanel extends JPanel {
 //            System.out.println("waiting");
 //        }
         startGame();
+
+//        try {
         createTextField();
+//        } catch (InterruptedException exception) {
+//            // do nthing
+//        }
     }
 
     public void startGame() {
-        JLabel wordsToType = new JLabel("");
+        wordsToType = new JLabel("");
         wordsToType.setText("<html><p style=\"width:300px;text-align:center;\">"
                 + paragraph.getParagraphAsString() + "</p></html>");
         wordsToType.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -55,8 +60,17 @@ public class WordPanel extends JPanel {
         this.add(wordsToType);
     }
 
+    public void resetText() {
+        String newPara = paragraph.convertParaToString(paragraph.generateParagraph());
+        paragraph.setParagraph(newPara);
+        wordsToType.setText("<html><p style=\"width:300px;text-align:center;\">"
+                + newPara + "</p></html>");
+        textField.setText("");
+    }
+
     public void createTextField() {
         textField = new JTextField();
+        textField.setFont(new Font("Serif", Font.PLAIN, 20));
         textField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent evt) {
@@ -68,14 +82,20 @@ public class WordPanel extends JPanel {
                 }
             }
         });
-        textField.setBounds(35,height / 2,400, 50);
+        textField.setBounds(35, height / 2, 400, 50);
         textField.setBackground(lightGray);
         textField.setOpaque(true);
-        textField.setVisible(true);
+
+        EventQueue.invokeLater(() -> textField.requestFocusInWindow());
+
         this.add(textField);
     }
 
     public void stopGame() {
+        EndGamePanel endGamePanel = new EndGamePanel(this.gamePanel, this.gamePanel.getPlayer());
+    }
 
+    public Countdown getCountdown() {
+        return countdown;
     }
 }

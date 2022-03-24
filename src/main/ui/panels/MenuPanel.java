@@ -1,7 +1,6 @@
 package ui.panels;
 
 import model.Player;
-import ui.misc.Countdown;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,11 +80,19 @@ public class MenuPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action.equals("Play")) {
-            typingGamePanel.getMenuCL().show(typingGamePanel, "word panel");
-            try {
-                typingGamePanel.getWordPanel().init();
-            } catch (InterruptedException exception) {
-                //
+            typingGamePanel.setWordPanel();
+//            try {
+            typingGamePanel.getWordPanel().init();
+//            } catch (InterruptedException exception) {
+//                //
+//            }
+        } else if (action.equals("Quit")) {
+            int promptResult = JOptionPane.showConfirmDialog(null,
+                    "Do you want to save your player data?",
+                    "Confirm Close", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+            if (promptResult == JOptionPane.YES_OPTION) {
+                System.exit(0);
             }
         } else if (action.equals("Highscores")) {
             typingGamePanel.getMenuCL().show(typingGamePanel, "scoreboard");

@@ -1,4 +1,4 @@
-package ui.misc;
+package ui.gamefunctionality;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,12 +68,12 @@ public class Countdown {
                     System.out.println(sec);
                     sec--;
                 } catch (IndexOutOfBoundsException exception) {
-                    // do nothing
+                    // do nothing because need to recursively set last image to false,
+                    // first picture will never have a greater index
+
                 }
             }
         });
-
-        System.out.println("hello");
     }
 
     public List<JComponent> getCountdownIcons() {

@@ -7,6 +7,11 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
 
 // A typing game class where users can create a player, practice their typing skills, and view scores
 public class TypingGame extends JFrame {
@@ -24,9 +29,10 @@ public class TypingGame extends JFrame {
     // EFFECTS: sets up window in which Typing Game will be played and sign up/ login page will be
     public TypingGame() {
         super("Typing Game");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setSize(width, height);
         setResizable(false);
+        centreWindow(this);
         Border border = new TitledBorder(new LineBorder(Color.black, borderThickness));
         this.getRootPane().setBorder(border);
 
@@ -45,6 +51,7 @@ public class TypingGame extends JFrame {
 
         cl.show(screens, "loadInScreen");
         add(screens);
+        promptUserClose();
         setVisible(true);
     }
 
@@ -90,6 +97,21 @@ public class TypingGame extends JFrame {
         }
     }
 
+    public void promptUserClose() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                int promptResult = JOptionPane.showConfirmDialog(null,
+                        "Do you want to save your player data?",
+                        "Confirm Close", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
+                if (promptResult == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
+    }
+
     public LoadInScreenPanel getLoadInScreen() {
         return loadInScreen;
     }
@@ -109,4 +131,13 @@ public class TypingGame extends JFrame {
     public JPanel getScreens() {
         return screens;
     }
+
+    public static void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+    }
+
+
 }
