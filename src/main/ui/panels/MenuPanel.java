@@ -63,7 +63,7 @@ public class MenuPanel extends JPanel implements ActionListener {
     }
 
     public void setQuitButton() {
-        this.quitButton = makeButton("Quit", 300);
+        this.quitButton = makeButton("Save and Quit", 300);
     }
 
     public void setWelcomeMessage() {
@@ -86,7 +86,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 //            } catch (InterruptedException exception) {
 //                //
 //            }
-        } else if (action.equals("Quit")) {
+        } else if (action.equals("Save and Quit")) {
             int promptResult = JOptionPane.showConfirmDialog(null,
                     "Do you want to save your player data?",
                     "Confirm Close", JOptionPane.YES_NO_OPTION,

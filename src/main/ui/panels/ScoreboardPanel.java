@@ -19,6 +19,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     private JPanel scoreTile;
     private JPanel accTile;
     private JPanel scoreboard;
+    private JPanel numberTile;
 
     public ScoreboardPanel(TypingGamePanel t) {
         super();
@@ -64,6 +65,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     public void updateScoreboard() {
         this.scoreTile.removeAll();
         this.accTile.removeAll();
+        this.numberTile.removeAll();
+        this.numberTile.add(createBlankSpace());
         addToScoreTile();
         addToAccTile();
     }
@@ -78,7 +81,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     }
 
     public JPanel createScoreTile() {
-        JPanel scoreTile = createPanel(width / 3);
+        scoreTile = createPanel(width / 3);
         this.scoreTile = scoreTile;
         return scoreTile;
     }
@@ -90,24 +93,28 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     }
 
     public JPanel createNumbersTile() {
-        JPanel numberTile = createPanel(40);
+        numberTile = createPanel(40);
+        numberTile.add(createBlankSpace());
+        this.numberTile = numberTile;
+        return numberTile;
+    }
+
+    public JLabel createBlankSpace() {
         JLabel blankSpace = new JLabel("");
         blankSpace.setFont(rowFont);
         blankSpace.setPreferredSize(new Dimension(40, rowHeight));
         blankSpace.setMaximumSize(new Dimension(40, rowHeight));
-        numberTile.add(blankSpace);
+        return blankSpace;
+    }
 
-        for (int i = 0; i < 5; i++) {
-            JLabel number = new JLabel(Integer.toString(i + 1) + ".");
-            highlightTopThree(i, number);
-            number.setOpaque(true);
-            number.setFont(rowFont);
-            number.setPreferredSize(new Dimension(40, rowHeight));
-            number.setMaximumSize(new Dimension(40, rowHeight));
-            numberTile.add(number);
-        }
-
-        return numberTile;
+    public void addNumberToNumberTile(int i) {
+        JLabel number = new JLabel(Integer.toString(i + 1) + ".");
+        highlightTopThree(i, number);
+        number.setOpaque(true);
+        number.setFont(rowFont);
+        number.setPreferredSize(new Dimension(40, rowHeight));
+        number.setMaximumSize(new Dimension(40, rowHeight));
+        numberTile.add(number);
     }
 
     public void addToScoreTile() {
@@ -116,6 +123,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
             try {
                 String score = Double.toString(typingGamePanel.getPlayer().getScoreboard().get(i).getScore());
                 createSubTile(scoreTile, score, i);
+                // adds number corresponding to ranking
+                addNumberToNumberTile(i);
             } catch (IndexOutOfBoundsException e) {
                 // do nothing
             }

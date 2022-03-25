@@ -1,5 +1,6 @@
 package ui.frame;
 
+import sun.lwawt.macosx.CSystemTray;
 import ui.panels.*;
 
 import javax.swing.*;
@@ -102,9 +103,11 @@ public class TypingGame extends JFrame {
             @Override
             public void windowClosing(WindowEvent we) {
                 int promptResult = JOptionPane.showConfirmDialog(null,
-                        "Do you want to save your player data?",
+                        "Do you really want to quit without saving?"
+                                + " If not, please press save and quit in the menu.",
                         "Confirm Close", JOptionPane.YES_NO_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE, new ImageIcon(new ImageIcon("./images/bye.png").getImage()
+                        JOptionPane.INFORMATION_MESSAGE,
+                        new ImageIcon(new ImageIcon("./images/bye.png").getImage()
                                 .getScaledInstance(75, 75, Image.SCALE_DEFAULT)));
                 if (promptResult == JOptionPane.YES_OPTION) {
                     System.exit(0);

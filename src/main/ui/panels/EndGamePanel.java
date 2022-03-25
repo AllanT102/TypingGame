@@ -65,7 +65,7 @@ public class EndGamePanel extends JPanel implements ActionListener {
     }
 
     public void makeQuitButton() {
-        makeButton("Quit", 300);
+        makeButton("Save and Quit", 300);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class EndGamePanel extends JPanel implements ActionListener {
             typingGamePanel.getWordPanel().init();
         } else if (action.equals("Menu")) {
             typingGamePanel.getMenuCL().show(typingGamePanel, "menu panel");
-        } else if (action.equals("Quit")) {
+        } else if (action.equals("Save and Quit")) {
             int promptResult = JOptionPane.showConfirmDialog(null,
                     "Do you want to save your player data?",
                     "Confirm Close", JOptionPane.YES_NO_OPTION,
