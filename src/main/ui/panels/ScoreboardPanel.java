@@ -1,7 +1,5 @@
 package ui.panels;
 
-import com.sun.beans.editors.IntegerEditor;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

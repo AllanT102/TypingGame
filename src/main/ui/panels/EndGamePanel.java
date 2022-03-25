@@ -2,7 +2,6 @@ package ui.panels;
 
 import model.Player;
 import model.Score;
-import sun.lwawt.macosx.CSystemTray;
 
 import javax.swing.*;
 

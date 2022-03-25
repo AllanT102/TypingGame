@@ -1,6 +1,5 @@
 package ui.frame;
 
-import sun.lwawt.macosx.CSystemTray;
 import ui.panels.*;
 
 import javax.swing.*;
@@ -10,9 +9,6 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.util.ArrayList;
-import java.util.List;
 
 // A typing game class where users can create a player, practice their typing skills, and view scores
 public class TypingGame extends JFrame {

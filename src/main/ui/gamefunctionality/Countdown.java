@@ -14,7 +14,7 @@ public class Countdown {
 
     private List<JComponent> countdownIcons;
     private Timer timer;
-
+    
     public Countdown() {
         countdownIcons = new ArrayList<>();
         setCountdownIcons();
