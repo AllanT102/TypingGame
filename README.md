@@ -34,6 +34,12 @@ next time I play whenever I quit the game. It will automatically save for me.
 
 As a user, I want to be able to load into the same player account the next time I play.
 
+#### Phase 3
+
+As a user, I want to be able to add my scores to a scoreboard, see a countdown, see the words I am typing, and the 
+ords I need to type.  
+
+As a user, I want to be able to login to my account and prompted to save my user information before I quit.
 
 
 
