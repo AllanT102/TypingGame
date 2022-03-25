@@ -12,9 +12,9 @@ import java.awt.event.WindowEvent;
 
 // the frame that holds all game contents
 public class TypingGame extends JFrame {
-    private int width = 500;
-    private int height = 500;
-    private int borderThickness = 10;
+    private final int width = 500;
+    private final int height = 500;
+    private final int borderThickness = 10;
 
     private JPanel screens;
     private LoadInScreenPanel loadInScreen;

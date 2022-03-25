@@ -7,12 +7,12 @@ import java.awt.*;
 
 // Represents typing game panel
 public class TypingGamePanel extends JPanel {
-    private Login login;
-    private Player player;
     private CardLayout menuCL;
     private MenuPanel menuPanel;
     private ScoreboardPanel sbPanel;
     private WordPanel wordPanel;
+    private Login login;
+    private Player player;
 
     // EFFECTS: constructs typing game panel which will hold other panels (menu panel, scoreboard)
     public TypingGamePanel() {
