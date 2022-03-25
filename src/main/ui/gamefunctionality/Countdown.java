@@ -73,7 +73,6 @@ public class Countdown {
                     if (sec < countdownIcons.size()) {
                         countdownIcons.get(sec).setVisible(false);
                     }
-                    System.out.println(sec);
                     sec--;
                 } catch (IndexOutOfBoundsException exception) {
                     // do nothing because need to recursively set last image to false,
