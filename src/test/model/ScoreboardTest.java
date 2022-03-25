@@ -92,4 +92,10 @@ public class ScoreboardTest {
         sbTest.addScore(s1);
         assertEquals("3. 1000.0 Points, 0.0% Accuracy", sbTest.convertScoreboardToString(2));
     }
+
+    @Test
+    void testGet() {
+        sbTest.addScore(s1);
+        assertEquals(s1, sbTest.get(0));
+    }
 }
