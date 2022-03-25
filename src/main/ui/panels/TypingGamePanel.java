@@ -13,8 +13,6 @@ public class TypingGamePanel extends JPanel {
     private MenuPanel menuPanel;
     private ScoreboardPanel sbPanel;
     private WordPanel wordPanel;
-    private EndGamePanel endGamePanel;
-
 
     // EFFECTS: constructs typing game panel which will hold other panels (menu panel, scoreboard)
     public TypingGamePanel() {

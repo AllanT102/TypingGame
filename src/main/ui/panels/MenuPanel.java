@@ -11,8 +11,8 @@ import static java.awt.Color.*;
 
 // represents menu panel
 public class MenuPanel extends JPanel implements ActionListener {
-    private int width = 500;
-    private int height = 500;
+    private final int width = 500;
+    private final int height = 500;
     private Player player;
     private JButton quitButton;
     private JButton playButton;

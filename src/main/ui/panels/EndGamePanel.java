@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import static java.awt.Color.*;
 
 public class EndGamePanel extends JPanel implements ActionListener {
-    private int width = 500;
+    private final int width = 500;
     private TypingGamePanel typingGamePanel;
     private Player player;
     private Score score;

@@ -14,9 +14,9 @@ import static java.awt.Color.*;
 
 // represents panel that will display typing words
 public class WordPanel extends JPanel {
-    private int width = 500;
-    private int height = 500;
-    private int charPerLine = 44;
+    private final int width = 500;
+    private final int height = 500;
+    private final int charPerLine = 44;
 
     private Countdown countdown;
     private Paragraph paragraph;

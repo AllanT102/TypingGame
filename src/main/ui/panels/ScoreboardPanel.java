@@ -9,10 +9,10 @@ import static java.awt.Color.*;
 
 // Represents scoreboard panel
 public class ScoreboardPanel extends JPanel implements ActionListener {
-    private int width = 500;
-    private int tileHeight = 300;
-    private int rowHeight = tileHeight / 6;
-    private Font rowFont = new Font("Serif", Font.PLAIN, 25);
+    private final int width = 500;
+    private final int tileHeight = 300;
+    private final int rowHeight = tileHeight / 6;
+    private final Font rowFont = new Font("Serif", Font.PLAIN, 25);
 
     private TypingGamePanel typingGamePanel;
     private JPanel scoreTile;

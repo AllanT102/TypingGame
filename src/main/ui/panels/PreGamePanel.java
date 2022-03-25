@@ -12,13 +12,13 @@ import static java.awt.Color.*;
 
 // abstract class for a pregame panel
 public abstract class PreGamePanel extends JPanel implements ActionListener {
-    protected int width = 500;
-    protected int height = 500;
-    protected int userFieldW = 90;
-    protected int userFieldH = 25;
-    protected int textFieldW = 165;
-    protected int textFieldH = 25;
-    protected int borderThickness = 10;
+    protected final int width = 500;
+    protected final int height = 500;
+    protected final int userFieldW = 90;
+    protected final int userFieldH = 25;
+    protected final int textFieldW = 165;
+    protected final int textFieldH = 25;
+    protected final int borderThickness = 10;
 
     protected TypingGame game;
     protected Login login;

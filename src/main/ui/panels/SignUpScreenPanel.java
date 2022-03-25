@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 // Represents sign up screen
 public class SignUpScreenPanel extends PreGamePanel {
 
-
     // EFFECTS: constructs sign up panel and sets up the sign in panel with options to sign up
     public SignUpScreenPanel() {
         super();
