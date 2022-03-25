@@ -1,6 +1,5 @@
 package ui.panels;
 
-
 import model.Paragraph;
 import model.Player;
 import model.Score;
@@ -13,6 +12,7 @@ import java.awt.event.KeyEvent;
 
 import static java.awt.Color.*;
 
+// represents panel that will display typing words
 public class WordPanel extends JPanel {
     private int width = 500;
     private int height = 500;
@@ -26,6 +26,9 @@ public class WordPanel extends JPanel {
     private TypingGamePanel gamePanel;
     private JLabel wordsToType;
 
+    // MODIFIES: gamePanel, player
+    // EFFECTS: constructs a wordPanel object with paragraph that player will type and a countdown that will display
+    //          before game starts
     public WordPanel(TypingGamePanel gamePanel, Player player) {
         super();
         setLayout(null);
@@ -39,6 +42,9 @@ public class WordPanel extends JPanel {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initial startup of game including countdown, starting game,
+    //          and creating a text-field for user to type in
     public void init() {
         countdown.startCountdown();
         countdown.getTimer().start();
@@ -56,6 +62,8 @@ public class WordPanel extends JPanel {
 //        }
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts game by displaying words on screen
     public void startGame() {
         wordsToType = new JLabel("");
         wordsToType.setText("<html><p style=\"width:300px;text-align:center;\">"
@@ -65,14 +73,8 @@ public class WordPanel extends JPanel {
         this.add(wordsToType);
     }
 
-    public void resetText() {
-        String newPara = paragraph.convertParaToString(paragraph.generateParagraph());
-        paragraph.setParagraph(newPara);
-        wordsToType.setText("<html><p style=\"width:300px;text-align:center;\">"
-                + newPara + "</p></html>");
-        textField.setText("");
-    }
-
+    // MODIFIES: this
+    // EFFECTS: creates text field for user to type in and processes user input
     public void createTextField() {
         textField = new JTextField();
         textField.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -91,12 +93,12 @@ public class WordPanel extends JPanel {
         textField.setBounds(35, height / 2, 400, 50);
         textField.setBackground(lightGray);
         textField.setOpaque(true);
-
         EventQueue.invokeLater(() -> textField.requestFocusInWindow());
-
         this.add(textField);
     }
 
+    // MODIFIES: this
+    // EFFECTS: calculates score that the user got
     public Score calculateScore() {
         this.score = new Score();
         String userInputText = textField.getText();
@@ -108,6 +110,7 @@ public class WordPanel extends JPanel {
         return this.score;
     }
 
+    // EFFECTS: stops game by creating end game panel
     public void stopGame() {
         EndGamePanel endGamePanel = new EndGamePanel(this.gamePanel, this.gamePanel.getPlayer(), this.score);
     }

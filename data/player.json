@@ -48,6 +48,10 @@
             {
                 "Score": 0,
                 "Accuracy": 0
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
             }
         ],
         "Name": "Allan"

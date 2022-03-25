@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-// A typing game class where users can create a player, practice their typing skills, and view scores
+// the frame that holds all game contents
 public class TypingGame extends JFrame {
     private int width = 500;
     private int height = 500;
@@ -23,7 +23,8 @@ public class TypingGame extends JFrame {
     private CardLayout cl;
 
     // constructs main window
-    // EFFECTS: sets up window in which Typing Game will be played and sign up/ login page will be
+    // EFFECTS: sets up window in which Typing Game will be played and sign up/ login page will be; uses cardLayout to
+    //          swap between screens and holds load-in/signup/typing-game-panel screens
     public TypingGame() {
         super("Typing Game");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -39,12 +40,10 @@ public class TypingGame extends JFrame {
         signUpScreen = new SignUpScreenPanel();
         typingGamePanel = new TypingGamePanel();
 
-
         screens.setLayout(cl);
         screens.add(loadInScreen, "loadInScreen");
         screens.add(signUpScreen, "signUpScreen");
         screens.add(typingGamePanel, "typingGamePanel");
-
 
         cl.show(screens, "loadInScreen");
         add(screens);
@@ -94,6 +93,8 @@ public class TypingGame extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates user prompt option when exit is pressed
     public void promptUserClose() {
         addWindowListener(new WindowAdapter() {
             @Override
@@ -110,6 +111,16 @@ public class TypingGame extends JFrame {
                 }
             }
         });
+    }
+
+    // METHOD TAKEN FROM: https://stackoverflow.com/questions/144892/how-to-center-a-window-in-java
+    // MODIFIES: this
+    // EFFECTS: centres frame in the middle of users screen
+    public static void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 
     public LoadInScreenPanel getLoadInScreen() {
@@ -131,13 +142,4 @@ public class TypingGame extends JFrame {
     public JPanel getScreens() {
         return screens;
     }
-
-    public static void centreWindow(Window frame) {
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-        frame.setLocation(x, y);
-    }
-
-
 }

@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import static java.awt.Color.*;
 
+// abstract class for a pregame panel
 public abstract class PreGamePanel extends JPanel implements ActionListener {
     protected int width = 500;
     protected int height = 500;
@@ -22,6 +23,7 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
     protected TypingGame game;
     protected Login login;
 
+    // EFFECTS: constructs pre-game panel
     public PreGamePanel() {
         super();
         setLayout(null);

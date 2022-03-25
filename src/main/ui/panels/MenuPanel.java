@@ -9,10 +9,10 @@ import java.awt.event.ActionListener;
 
 import static java.awt.Color.*;
 
+// represents menu panel
 public class MenuPanel extends JPanel implements ActionListener {
-    protected int width = 500;
-    protected int height = 500;
-
+    private int width = 500;
+    private int height = 500;
     private Player player;
     private JButton quitButton;
     private JButton playButton;
@@ -20,6 +20,7 @@ public class MenuPanel extends JPanel implements ActionListener {
     private TypingGamePanel typingGamePanel;
 
     // Constructs the game panel
+    // MODIFIES: t
     // EFFECTS: sets up the game and play screen
     public MenuPanel(TypingGamePanel t) {
         super();
@@ -38,10 +39,14 @@ public class MenuPanel extends JPanel implements ActionListener {
         setQuitButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets player to player
     public void setPlayer(Player player) {
         this.player = player;
     }
 
+    // MODIFIES: this
+    // EFFECTS: helper method to make a button
     public JButton makeButton(String name, int ycoord) {
         JButton button = new JButton(name);
         button.setActionCommand(name);
@@ -54,18 +59,26 @@ public class MenuPanel extends JPanel implements ActionListener {
         return button;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates play button
     public void setPlayButton() {
         this.playButton = makeButton("Play", 100);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates highscore button
     public void setHighscoreButton() {
         this.highscoreButton = makeButton("Highscores", 200);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates quit button
     public void setQuitButton() {
         this.quitButton = makeButton("Save and Quit", 300);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets a welcome message at top of screen
     public void setWelcomeMessage() {
         JLabel welcomeMessage = new JLabel("Welcome, " + this.player.getName() + "!", SwingConstants.CENTER);
         welcomeMessage.setFont(new Font("Serif", Font.BOLD, 30));
@@ -76,20 +89,17 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.add(welcomeMessage);
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes button clicks
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
         if (action.equals("Play")) {
             typingGamePanel.setWordPanel();
-//            try {
             typingGamePanel.getWordPanel().init();
-//            } catch (InterruptedException exception) {
-//                //
-//            }
         } else if (action.equals("Save and Quit")) {
             int promptResult = JOptionPane.showConfirmDialog(null,
-                    "Do you want to save your player data?",
-                    "Confirm Close", JOptionPane.YES_NO_OPTION,
+                    "Do you want to save your player data?", "Confirm Close", JOptionPane.YES_NO_OPTION,
                     JOptionPane.INFORMATION_MESSAGE, new ImageIcon(new ImageIcon("./images/bye.png").getImage()
                             .getScaledInstance(75, 75, Image.SCALE_DEFAULT)));
             if (promptResult == JOptionPane.YES_OPTION) {

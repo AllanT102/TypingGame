@@ -5,6 +5,7 @@ import ui.panels.LoadInScreenPanel;
 import ui.panels.SignUpScreenPanel;
 import ui.panels.TypingGamePanel;
 
+// Class that sets up entire game
 public class SetUp {
     private LoadInScreenPanel loadInScreen;
     private SignUpScreenPanel signUpScreen;
@@ -13,7 +14,7 @@ public class SetUp {
     private TypingGame game;
 
 
-    // EFFECTS: class to handle setup of loading screen
+    // EFFECTS: constructs class to handle setup of loading screen and bidirectional relationships
     public SetUp() {
         game = new TypingGame();
         login = new Login();

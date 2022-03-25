@@ -6,11 +6,11 @@ import ui.frame.TypingGame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-
+// Represents sign up screen
 public class SignUpScreenPanel extends PreGamePanel {
 
-    // Constructs the sign up page
-    // EFFECTS: sets up the sign in panel with options to sign up
+
+    // EFFECTS: constructs sign up panel and sets up the sign in panel with options to sign up
     public SignUpScreenPanel() {
         super();
 
@@ -62,6 +62,8 @@ public class SignUpScreenPanel extends PreGamePanel {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes button clicks
     @Override
     public void actionPerformed(ActionEvent e) {
         JTextField textField = (JTextField) this.getComponent(2);

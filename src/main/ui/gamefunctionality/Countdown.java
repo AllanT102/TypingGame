@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+// Countdown that represents the countdown that displays on screen
 public class Countdown {
     private int sec = 3;
     private int width = 500;
@@ -14,12 +15,16 @@ public class Countdown {
 
     private List<JComponent> countdownIcons;
     private Timer timer;
-    
+
+    // constructs the countdown
+    // EFFECTS: creates a new countdown with an empty list of icons and sets the icons
     public Countdown() {
         countdownIcons = new ArrayList<>();
         setCountdownIcons();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds scaled images to list of icons
     public void setCountdownIcons() {
         ImageIcon threeScaled =
                 new ImageIcon(new ImageIcon("./images/three.png").getImage()
@@ -47,6 +52,9 @@ public class Countdown {
         countdownIcons.add(three);
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts the countdown by constructing a timer object that starts at sec, and displays each image in list
+    //          icons and hides previous icon
     public void startCountdown() {
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -70,7 +78,6 @@ public class Countdown {
                 } catch (IndexOutOfBoundsException exception) {
                     // do nothing because need to recursively set last image to false,
                     // first picture will never have a greater index
-
                 }
             }
         });

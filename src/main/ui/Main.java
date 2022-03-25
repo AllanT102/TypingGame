@@ -5,7 +5,6 @@ import ui.gamefunctionality.SetUp;
 public class Main {
 
     public static void main(String[] args) {
-
         try {
             new SetUp();
         } catch (Error e) {

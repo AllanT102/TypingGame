@@ -11,6 +11,7 @@ import ui.panels.TypingGamePanel;
 
 import java.io.IOException;
 
+// represents class that deals with all login aspects
 public class Login {
     private static final String JSON_DATA = "./data/player.json";
     private Players allPlayers;
@@ -21,6 +22,7 @@ public class Login {
     private SignUpScreenPanel signUpScreen;
     private TypingGamePanel gamePanel;
 
+    // constructs new login object and reads JSON data to load all player data
     public Login() {
         jsonReader = new JsonReader(JSON_DATA);
         jsonWriter = new JsonWriter(JSON_DATA);

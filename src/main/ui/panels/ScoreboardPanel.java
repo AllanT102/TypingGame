@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import static java.awt.Color.*;
 
+// Represents scoreboard panel
 public class ScoreboardPanel extends JPanel implements ActionListener {
     private int width = 500;
     private int tileHeight = 300;
@@ -19,6 +20,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     private JPanel scoreboard;
     private JPanel numberTile;
 
+    // MODIFIES: t
+    // EFFECTS: cosntructs a scoreboard panel
     public ScoreboardPanel(TypingGamePanel t) {
         super();
         this.typingGamePanel = t;
@@ -30,6 +33,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates title banner on top of page
     public void createTitle() {
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS));
@@ -46,7 +51,9 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         this.add(titlePanel);
     }
 
-    // called after highscore button is clicked so that player is already assigned to class
+    // MODIFIES: this
+    // EFFECTS: creates the scoreboard with number tile, score tile, and accuracy tile
+    //          called after highscore button is clicked so that player is already assigned to class
     public void createScoreboard() {
         scoreboard = new JPanel();
         scoreboard.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -60,6 +67,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         addBackButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: updates scoreboard
     public void updateScoreboard() {
         this.scoreTile.removeAll();
         this.accTile.removeAll();
@@ -69,6 +78,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         addToAccTile();
     }
 
+    // EFFECTS: creates a panel with set style
     public JPanel createPanel(int w) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -78,18 +88,24 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         return panel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates score tile
     public JPanel createScoreTile() {
         scoreTile = createPanel(width / 3);
         this.scoreTile = scoreTile;
         return scoreTile;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates accuracy tile
     public JPanel createAccTile() {
         JPanel accTile = createPanel(width / 3);
         this.accTile = accTile;
         return accTile;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates numbers tile
     public JPanel createNumbersTile() {
         numberTile = createPanel(40);
         numberTile.add(createBlankSpace());
@@ -97,6 +113,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         return numberTile;
     }
 
+    // EFFECTS: creates a blank space for spacing
     public JLabel createBlankSpace() {
         JLabel blankSpace = new JLabel("");
         blankSpace.setFont(rowFont);
@@ -105,6 +122,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         return blankSpace;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a singular number label to the number tile
     public void addNumberToNumberTile(int i) {
         JLabel number = new JLabel(Integer.toString(i + 1) + ".");
         highlightTopThree(i, number);
@@ -115,6 +134,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         numberTile.add(number);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a singular score label and title to the number tile
     public void addToScoreTile() {
         addTileTitle("Score", this.scoreTile);
         for (int i = 0; i < 5; i++) {
@@ -129,6 +150,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a singular accuracy label and title to the number tile
     public void addToAccTile() {
         addTileTitle("Accuracy", this.accTile);
         for (int i = 0; i < 5; i++) {
@@ -141,6 +164,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: highlights top 3 rows of the scoreboard
     public void highlightTopThree(int i, JLabel row) {
         switch (i) {
             case 0:
@@ -157,7 +182,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         }
     }
 
-
+    // MODIFIES: tile
+    // EFFECTS: creates a subtile to go into bigger tile
     public void createSubTile(JPanel tile, String info, int i) {
         JLabel sub = new JLabel(info);
         highlightTopThree(i, sub);
@@ -168,6 +194,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         tile.add(sub);
     }
 
+    // MODIFIES: tile
+    // EFFECTS: adds title to top of tile
     private void addTileTitle(String name, JPanel tile) {
         JLabel title = new JLabel(name);
         title.setMaximumSize(new Dimension(width, rowHeight));
@@ -175,6 +203,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         tile.add(title);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds back button to panel
     private void addBackButton() {
         JButton button = new JButton("Back to Menu");
         button.addActionListener(this);
@@ -186,6 +216,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         this.add(button);
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes button clicks
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();

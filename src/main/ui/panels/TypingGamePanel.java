@@ -5,6 +5,7 @@ import ui.gamefunctionality.Login;
 import javax.swing.*;
 import java.awt.*;
 
+// Represents typing game panel
 public class TypingGamePanel extends JPanel {
     private Login login;
     private Player player;
@@ -15,8 +16,7 @@ public class TypingGamePanel extends JPanel {
     private EndGamePanel endGamePanel;
 
 
-    // Constructs the game panel
-    // EFFECTS: sets up the game and play screen
+    // EFFECTS: constructs typing game panel which will hold other panels (menu panel, scoreboard)
     public TypingGamePanel() {
         super();
         menuCL = new CardLayout();
@@ -51,7 +51,8 @@ public class TypingGamePanel extends JPanel {
         }
     }
 
-    // called in sub panels to create new game text
+    // MODIFIES: this
+    // EFFECTS: creates a new wordPanel with new paragraph by removing the old wordPanel
     public void setWordPanel() {
         this.wordPanel = null;
         WordPanel newWordPanel = new WordPanel(this, player);
@@ -60,6 +61,8 @@ public class TypingGamePanel extends JPanel {
         menuCL.show(this, "word panel");
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets player
     public void setPlayer(Player player) {
         this.player = player;
     }

@@ -8,17 +8,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-
 import static java.awt.Color.*;
 
 public class EndGamePanel extends JPanel implements ActionListener {
     private int width = 500;
-
     private TypingGamePanel typingGamePanel;
     private Player player;
     private Score score;
 
+    // MODIFIES: gamePanel
+    // EFFECTS: constructs end game panel that displays after user finishes playing a game
     public EndGamePanel(TypingGamePanel gamePanel, Player player, Score score) {
         super();
         this.typingGamePanel = gamePanel;
@@ -34,6 +33,7 @@ public class EndGamePanel extends JPanel implements ActionListener {
         gamePanel.getMenuCL().show(gamePanel, "endgame");
     }
 
+    // EFFECTS: helper method to make a button
     public void makeButton(String name, int ycoord) {
         JButton button = new JButton(name);
         button.setActionCommand(name);
@@ -45,6 +45,7 @@ public class EndGamePanel extends JPanel implements ActionListener {
         this.add(button);
     }
 
+    // EFFECTS: makes score line that displays after game
     public void makeScoreLine() {
         JLabel scoreLine = new JLabel(score.getResults(), SwingConstants.CENTER);
         scoreLine.setFont(new Font("Serif", Font.BOLD, 30));
@@ -55,18 +56,23 @@ public class EndGamePanel extends JPanel implements ActionListener {
         this.add(scoreLine);
     }
 
+    // EFFECTS: makes replay button
     public void makeReplayButton() {
         makeButton("Play again", 100);
     }
 
+    // EFFECTS: makes back to menu button
     public void makeGoBackToMenuButton() {
         makeButton("Menu", 200);
     }
 
+    // EFFECTS: makes quit button
     public void makeQuitButton() {
         makeButton("Save and Quit", 300);
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes button clicks (play again, menu, save and quit
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();

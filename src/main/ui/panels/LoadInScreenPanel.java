@@ -6,14 +6,13 @@ import ui.frame.TypingGame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-
+// represents the load in screen
 public class LoadInScreenPanel extends PreGamePanel {
 
     // Constructs the load in screen
     // EFFECTS: sets up the panel with pregame login options
     public LoadInScreenPanel() {
         super();
-
         makeTitle();
         makeUsername();
         makeUsernameTextField();
