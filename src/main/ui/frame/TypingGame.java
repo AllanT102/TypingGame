@@ -104,7 +104,8 @@ public class TypingGame extends JFrame {
                 int promptResult = JOptionPane.showConfirmDialog(null,
                         "Do you want to save your player data?",
                         "Confirm Close", JOptionPane.YES_NO_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.INFORMATION_MESSAGE, new ImageIcon(new ImageIcon("./images/bye.png").getImage()
+                                .getScaledInstance(75, 75, Image.SCALE_DEFAULT)));
                 if (promptResult == JOptionPane.YES_OPTION) {
                     System.exit(0);
                 }

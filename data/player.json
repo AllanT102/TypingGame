@@ -1,25 +1,62 @@
-[{
-  "Allan": [
+[
     {
-      "Score": 100000,
-      "Accuracy": 100
+        "Allan": [
+            {
+                "Score": 100000,
+                "Accuracy": 100
+            },
+            {
+                "Score": 41000,
+                "Accuracy": 14
+            },
+            {
+                "Score": 3000,
+                "Accuracy": 3
+            },
+            {
+                "Score": 3000,
+                "Accuracy": 3
+            },
+            {
+                "Score": 3000,
+                "Accuracy": 3
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
+            },
+            {
+                "Score": 0,
+                "Accuracy": 0
+            }
+        ],
+        "Name": "Allan"
     },
     {
-      "Score": 41000,
-      "Accuracy": 14
-    },
-    {
-      "Score": 3000,
-      "Accuracy": 3
-    },
-    {
-      "Score": 3000,
-      "Accuracy": 3
-    },
-    {
-      "Score": 3000,
-      "Accuracy": 3
+        "Jonny": [{
+            "Score": 7000,
+            "Accuracy": 7
+        }],
+        "Name": "Jonny"
     }
-  ],
-  "Name": "Allan"
-}]
+]

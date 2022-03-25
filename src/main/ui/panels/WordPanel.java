@@ -2,6 +2,8 @@ package ui.panels;
 
 
 import model.Paragraph;
+import model.Player;
+import model.Score;
 import ui.gamefunctionality.Countdown;
 
 import javax.swing.*;
@@ -18,14 +20,17 @@ public class WordPanel extends JPanel {
 
     private Countdown countdown;
     private Paragraph paragraph;
+    private Player player;
+    private Score score;
     private JTextField textField;
     private TypingGamePanel gamePanel;
     private JLabel wordsToType;
 
-    public WordPanel(TypingGamePanel gamePanel) {
+    public WordPanel(TypingGamePanel gamePanel, Player player) {
         super();
         setLayout(null);
         paragraph = new Paragraph();
+        this.player = player;
         this.gamePanel = gamePanel;
         this.countdown = new Countdown();
         for (Component c : countdown.getCountdownIcons()) {
@@ -78,6 +83,7 @@ public class WordPanel extends JPanel {
                 if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
                     evt.consume();
                 } else if (c == KeyEvent.VK_ENTER) {
+                    calculateScore();
                     stopGame();
                 }
             }
@@ -91,8 +97,19 @@ public class WordPanel extends JPanel {
         this.add(textField);
     }
 
+    public Score calculateScore() {
+        this.score = new Score();
+        String userInputText = textField.getText();
+        score.calculateAccuracy(paragraph.getTotalChar(),
+                paragraph.getNumTypedCorrect(paragraph, paragraph.getParagraphAsString(), userInputText));
+        score.calculateScore(score.getAcc());
+        score.setResults();
+        player.getScoreboard().addScore(score);
+        return this.score;
+    }
+
     public void stopGame() {
-        EndGamePanel endGamePanel = new EndGamePanel(this.gamePanel, this.gamePanel.getPlayer());
+        EndGamePanel endGamePanel = new EndGamePanel(this.gamePanel, this.gamePanel.getPlayer(), this.score);
     }
 
     public Countdown getCountdown() {

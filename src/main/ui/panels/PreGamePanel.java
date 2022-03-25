@@ -31,11 +31,11 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
     // EFFECTS: creates title
     protected void makeTitle() {
         JLabel title = new JLabel("TYPING GAME", SwingConstants.CENTER);
-        title.setFont(new Font("Serif", Font.BOLD, 40));
+        title.setFont(new Font("Serif", Font.BOLD, 50));
         title.setBounds(0, height / 5, width, 100);
         title.setOpaque(true);
         title.setForeground(black);
-        title.setBackground(lightGray);
+        title.setBackground(new Color(0, 102, 204));
         this.add(title);
     }
 

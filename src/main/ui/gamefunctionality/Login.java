@@ -36,7 +36,7 @@ public class Login {
 
     // MODIFIES: this
     // EFFECTS: saves user data ie. player information
-    private void saveData() {
+    public void saveData() {
         try {
             jsonWriter.open();
             jsonWriter.write(this.allPlayers);

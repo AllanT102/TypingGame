@@ -15,6 +15,7 @@ public class Score implements Writable {
     // EFFECTS: constructs a score with initial score of 0;
     public Score() {
         this.plScore = 0;
+        this.acc = 0;
     }
 
     public String getResults() {

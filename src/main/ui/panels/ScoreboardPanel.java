@@ -13,7 +13,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     private int width = 500;
     private int tileHeight = 300;
     private int rowHeight = tileHeight / 6;
-    private Font rowFont = new Font("Serif", Font.BOLD, 30);
+    private Font rowFont = new Font("Serif", Font.PLAIN, 25);
 
     private TypingGamePanel typingGamePanel;
     private JPanel scoreTile;
@@ -34,13 +34,15 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     public void createTitle() {
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS));
-        JLabel title = new JLabel("SCOREBOARD", SwingConstants.CENTER);
-        title.setFont(new Font("Serif", Font.BOLD, 50));
+        JLabel title = new JLabel("Scoreboard", SwingConstants.CENTER);
+        title.setFont(new Font("Serif", Font.BOLD, 30));
         title.setForeground(black);
-        title.setBackground(lightGray);
+        title.setBackground(new Color(0, 102, 204));
         title.setOpaque(true);
         title.setAlignmentX(CENTER_ALIGNMENT);
-        title.setMaximumSize(new Dimension(width, 70));
+        title.setAlignmentY(50);
+        title.setPreferredSize(new Dimension(width, 40));
+        title.setMaximumSize(new Dimension(width, 40));
         titlePanel.add(title);
         this.add(titlePanel);
     }
@@ -48,7 +50,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     // called after highscore button is clicked so that player is already assigned to class
     public void createScoreboard() {
         scoreboard = new JPanel();
-        scoreboard.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
+        scoreboard.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         scoreboard.add(createNumbersTile());
         scoreboard.add(createScoreTile());
@@ -97,6 +99,8 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
 
         for (int i = 0; i < 5; i++) {
             JLabel number = new JLabel(Integer.toString(i + 1) + ".");
+            highlightTopThree(i, number);
+            number.setOpaque(true);
             number.setFont(rowFont);
             number.setPreferredSize(new Dimension(40, rowHeight));
             number.setMaximumSize(new Dimension(40, rowHeight));
@@ -111,7 +115,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         for (int i = 0; i < 5; i++) {
             try {
                 String score = Double.toString(typingGamePanel.getPlayer().getScoreboard().get(i).getScore());
-                createSubTile(scoreTile, score);
+                createSubTile(scoreTile, score, i);
             } catch (IndexOutOfBoundsException e) {
                 // do nothing
             }
@@ -123,15 +127,34 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         for (int i = 0; i < 5; i++) {
             try {
                 String acc = Double.toString(typingGamePanel.getPlayer().getScoreboard().get(i).getAcc());
-                createSubTile(accTile, acc + "%");
+                createSubTile(accTile, acc + "%", i);
             } catch (IndexOutOfBoundsException e) {
                 // do nothing
             }
         }
     }
 
-    public void createSubTile(JPanel tile, String info) {
+    public void highlightTopThree(int i, JLabel row) {
+        switch (i) {
+            case 0:
+                row.setBackground(new Color(0, 102, 204));
+                break;
+            case 1:
+                row.setBackground(new Color(102, 102, 255));
+                break;
+            case 2:
+                row.setBackground(new Color(178, 102, 255));
+                break;
+            default:
+                row.setBackground(null);
+        }
+    }
+
+
+    public void createSubTile(JPanel tile, String info, int i) {
         JLabel sub = new JLabel(info);
+        highlightTopThree(i, sub);
+        sub.setOpaque(true);
         sub.setFont(rowFont);
         sub.setPreferredSize(new Dimension(width / 3, rowHeight));
         sub.setMaximumSize(new Dimension(width / 3, rowHeight));

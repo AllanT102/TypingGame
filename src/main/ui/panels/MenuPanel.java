@@ -68,10 +68,10 @@ public class MenuPanel extends JPanel implements ActionListener {
 
     public void setWelcomeMessage() {
         JLabel welcomeMessage = new JLabel("Welcome, " + this.player.getName() + "!", SwingConstants.CENTER);
-        welcomeMessage.setFont(new Font("Serif", Font.BOLD, 25));
-        welcomeMessage.setBounds(0, 10, width, 30);
+        welcomeMessage.setFont(new Font("Serif", Font.BOLD, 30));
+        welcomeMessage.setBounds(0, 0, width, 40);
         welcomeMessage.setForeground(black);
-        welcomeMessage.setBackground(lightGray);
+        welcomeMessage.setBackground(new Color(0, 102, 204));
         welcomeMessage.setOpaque(true);
         this.add(welcomeMessage);
     }
@@ -90,8 +90,12 @@ public class MenuPanel extends JPanel implements ActionListener {
             int promptResult = JOptionPane.showConfirmDialog(null,
                     "Do you want to save your player data?",
                     "Confirm Close", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE, new ImageIcon(new ImageIcon("./images/bye.png").getImage()
+                            .getScaledInstance(75, 75, Image.SCALE_DEFAULT)));
             if (promptResult == JOptionPane.YES_OPTION) {
+                typingGamePanel.getLogin().saveData();
+                System.exit(0);
+            } else if (promptResult == JOptionPane.NO_OPTION) {
                 System.exit(0);
             }
         } else if (action.equals("Highscores")) {

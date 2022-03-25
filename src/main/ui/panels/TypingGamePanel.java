@@ -54,7 +54,7 @@ public class TypingGamePanel extends JPanel {
     // called in sub panels to create new game text
     public void setWordPanel() {
         this.wordPanel = null;
-        WordPanel newWordPanel = new WordPanel(this);
+        WordPanel newWordPanel = new WordPanel(this, player);
         this.wordPanel = newWordPanel;
         add(newWordPanel, "word panel");
         menuCL.show(this, "word panel");
@@ -82,5 +82,9 @@ public class TypingGamePanel extends JPanel {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Login getLogin() {
+        return login;
     }
 }
