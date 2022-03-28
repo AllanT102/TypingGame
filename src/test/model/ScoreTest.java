@@ -9,11 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ScoreTest {
 
+    private Player p1;
     private Score scoreTest;
 
     @BeforeEach
     void runBefore(){
         scoreTest = new Score();
+        p1 = new Player("allan");
     }
 
     @Test
@@ -52,7 +54,7 @@ public class ScoreTest {
     void testSetResults(){
         scoreTest.calculateScore(1);
         scoreTest.calculateAccuracy(1,1);
-        scoreTest.setResults();
+        scoreTest.setResults(p1);
 
         assertEquals("Score: 1000.0 Accuracy: 100.0%", scoreTest.getResults());
     }

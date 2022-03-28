@@ -1,5 +1,7 @@
 package ui.panels;
 
+import model.Event;
+import model.EventLog;
 import model.Player;
 import model.Score;
 
@@ -87,12 +89,20 @@ public class EndGamePanel extends JPanel implements ActionListener {
                     "Confirm Close", JOptionPane.YES_NO_OPTION,
                     JOptionPane.INFORMATION_MESSAGE, new ImageIcon(new ImageIcon("./images/bye.png").getImage()
                             .getScaledInstance(75, 75, Image.SCALE_DEFAULT)));
+            printLog(EventLog.getInstance());
             if (promptResult == JOptionPane.YES_OPTION) {
                 typingGamePanel.getLogin().saveData();
                 System.exit(0);
             } else if (promptResult == JOptionPane.NO_OPTION) {
                 System.exit(0);
             }
+        }
+    }
+
+    // EFFECTS: prints event log to console
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.getDescription());
         }
     }
 }

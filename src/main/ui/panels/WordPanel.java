@@ -1,5 +1,7 @@
 package ui.panels;
 
+import model.Event;
+import model.EventLog;
 import model.Paragraph;
 import model.Player;
 import model.Score;
@@ -105,7 +107,7 @@ public class WordPanel extends JPanel {
         score.calculateAccuracy(paragraph.getTotalChar(),
                 paragraph.getNumTypedCorrect(paragraph, paragraph.getParagraphAsString(), userInputText));
         score.calculateScore(score.getAcc());
-        score.setResults();
+        score.setResults(this.player);
         player.getScoreboard().addScore(score);
         return this.score;
     }

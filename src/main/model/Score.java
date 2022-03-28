@@ -1,10 +1,8 @@
 package model;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 import persistence.Writable;
+import java.util.Date;
 
 // Represents an individual score that is achieved by the user after playing one typing game
 public class Score implements Writable {
@@ -61,9 +59,12 @@ public class Score implements Writable {
 
 
     // EFFECTS: sets results
-    public void setResults() {
+    public void setResults(Player p) {
+        Date date = new Date();
         this.results = new String("Score: " + getScore()
                 + " Accuracy: " + getAcc() + "%");
+        EventLog.getInstance().logEvent(new Event(p.getName()
+                + " scored " + getScore() + " with an accuracy of " + getAcc() + "%" + " at " + date));
     }
 
     // Parts of method taken from Thingy class in
