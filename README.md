@@ -41,5 +41,13 @@ ords I need to type.
 
 As a user, I want to be able to login to my account and prompted to save my user information before I quit.
 
+#### Phase 4
+
+Task 2: 
+
+Allan scored 0.0 with an accuracy of 0.0% at Wed Mar 30 10:38:06 PDT 2022
+Allan scored 6000.0 with an accuracy of 6.0% at Wed Mar 30 10:38:10 PDT 2022
+Allan scored 6000.0 with an accuracy of 6.0% at Wed Mar 30 10:38:13 PDT 2022
+
 
 

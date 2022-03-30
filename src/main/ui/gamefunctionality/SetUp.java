@@ -7,9 +7,6 @@ import ui.panels.TypingGamePanel;
 
 // Class that sets up entire game
 public class SetUp {
-    private LoadInScreenPanel loadInScreen;
-    private SignUpScreenPanel signUpScreen;
-    private TypingGamePanel gamePanel;
     private Login login;
     private TypingGame game;
 
@@ -19,23 +16,23 @@ public class SetUp {
         game = new TypingGame();
         login = new Login();
 
-        loadInScreen = game.getLoadInScreen();
-        signUpScreen = game.getSignUpScreen();
-        gamePanel = game.getTypingGamePanel();
+        LoadInScreenPanel loadInScreen = game.getLoadInScreen();
+        SignUpScreenPanel signUpScreen = game.getSignUpScreen();
+        TypingGamePanel gamePanel = game.getTypingGamePanel();
 
         loadInScreen.setLogin(this.login);
-        login.setLoadInScreen(this.loadInScreen);
+        login.setLoadInScreen(loadInScreen);
 
         signUpScreen.setLogin(this.login);
-        login.setSignUpScreen(this.signUpScreen);
+        login.setSignUpScreen(signUpScreen);
 
-        game.setSignUpScreen(this.signUpScreen);
+        game.setSignUpScreen(signUpScreen);
         signUpScreen.setGame(this.game);
 
-        game.setLoadInScreen(this.loadInScreen);
+        game.setLoadInScreen(loadInScreen);
         loadInScreen.setGame(this.game);
 
-        login.setGamePanel(this.gamePanel);
+        login.setGamePanel(gamePanel);
         gamePanel.setLogin(this.login);
     }
 }

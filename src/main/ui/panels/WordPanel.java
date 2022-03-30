@@ -1,7 +1,5 @@
 package ui.panels;
 
-import model.Event;
-import model.EventLog;
 import model.Paragraph;
 import model.Player;
 import model.Score;
@@ -27,6 +25,7 @@ public class WordPanel extends JPanel {
     private JTextField textField;
     private TypingGamePanel gamePanel;
     private JLabel wordsToType;
+    private EndGamePanel endGamePanel;
 
     // MODIFIES: gamePanel, player
     // EFFECTS: constructs a wordPanel object with paragraph that player will type and a countdown that will display
@@ -114,7 +113,8 @@ public class WordPanel extends JPanel {
 
     // EFFECTS: stops game by creating end game panel
     public void stopGame() {
-        EndGamePanel endGamePanel = new EndGamePanel(this.gamePanel, this.gamePanel.getPlayer(), this.score);
+        endGamePanel = null;
+        endGamePanel = new EndGamePanel(this.gamePanel, this.gamePanel.getPlayer(), this.score);
     }
 
     public Countdown getCountdown() {
