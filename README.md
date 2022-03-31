@@ -49,5 +49,22 @@ Allan scored 0.0 with an accuracy of 0.0% at Wed Mar 30 10:38:06 PDT 2022
 Allan scored 6000.0 with an accuracy of 6.0% at Wed Mar 30 10:38:10 PDT 2022
 Allan scored 6000.0 with an accuracy of 6.0% at Wed Mar 30 10:38:13 PDT 2022
 
+#### Reflection and Further Development
+
+1. After drawing the UML diagram, I realized how much coupling there is in my project. Although I feel like there is high
+cohesion within the code, all the classes depend on each other, which is poor coding style as if one class breaks, 
+everything else breaks. Specifically, I realized that I implemented bi-directional relationships just to pass on the same 
+data such as player information to the next class. However, this could have been fixed by using the singleton design pattern
+as I could have made the initial screens (loadInScreen and SignUpScreen) accessible to all other classes. Or I could
+have implemented a more structured hierarchy so that I could just access the related classes data and so on.
+2. For many panels, I did not use a layout because I wanted to freely set the location of my objects. However, this
+just means that if I wanted to redesign this in the future, I would have to redo all the layout planning of the panels 
+and change all its variables because I did not use the single point of responsibility principle for dimensions such as 
+width and height.
+3. There is a some common behaviour between my classes such as setting up the bi-drectional relationships. I 
+also reuse a lot of code within classes as well, so I could have created helper methods to reduce code clones. 
+4. I could have implemented other functions to the game such as a timer countdown, colour matching to words typed 
+correctly, or even a password for users. I could have also fixed the bug about not being able to type before the countdown
+if I knew more about multi-threading and synchronous programming.
 
 
