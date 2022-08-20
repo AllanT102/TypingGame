@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // Represents general tests for JSON readers/writers
 public class JsonTest {
 
-    // Parts of method taken from JsonTest class in
-    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
     // EFFECTS: Checks if player has correct name and scoreboard
     protected void checkPlayer(Player p, String name, Scoreboard sb) {
         assertEquals(name, p.getName());

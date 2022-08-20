@@ -2,6 +2,8 @@
 
 ### dare to test your typing abilities...
 
+test
+
 This game will allow its user to practice their typing skills by typing
 according to what is on their screen. The application will track may track
 typing accuracy, words per minute, and even possibly have a scoring system. This game

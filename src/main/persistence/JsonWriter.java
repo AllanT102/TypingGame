@@ -28,8 +28,6 @@ public class JsonWriter {
         writer = new FileWriter(this.destination, false);
     }
 
-    // Parts of method taken from JsonWriter class in
-    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
     // EFFECTS: writes JSON representation of player to file
     public void write(Players p) throws IOException {
@@ -37,16 +35,14 @@ public class JsonWriter {
         saveToFile(json.toString(TAB));
     }
 
-    // Parts of method taken from JsonWriter class in
-    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
     // MODIFIES: this
     // EFFECTS: closes writer
     public void close() throws IOException {
         writer.close();
     }
 
-    // Parts of method taken from JsonWriter class in
-    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
     // MODIFIES: this
     // EFFECTS: writes string to file
     private void saveToFile(String json) throws IOException {
