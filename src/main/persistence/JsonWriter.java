@@ -4,11 +4,7 @@ package persistence;
 import model.Player;
 import model.Players;
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.FileNotFoundException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 
 // Represents a writer that writes JSON representation of the player to file

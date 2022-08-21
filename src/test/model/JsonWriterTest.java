@@ -17,6 +17,7 @@ public class JsonWriterTest extends JsonTest {
     Score s1;
     Score s2;
     Score s3;
+    Score s4;
 
     @BeforeEach
     void runBefore() {
@@ -24,6 +25,7 @@ public class JsonWriterTest extends JsonTest {
 
         sb = new Scoreboard();
         sbKb = new Scoreboard();
+
 
         s1 = new Score();
         s1.setAcc(100);
@@ -40,6 +42,10 @@ public class JsonWriterTest extends JsonTest {
         s3.setScore(3000);
         sb.addScore(s3);
 
+        s4 = new Score();
+        s4.setAcc(1);
+        s4.setScore(1231);
+        sbKb.addScore(s4);
 
         Player.getPlayerInstance("Allan").setScoreboard(sb);
     }
@@ -77,12 +83,42 @@ public class JsonWriterTest extends JsonTest {
 
     @Test
     void testWriteExistingPlayer() {
+        try {
+            Player.getPlayerInstance("asdf").setScoreboard(sbKb);
+            JsonWriter writer = new JsonWriter("./data/testWriteMultiplePlayers.json");
+            writer.open();
+            writer.write();
+            writer.close();
 
+            JsonReader reader = new JsonReader("./data/testWriteMultiplePlayers.json");
+            Players players = reader.getAllPlayers();
+            Player checkP = reader.read("Allan");
+            assertEquals(3, players.size());
+            assertEquals(checkP.getName(), "Allan");
+            assertEquals(checkP, Player.getPlayerInstance("asdf"));
+        } catch (IOException e) {
+            fail("IOException not expected");
+        }
     }
 
     @Test
-    void testWriteMultiplePlayers() {
+    void testWriteNewPlayer() {
+        try {
+            Player.getPlayerInstance("asdf").setScoreboard(sbKb);
+            JsonWriter writer = new JsonWriter("./data/testWriteNewPlayer.json");
+            writer.open();
+            writer.write();
+            writer.close();
 
+            JsonReader reader = new JsonReader("./data/testWriteNewPlayer.json");
+            Players players = reader.getAllPlayers();
+            Player checkP = reader.read("Allan");
+            assertEquals(3, players.size());
+            assertEquals(checkP.getName(), "Allan");
+            assertEquals(checkP, Player.getPlayerInstance("asdf"));
+        } catch (IOException e) {
+            fail("IOException not expected");
+        }
     }
 
 

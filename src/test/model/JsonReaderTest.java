@@ -78,11 +78,10 @@ public class JsonReaderTest extends JsonTest {
         try {
             Players p = reader.getAllPlayers();
             assertEquals(0, p.size());
-            fail("JSONException was expected.");
         } catch (IOException e) {
             fail("No IOException expected, couldn't read file");
         } catch (JSONException e) {
-            // pass
+            fail("JSONException was not expected.");
         }
     }
 
