@@ -16,6 +16,7 @@ public class JsonWriter {
     private static final int TAB = 4;
     private FileWriter writer;
     private String destination;
+    private Players players;
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -25,13 +26,19 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS opens writer; throws IOException if destination file cannot be opened
     public void open() throws IOException {
+        JsonReader reader = new JsonReader(this.destination);
+        Player playerData = Player.getPlayerInstance("");
+        this.players = reader.getAllPlayers();
+        this.players.addPlayer(playerData.getName(), playerData.getScoreboard());
+
         writer = new FileWriter(this.destination, false);
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of player to file
-    public void write(Players p) throws IOException {
-        JSONArray json = p.toJson();
+    // write9) is
+    public void write() throws IOException {
+        JSONArray json = this.players.toJson();
         saveToFile(json.toString(TAB));
     }
 

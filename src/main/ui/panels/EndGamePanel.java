@@ -4,6 +4,7 @@ import model.Event;
 import model.EventLog;
 import model.Player;
 import model.Score;
+import ui.gamefunctionality.Login;
 
 import javax.swing.*;
 
@@ -91,7 +92,9 @@ public class EndGamePanel extends JPanel implements ActionListener {
                             .getScaledInstance(75, 75, Image.SCALE_DEFAULT)));
             printLog(EventLog.getInstance());
             if (promptResult == JOptionPane.YES_OPTION) {
-                typingGamePanel.getLogin().saveData();
+                if (Player.playerExist()) {
+                    Login.getInstance().saveData();
+                }
                 System.exit(0);
             } else if (promptResult == JOptionPane.NO_OPTION) {
                 System.exit(0);

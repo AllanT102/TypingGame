@@ -63,7 +63,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./NoSuchFile");
         try {
-            Players players = reader.read();
+            Player players = reader.read("");
             fail("IOException was expected");
         } catch (IOException e) {
             // pass
@@ -76,8 +76,8 @@ public class JsonReaderTest extends JsonTest {
     void testEmptyPlayer() {
         JsonReader reader = new JsonReader("./data/testReadPlayerEmpty.json");
         try {
-            Players p = reader.read();
-            assertEquals(0, p.length());
+            Players p = reader.getAllPlayers();
+            assertEquals(0, p.size());
             fail("JSONException was expected.");
         } catch (IOException e) {
             fail("No IOException expected, couldn't read file");
@@ -90,10 +90,8 @@ public class JsonReaderTest extends JsonTest {
     void testReaderOnePlayer() {
         JsonReader reader = new JsonReader("./data/testReadOnePlayer.json");
         try {
-            Players p = reader.read();
-            assertEquals(1, p.length());
-            checkPlayer(p.getPlayer(0), "Allan", sb);
-            assertEquals(p, reader.getAllPlayers());
+            Players players = reader.getAllPlayers();
+            assertEquals(1, players.size());
         } catch (IOException e) {
             fail("No IOException expected, couldn't read file");
         } catch (JSONException e) {
@@ -105,25 +103,37 @@ public class JsonReaderTest extends JsonTest {
     void testReadMultiplePlayers() {
         JsonReader reader = new JsonReader("./data/testReadMultiplePlayers.json");
         try {
-            Players p = reader.read();
-            assertEquals(4, p.length());
-            checkPlayer(p.getPlayer(0), "Allan", sb);
-            checkPlayer(p.getPlayer(1), "Lebron James", sbLbj);
-            checkPlayer(p.getPlayer(2), "Kobe Bryant", sbKb);
-            checkPlayer(p.getPlayer(3), "Stephen Curry", sbCurr);
-
-            // testing checkScoreboard
-            assertTrue(checkScoreboard(p.getPlayer(0), sb));
-            assertFalse(checkScoreboard(p.getPlayer(0), sbLbj));
-            assertFalse(checkScoreboard(p.getPlayer(1), sbKb));
-            assertFalse(checkScoreboard(p.getPlayer(2), sb));
-            assertFalse(checkScoreboard(p.getPlayer(1), sbCurr));
-            assertFalse(checkScoreboard(p.getPlayer(2), sbCurr));
-
+            Players players = reader.getAllPlayers();
+            assertEquals(4, players.size());
+            assertEquals(players.getSb("Allan"), sb);
+            assertEquals(players.getSb("Lebron James"), sbLbj);
+            assertEquals(players.getSb("Kobe Bryant"), sbKb);
         } catch (IOException e) {
             fail("No IOException expected, couldn't read file");
         } catch (JSONException e) {
             fail("No JSONException expected, error occurred when reading file.");
+        }
+    }
+
+    @Test
+    void testRead() {
+        JsonReader reader = new JsonReader("./data/testReadMultiplePlayers.json");
+        try {
+            Player p = reader.read("Lebron James");
+            assertEquals(p, Player.getPlayerInstance(""));
+        } catch (Exception e) {
+            fail("No exception expected");
+        }
+    }
+
+    @Test
+    void testReadNoMatch() {
+        JsonReader reader = new JsonReader("./data/testReadMultiplePlayers.json");
+        try {
+            Player p = reader.read("dong");
+            assertNull(p);
+        } catch (Exception e) {
+            fail("No exception expected");
         }
     }
 

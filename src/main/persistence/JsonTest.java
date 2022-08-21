@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class JsonTest {
 
 
-    // EFFECTS: Checks if player has correct name and scoreboard
-    protected void checkPlayer(Player p, String name, Scoreboard sb) {
-        assertEquals(name, p.getName());
-        assertTrue(checkScoreboard(p, sb));
-    }
+//    // EFFECTS: Checks if player has correct name and scoreboard
+//    protected void checkPlayer(Player p, String name, Scoreboard sb) {
+//        assertEquals(name, p.getName());
+//        assertTrue(checkScoreboard(p, sb));
+//    }
 
     // EFFECTS: checks each score within the scoreboard to see if scores match
     protected Boolean checkScoreboard(Player p, Scoreboard sb) {
@@ -37,5 +37,6 @@ public class JsonTest {
     private Score getScoreAtIndex(int i, Scoreboard sb) {
         return sb.getScoreboardAsList().get(i);
     }
+
 
 }

@@ -1,6 +1,7 @@
 package ui.panels;
 
 import model.Player;
+import ui.gamefunctionality.Login;
 
 import javax.swing.*;
 import java.awt.*;
@@ -103,7 +104,9 @@ public class MenuPanel extends JPanel implements ActionListener {
                     JOptionPane.INFORMATION_MESSAGE, new ImageIcon(new ImageIcon("./images/bye.png").getImage()
                             .getScaledInstance(75, 75, Image.SCALE_DEFAULT)));
             if (promptResult == JOptionPane.YES_OPTION) {
-                typingGamePanel.getLogin().saveData();
+                if (Player.playerExist()) {
+                    Login.getInstance().saveData();
+                }
                 System.exit(0);
             } else if (promptResult == JOptionPane.NO_OPTION) {
                 System.exit(0);

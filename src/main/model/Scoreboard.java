@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 // Represents the scoreboard that is attached to each player's account,
@@ -55,5 +56,20 @@ public class Scoreboard {
         return sbAsString;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Scoreboard that = (Scoreboard) o;
+        for (int i = 0; i < sb.size(); i++) {
+            if (i >= that.sb.size()) return false;
+            if (!sb.get(i).equals(that.sb.get(i))) return false;
+        }
+        return true;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(sb);
+    }
 }

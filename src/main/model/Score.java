@@ -3,6 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 import java.util.Date;
+import java.util.Objects;
 
 // Represents an individual score that is achieved by the user after playing one typing game
 public class Score implements Writable {
@@ -75,5 +76,18 @@ public class Score implements Writable {
         json.put("Score", plScore);
         json.put("Accuracy", acc);
         return json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score = (Score) o;
+        return Double.compare(score.plScore, plScore) == 0 && Double.compare(score.acc, acc) == 0 && Objects.equals(results, score.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(plScore, acc, results);
     }
 }

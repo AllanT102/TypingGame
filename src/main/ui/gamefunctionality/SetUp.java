@@ -14,7 +14,7 @@ public class SetUp {
     // EFFECTS: constructs class to handle setup of loading screen and bidirectional relationships
     public SetUp() {
         game = new TypingGame();
-        login = new Login();
+//        login = new Login();
 
         LoadInScreenPanel loadInScreen = game.getLoadInScreen();
         SignUpScreenPanel signUpScreen = game.getSignUpScreen();

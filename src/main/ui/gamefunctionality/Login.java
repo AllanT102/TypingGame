@@ -13,9 +13,10 @@ import java.io.IOException;
 
 // represents class that deals with all login aspects
 public class Login {
+
+    private static Login login;
     private static final String JSON_DATA = "./data/player.json";
-    private Players allPlayers;
-    private Player player;
+    private Players players;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private LoadInScreenPanel loadInScreen;
@@ -23,17 +24,21 @@ public class Login {
     private TypingGamePanel gamePanel;
 
     // constructs new login object and reads JSON data to load all player data
-    public Login() {
+    private Login() {
         jsonReader = new JsonReader(JSON_DATA);
         jsonWriter = new JsonWriter(JSON_DATA);
-        allPlayers = new Players();
         try {
-            loadAllPlayers();
+            players = jsonReader.getAllPlayers();
         } catch (IOException e) {
-            System.out.println("Error when loading players.");
-        } catch (JSONException e) {
-            // do nothing
+            System.out.println("Unable to read file");
         }
+    }
+
+    public static Login getInstance() {
+        if (login == null) {
+            login = new Login();
+        }
+        return login;
     }
 
     // MODIFIES: this
@@ -41,7 +46,7 @@ public class Login {
     public void saveData() {
         try {
             jsonWriter.open();
-            jsonWriter.write(this.allPlayers);
+            jsonWriter.write();
             jsonWriter.close();
         } catch (IOException e) {
             System.out.println("Unable to read file!");
@@ -112,11 +117,18 @@ public class Login {
     // MODIFIES: this
     // EFFECTS: returns whether or not the name is valid
     public boolean signIn(String existingName) {
-        Boolean playerCreated = loadPlayerData(existingName);
-        if (playerCreated) {
-            return true;
-        } else {
-            loadInScreen.makeLoginMessage("Login failed, try again!");
+        try {
+            Player p = loadPlayer(existingName);
+            if (p != null) {
+                return true;
+            } else {
+                loadInScreen.makeLoginMessage("Login failed, try again!");
+                return false;
+            }
+        } catch (IOException e) {
+            System.out.println("Error when loading players.");
+            return false;
+        } catch (JSONException e) {
             return false;
         }
     }
@@ -127,47 +139,42 @@ public class Login {
         if (!nameIsValid(newName)) {
             return false;
         } else {
-            player = new Player(newName);
-            allPlayers.addPlayer(player);
+            Player.getPlayerInstance(newName);
             return true;
         }
     }
 
     // EFFECTS: checks if name is already in allPlayers
     public Boolean nameIsValid(String name) {
-        for (int i = 0; i < allPlayers.length(); i++) {
-            if (name.equals(allPlayers.getPlayer(i).getName())) {
-                return false;
-            }
-        }
-        return true;
+        return players.contains(name);
     }
 
-    // MODIFIES: this
-    // EFFECTS: tries to find matching player name in allPlayers
-    public Boolean loadPlayerData(String name) {
-        for (int i = 0; i < allPlayers.length(); i++) {
-            String plName = allPlayers.getPlayer(i).getName();
-            if (name.equals(plName)) {
-                this.player = allPlayers.getPlayer(i);
-                return true;
-            }
-        }
-        return false;
-    }
+//    // MODIFIES: this
+//    // EFFECTS: tries to find matching player name in allPlayers
+//    public Boolean loadPlayerData(String name) {
+//        for (int i = 0; i < allPlayers.length(); i++) {
+//            String plName = allPlayers.getPlayer(i).getName();
+//            if (name.equals(plName)) {
+//                this.player = allPlayers.getPlayer(i);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     // MODIFIES: this
     // EFFECTS: loads all players stored in JSON_DATA, and adds each individual player to allPlayers
-    public void loadAllPlayers() throws IOException, JSONException {
-        jsonReader.read();
-        this.allPlayers = jsonReader.getAllPlayers();
+    public Player loadPlayer(String name) throws IOException, JSONException {
+        Player p = jsonReader.read(name);
+        return p;
+//        this.allPlayers = jsonReader.getAllPlayers();
     }
 
     public Players getAllPlayers() {
-        return allPlayers;
+        return players;
     }
 
     public Player getPlayer() {
-        return player;
+        return Player.getPlayerInstance("");
     }
 }

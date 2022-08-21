@@ -1,5 +1,6 @@
 package ui.panels;
 
+import sun.rmi.runtime.Log;
 import ui.gamefunctionality.Login;
 import ui.frame.TypingGame;
 
@@ -71,6 +72,7 @@ public class LoadInScreenPanel extends PreGamePanel {
         String action = e.getActionCommand();
 
         if (action.equals("login")) {
+            Login login = Login.getInstance();
             Boolean success = login.signIn(username);
             if (success) {
                 game.getCl().show(game.getScreens(), "typingGamePanel");

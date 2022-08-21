@@ -1,34 +1,43 @@
 package model;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Represents a list of player accounts
 public class Players {
-    private List<Player> playerList;
+    private HashMap<String, Scoreboard> playerMap;
 
     // EFFECTS: constructs an empty list of players
     public Players() {
-        playerList = new ArrayList<>();
+        playerMap = new HashMap<>();
     }
 
     // EFFECTS: returns player at given index
-    public Player getPlayer(int i) {
-        return playerList.get(i);
+    public boolean contains(String name) {
+        return playerMap.containsKey(name);
     }
-
-    // EFFECTS: returns size of array
-    public int length() {
-        return playerList.size();
-    }
-
 
     // MODIFIES: this
     // EFFECTS: adds player to the end of the list
-    public void addPlayer(Player p) {
-        playerList.add(p);
+    public void addPlayer(String name, Scoreboard info) {
+        playerMap.put(name, info);
+    }
+
+    public int size() {
+        return playerMap.size();
+    }
+
+    public Scoreboard getSb(String name) {
+        if (playerMap.containsKey(name)) {
+            return playerMap.get(name);
+        } else {
+            return null;
+        }
     }
 
     // Parts of method taken from workroom class in
@@ -37,9 +46,21 @@ public class Players {
     public JSONArray toJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for (Player p : playerList) {
-            jsonArray.put(p.toJson());
+        for (Map.Entry<String, Scoreboard> entry : playerMap.entrySet()) {
+            JSONObject json = new JSONObject();
+            json.put("Name", entry.getKey());
+            json.put(entry.getKey(), sbToJson(entry.getValue()));
+            jsonArray.put(json);
         }
         return jsonArray;
+    }
+
+    public JSONArray sbToJson(Scoreboard sb) {
+        JSONArray jsArray = new JSONArray();
+
+        for (Score s : sb.getScoreboardAsList()) {
+            jsArray.put(s.toJson());
+        }
+        return jsArray;
     }
 }
