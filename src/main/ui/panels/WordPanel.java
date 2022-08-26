@@ -53,12 +53,26 @@ public class WordPanel extends JPanel {
 //            System.out.println("waiting");
 //        }
         startGame();
+        createTextField();
+        setTimeout(() -> textField.setEditable(true), 3900);
 
 //        try {
-        createTextField();
+
 //        } catch (InterruptedException exception) {
 //            // do nthing
 //        }
+    }
+
+    public static void setTimeout(Runnable runnable, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            }
+            catch (Exception e){
+                System.err.println(e);
+            }
+        }).start();
     }
 
     // MODIFIES: this
@@ -76,6 +90,7 @@ public class WordPanel extends JPanel {
     // EFFECTS: creates text field for user to type in and processes user input
     public void createTextField() {
         textField = new JTextField();
+        textField.setEditable(false);
         textField.setFont(new Font("Serif", Font.PLAIN, 20));
         textField.addKeyListener(new KeyAdapter() {
             @Override

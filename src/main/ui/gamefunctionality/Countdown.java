@@ -1,5 +1,7 @@
 package ui.gamefunctionality;
 
+import ui.panels.WordPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,13 +16,16 @@ public class Countdown {
     private int height = 500;
 
     private List<JComponent> countdownIcons;
+    private WordPanel wordPanel;
     private Timer timer;
+    private boolean countdownOver;
 
     // constructs the countdown
     // EFFECTS: creates a new countdown with an empty list of icons and sets the icons
     public Countdown() {
         countdownIcons = new ArrayList<>();
         setCountdownIcons();
+        this.countdownOver = false;
     }
 
     // MODIFIES: this
@@ -80,6 +85,7 @@ public class Countdown {
                 }
             }
         });
+        this.countdownOver = true;
     }
 
     public List<JComponent> getCountdownIcons() {
@@ -92,5 +98,9 @@ public class Countdown {
 
     public int getSec() {
         return sec;
+    }
+
+    public boolean getReady() {
+        return this.countdownOver;
     }
 }
