@@ -1,6 +1,5 @@
 package ui.panels;
 
-import sun.rmi.runtime.Log;
 import ui.gamefunctionality.Login;
 import ui.frame.TypingGame;
 
@@ -41,26 +40,6 @@ public class LoadInScreenPanel extends PreGamePanel {
             oldGame.removeLoadInScreen();
         }
     }
-
-//    // MODIFIES: this
-//    // EFFECTS: sets setLogin
-//    public void setLogin(Login login) {
-//        if (this.login != login) {
-//            removeLogin();
-//            this.login = login;
-//            this.login.setLoadInScreen(this);
-//        }
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: removes team from this office
-//    public void removeLogin() {
-//        if (this.login != null) {
-//            Login oldL = this.login;
-//            this.login = null;
-//            oldL.removeLoadInScreen();
-//        }
-//    }
 
     // MODIFIES: this
     // EFFECTS: processes button clicks by loading player information or switching windows to player creation

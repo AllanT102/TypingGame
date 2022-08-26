@@ -47,67 +47,6 @@ public class Login {
         }
     }
 
-//    // MODIFIES: this, team
-//    // EFFECTS: sets loadInScreen
-//    public void setLoadInScreen(LoadInScreenPanel loadInScreen) {
-//        if (this.loadInScreen != loadInScreen) {
-//            removeLoadInScreen();
-//            this.loadInScreen = loadInScreen;
-//            this.loadInScreen.setLogin(this);
-//        }
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: removes team from this office
-//    public void removeLoadInScreen() {
-//        if (this.loadInScreen != null) {
-//            LoadInScreenPanel oldLIS = this.loadInScreen;
-//            this.loadInScreen = null;
-//            oldLIS.removeLogin();
-//        }
-//    }
-//
-//    // MODIFIES: this, team
-//    // EFFECTS: sets signUpScreen
-//    public void setSignUpScreen(SignUpScreenPanel signUpScreen) {
-//        if (this.signUpScreen != signUpScreen) {
-//            removeSignUpScreen();
-//            this.signUpScreen = signUpScreen;
-//            this.signUpScreen.setLogin(this);
-//        }
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: removes team from this office
-//    public void removeSignUpScreen() {
-//        if (this.signUpScreen != null) {
-//            SignUpScreenPanel oldLIS = this.signUpScreen;
-//            this.signUpScreen = null;
-//            oldLIS.removeLogin();
-//        }
-//    }
-//
-//    // MODIFIES: this, team
-//    // EFFECTS: sets gamePanel
-//    public void setGamePanel(TypingGamePanel gamePanel) {
-//        if (this.gamePanel != gamePanel) {
-//            removeGamePanel();
-//            this.gamePanel = gamePanel;
-//            this.gamePanel.setLogin(this);
-//        }
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: removes gamePanel
-//    public void removeGamePanel() {
-//        if (this.gamePanel != null) {
-//            TypingGamePanel oldG = this.gamePanel;
-//            this.gamePanel = null;
-//            oldG.removeLogin();
-//        }
-//    }
-
-
     // MODIFIES: this
     // EFFECTS: returns whether or not the name is valid
     public boolean signIn(String existingName) {
@@ -138,19 +77,6 @@ public class Login {
     public Boolean nameIsValid(String name) {
         return !players.contains(name);
     }
-
-//    // MODIFIES: this
-//    // EFFECTS: tries to find matching player name in allPlayers
-//    public Boolean loadPlayerData(String name) {
-//        for (int i = 0; i < allPlayers.length(); i++) {
-//            String plName = allPlayers.getPlayer(i).getName();
-//            if (name.equals(plName)) {
-//                this.player = allPlayers.getPlayer(i);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     // MODIFIES: this
     // EFFECTS: loads all players stored in JSON_DATA, and adds each individual player to allPlayers

@@ -42,6 +42,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // EFFECTS: returns all players from JSON file
     public Players getAllPlayers() throws IOException {
         String jsonData = readFile(source);
         if (jsonData.equals("")) {
@@ -58,8 +59,6 @@ public class JsonReader {
         return players;
     }
 
-    // MIGHT NEED TO INPUT THE STRING NAME INSTEAD SO THAT WE CAN SAVE MULTIPLE PLAYERS! AND ALSO STORE SCORES
-    // WITH KEY VALUE OF NAME
     // EFFECTS: parses players from JSON object and returns it
     private Player parsePlayers(JSONArray jsonArray, String playerName) {
         Player p = null;
@@ -96,6 +95,7 @@ public class JsonReader {
         return score;
     }
 
+    // EFFECTS: returns scoreboard of player from JSON file
     private Scoreboard getScoreboard(JSONObject jsonObject, String name) {
         JSONArray jsonArray = jsonObject.getJSONArray(name);
         Scoreboard sb = new Scoreboard();

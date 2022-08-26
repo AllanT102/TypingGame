@@ -1,7 +1,6 @@
 package ui.panels;
 
 import model.Player;
-import ui.gamefunctionality.Login;
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,26 +25,6 @@ public class TypingGamePanel extends JPanel {
         menuCL.show(this, "menu panel");
         setVisible(true);
     }
-
-//    // MODIFIES: this
-//    // EFFECTS: sets setLogin
-//    public void setLogin(Login login) {
-//        if (this.login != login) {
-//            removeLogin();
-//            this.login = login;
-//            this.login.setGamePanel(this);
-//        }
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: removes team from this office
-//    public void removeLogin() {
-//        if (this.login != null) {
-//            Login oldG = this.login;
-//            this.login = null;
-//            oldG.removeGamePanel();
-//        }
-//    }
 
     // MODIFIES: this
     // EFFECTS: creates a new wordPanel with new paragraph by removing the old wordPanel

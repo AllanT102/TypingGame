@@ -41,26 +41,6 @@ public class SignUpScreenPanel extends PreGamePanel {
         }
     }
 
-//    // MODIFIES: this
-//    // EFFECTS: sets setLogin
-//    public void setLogin(Login login) {
-//        if (this.login != login) {
-//            removeLogin();
-//            this.login = login;
-//            this.login.setSignUpScreen(this);
-//        }
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: removes team from this office
-//    public void removeLogin() {
-//        if (this.login != null) {
-//            Login oldS = this.login;
-//            this.login = null;
-//            oldS.removeSignUpScreen();
-//        }
-//    }
-
     // MODIFIES: this
     // EFFECTS: processes button clicks
     @Override
