@@ -14,7 +14,6 @@ import static java.awt.Color.*;
 public class MenuPanel extends JPanel implements ActionListener {
     private final int width = 500;
     private final int height = 500;
-    private Player player;
     private JButton quitButton;
     private JButton playButton;
     private JButton highscoreButton;
@@ -32,19 +31,14 @@ public class MenuPanel extends JPanel implements ActionListener {
     // Called when player is instantiated
     // MODIFIES: this
     // EFFECTS: sets up the game and play screen
-    public void init(Player player) {
-        this.player = player;
+    public void init() {
         setWelcomeMessage();
         setPlayButton();
         setHighscoreButton();
         setQuitButton();
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets player to player
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+
 
     // MODIFIES: this
     // EFFECTS: helper method to make a button
@@ -81,7 +75,8 @@ public class MenuPanel extends JPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets a welcome message at top of screen
     public void setWelcomeMessage() {
-        JLabel welcomeMessage = new JLabel("Welcome, " + this.player.getName() + "!", SwingConstants.CENTER);
+        JLabel welcomeMessage = new JLabel("Welcome, "
+                + Player.getPlayerInstance("").getName() + "!", SwingConstants.CENTER);
         welcomeMessage.setFont(new Font("Serif", Font.BOLD, 30));
         welcomeMessage.setBounds(0, 0, width, 40);
         welcomeMessage.setForeground(black);

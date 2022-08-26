@@ -1,6 +1,5 @@
 package ui.panels;
 
-import ui.gamefunctionality.Login;
 import ui.frame.TypingGame;
 
 import javax.swing.*;
@@ -21,7 +20,6 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
     protected final int borderThickness = 10;
 
     protected TypingGame game;
-    protected Login login;
 
     // EFFECTS: constructs pre-game panel
     public PreGamePanel() {

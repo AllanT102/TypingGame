@@ -1,12 +1,5 @@
 package model;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import persistence.JsonReader;
-import persistence.Writable;
-
-import java.util.ArrayList;
-
 // Represents the player account that has a name, and scoreboard
 public class Player {
     private static Player thePlayer;

@@ -20,7 +20,6 @@ public class WordPanel extends JPanel {
 
     private Countdown countdown;
     private Paragraph paragraph;
-    private Player player;
     private Score score;
     private JTextField textField;
     private TypingGamePanel gamePanel;
@@ -34,7 +33,6 @@ public class WordPanel extends JPanel {
         super();
         setLayout(null);
         paragraph = new Paragraph();
-        this.player = player;
         this.gamePanel = gamePanel;
         this.countdown = new Countdown();
         for (Component c : countdown.getCountdownIcons()) {
@@ -106,15 +104,15 @@ public class WordPanel extends JPanel {
         score.calculateAccuracy(paragraph.getTotalChar(),
                 paragraph.getNumTypedCorrect(paragraph, paragraph.getParagraphAsString(), userInputText));
         score.calculateScore(score.getAcc());
-        score.setResults(this.player);
-        player.getScoreboard().addScore(score);
+        score.setResults(Player.getPlayerInstance(""));
+        Player.getPlayerInstance("").getScoreboard().addScore(score);
         return this.score;
     }
 
     // EFFECTS: stops game by creating end game panel
     public void stopGame() {
         endGamePanel = null;
-        endGamePanel = new EndGamePanel(this.gamePanel, this.gamePanel.getPlayer(), this.score);
+        endGamePanel = new EndGamePanel(this.gamePanel, this.score);
     }
 
     public Countdown getCountdown() {

@@ -19,12 +19,12 @@ public class SetUp {
         LoadInScreenPanel loadInScreen = game.getLoadInScreen();
         SignUpScreenPanel signUpScreen = game.getSignUpScreen();
         TypingGamePanel gamePanel = game.getTypingGamePanel();
-
-        loadInScreen.setLogin(this.login);
-        login.setLoadInScreen(loadInScreen);
-
-        signUpScreen.setLogin(this.login);
-        login.setSignUpScreen(signUpScreen);
+//
+//        loadInScreen.setLogin(this.login);
+//        login.setLoadInScreen(loadInScreen);
+//
+//        signUpScreen.setLogin(this.login);
+//        login.setSignUpScreen(signUpScreen);
 
         game.setSignUpScreen(signUpScreen);
         signUpScreen.setGame(this.game);
@@ -32,7 +32,7 @@ public class SetUp {
         game.setLoadInScreen(loadInScreen);
         loadInScreen.setGame(this.game);
 
-        login.setGamePanel(gamePanel);
-        gamePanel.setLogin(this.login);
+//        login.setGamePanel(gamePanel);
+//        gamePanel.setLogin(this.login);
     }
 }

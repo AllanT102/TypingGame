@@ -42,25 +42,25 @@ public class LoadInScreenPanel extends PreGamePanel {
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets setLogin
-    public void setLogin(Login login) {
-        if (this.login != login) {
-            removeLogin();
-            this.login = login;
-            this.login.setLoadInScreen(this);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes team from this office
-    public void removeLogin() {
-        if (this.login != null) {
-            Login oldL = this.login;
-            this.login = null;
-            oldL.removeLoadInScreen();
-        }
-    }
+//    // MODIFIES: this
+//    // EFFECTS: sets setLogin
+//    public void setLogin(Login login) {
+//        if (this.login != login) {
+//            removeLogin();
+//            this.login = login;
+//            this.login.setLoadInScreen(this);
+//        }
+//    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: removes team from this office
+//    public void removeLogin() {
+//        if (this.login != null) {
+//            Login oldL = this.login;
+//            this.login = null;
+//            oldL.removeLoadInScreen();
+//        }
+//    }
 
     // MODIFIES: this
     // EFFECTS: processes button clicks by loading player information or switching windows to player creation
@@ -76,8 +76,7 @@ public class LoadInScreenPanel extends PreGamePanel {
             Boolean success = login.signIn(username);
             if (success) {
                 game.getCl().show(game.getScreens(), "typingGamePanel");
-                game.getTypingGamePanel(). setPlayer(login.getPlayer());
-                game.getTypingGamePanel().getMenuPanel().init(login.getPlayer());
+                game.getTypingGamePanel().getMenuPanel().init();
             } else {
                 successMessage.setText("Login failed, try again!");
             }

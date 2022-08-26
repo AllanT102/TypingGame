@@ -1,5 +1,7 @@
 package ui.panels;
 
+import model.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +23,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
     private JPanel numberTile;
 
     // MODIFIES: t
-    // EFFECTS: cosntructs a scoreboard panel
+    // EFFECTS: constructs a scoreboard panel
     public ScoreboardPanel(TypingGamePanel t) {
         super();
         this.typingGamePanel = t;
@@ -140,7 +142,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         addTileTitle("Score", this.scoreTile);
         for (int i = 0; i < 5; i++) {
             try {
-                String score = Double.toString(typingGamePanel.getPlayer().getScoreboard().get(i).getScore());
+                String score = Double.toString(Player.getPlayerInstance("").getScoreboard().get(i).getScore());
                 createSubTile(scoreTile, score, i);
                 // adds number corresponding to ranking
                 addNumberToNumberTile(i);
@@ -156,7 +158,7 @@ public class ScoreboardPanel extends JPanel implements ActionListener {
         addTileTitle("Accuracy", this.accTile);
         for (int i = 0; i < 5; i++) {
             try {
-                String acc = Double.toString(typingGamePanel.getPlayer().getScoreboard().get(i).getAcc());
+                String acc = Double.toString(Player.getPlayerInstance("").getScoreboard().get(i).getAcc());
                 createSubTile(accTile, acc + "%", i);
             } catch (IndexOutOfBoundsException e) {
                 // do nothing

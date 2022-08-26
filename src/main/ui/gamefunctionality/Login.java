@@ -5,9 +5,6 @@ import model.Players;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-import ui.panels.LoadInScreenPanel;
-import ui.panels.SignUpScreenPanel;
-import ui.panels.TypingGamePanel;
 
 import java.io.IOException;
 
@@ -19,9 +16,6 @@ public class Login {
     private Players players;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private LoadInScreenPanel loadInScreen;
-    private SignUpScreenPanel signUpScreen;
-    private TypingGamePanel gamePanel;
 
     // constructs new login object and reads JSON data to load all player data
     private Login() {
@@ -53,65 +47,65 @@ public class Login {
         }
     }
 
-    // MODIFIES: this, team
-    // EFFECTS: sets loadInScreen
-    public void setLoadInScreen(LoadInScreenPanel loadInScreen) {
-        if (this.loadInScreen != loadInScreen) {
-            removeLoadInScreen();
-            this.loadInScreen = loadInScreen;
-            this.loadInScreen.setLogin(this);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes team from this office
-    public void removeLoadInScreen() {
-        if (this.loadInScreen != null) {
-            LoadInScreenPanel oldLIS = this.loadInScreen;
-            this.loadInScreen = null;
-            oldLIS.removeLogin();
-        }
-    }
-
-    // MODIFIES: this, team
-    // EFFECTS: sets signUpScreen
-    public void setSignUpScreen(SignUpScreenPanel signUpScreen) {
-        if (this.signUpScreen != signUpScreen) {
-            removeSignUpScreen();
-            this.signUpScreen = signUpScreen;
-            this.signUpScreen.setLogin(this);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes team from this office
-    public void removeSignUpScreen() {
-        if (this.signUpScreen != null) {
-            SignUpScreenPanel oldLIS = this.signUpScreen;
-            this.signUpScreen = null;
-            oldLIS.removeLogin();
-        }
-    }
-
-    // MODIFIES: this, team
-    // EFFECTS: sets gamePanel
-    public void setGamePanel(TypingGamePanel gamePanel) {
-        if (this.gamePanel != gamePanel) {
-            removeGamePanel();
-            this.gamePanel = gamePanel;
-            this.gamePanel.setLogin(this);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes gamePanel
-    public void removeGamePanel() {
-        if (this.gamePanel != null) {
-            TypingGamePanel oldG = this.gamePanel;
-            this.gamePanel = null;
-            oldG.removeLogin();
-        }
-    }
+//    // MODIFIES: this, team
+//    // EFFECTS: sets loadInScreen
+//    public void setLoadInScreen(LoadInScreenPanel loadInScreen) {
+//        if (this.loadInScreen != loadInScreen) {
+//            removeLoadInScreen();
+//            this.loadInScreen = loadInScreen;
+//            this.loadInScreen.setLogin(this);
+//        }
+//    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: removes team from this office
+//    public void removeLoadInScreen() {
+//        if (this.loadInScreen != null) {
+//            LoadInScreenPanel oldLIS = this.loadInScreen;
+//            this.loadInScreen = null;
+//            oldLIS.removeLogin();
+//        }
+//    }
+//
+//    // MODIFIES: this, team
+//    // EFFECTS: sets signUpScreen
+//    public void setSignUpScreen(SignUpScreenPanel signUpScreen) {
+//        if (this.signUpScreen != signUpScreen) {
+//            removeSignUpScreen();
+//            this.signUpScreen = signUpScreen;
+//            this.signUpScreen.setLogin(this);
+//        }
+//    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: removes team from this office
+//    public void removeSignUpScreen() {
+//        if (this.signUpScreen != null) {
+//            SignUpScreenPanel oldLIS = this.signUpScreen;
+//            this.signUpScreen = null;
+//            oldLIS.removeLogin();
+//        }
+//    }
+//
+//    // MODIFIES: this, team
+//    // EFFECTS: sets gamePanel
+//    public void setGamePanel(TypingGamePanel gamePanel) {
+//        if (this.gamePanel != gamePanel) {
+//            removeGamePanel();
+//            this.gamePanel = gamePanel;
+//            this.gamePanel.setLogin(this);
+//        }
+//    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: removes gamePanel
+//    public void removeGamePanel() {
+//        if (this.gamePanel != null) {
+//            TypingGamePanel oldG = this.gamePanel;
+//            this.gamePanel = null;
+//            oldG.removeLogin();
+//        }
+//    }
 
 
     // MODIFIES: this
@@ -119,12 +113,7 @@ public class Login {
     public boolean signIn(String existingName) {
         try {
             Player p = loadPlayer(existingName);
-            if (p != null) {
-                return true;
-            } else {
-                loadInScreen.makeLoginMessage("Login failed, try again!");
-                return false;
-            }
+            return p != null ? true : false;
         } catch (IOException e) {
             System.out.println("Error when loading players.");
             return false;
@@ -136,17 +125,18 @@ public class Login {
     // MODIFIES: this
     // EFFECTS: creates player account, checks if player name is already taken, and adds to list of players
     public Boolean signUp(String newName) {
-        if (!nameIsValid(newName)) {
-            return false;
-        } else {
+        if (nameIsValid(newName)) {
             Player.getPlayerInstance(newName);
             return true;
+        } else {
+            Player.getPlayerInstance(newName);
+            return false;
         }
     }
 
     // EFFECTS: checks if name is already in allPlayers
     public Boolean nameIsValid(String name) {
-        return players.contains(name);
+        return !players.contains(name);
     }
 
 //    // MODIFIES: this
@@ -168,10 +158,6 @@ public class Login {
         Player p = jsonReader.read(name);
         return p;
 //        this.allPlayers = jsonReader.getAllPlayers();
-    }
-
-    public Players getAllPlayers() {
-        return players;
     }
 
     public Player getPlayer() {

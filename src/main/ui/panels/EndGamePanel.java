@@ -16,15 +16,13 @@ import static java.awt.Color.*;
 public class EndGamePanel extends JPanel implements ActionListener {
     private final int width = 500;
     private TypingGamePanel typingGamePanel;
-    private Player player;
     private Score score;
 
     // MODIFIES: gamePanel
     // EFFECTS: constructs end game panel that displays after user finishes playing a game
-    public EndGamePanel(TypingGamePanel gamePanel, Player player, Score score) {
+    public EndGamePanel(TypingGamePanel gamePanel, Score score) {
         super();
         this.typingGamePanel = gamePanel;
-        this.player = player;
         this.score = score;
         setLayout(null);
         makeReplayButton();

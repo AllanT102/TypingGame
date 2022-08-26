@@ -41,25 +41,25 @@ public class SignUpScreenPanel extends PreGamePanel {
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets setLogin
-    public void setLogin(Login login) {
-        if (this.login != login) {
-            removeLogin();
-            this.login = login;
-            this.login.setSignUpScreen(this);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes team from this office
-    public void removeLogin() {
-        if (this.login != null) {
-            Login oldS = this.login;
-            this.login = null;
-            oldS.removeSignUpScreen();
-        }
-    }
+//    // MODIFIES: this
+//    // EFFECTS: sets setLogin
+//    public void setLogin(Login login) {
+//        if (this.login != login) {
+//            removeLogin();
+//            this.login = login;
+//            this.login.setSignUpScreen(this);
+//        }
+//    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: removes team from this office
+//    public void removeLogin() {
+//        if (this.login != null) {
+//            Login oldS = this.login;
+//            this.login = null;
+//            oldS.removeSignUpScreen();
+//        }
+//    }
 
     // MODIFIES: this
     // EFFECTS: processes button clicks
@@ -73,12 +73,13 @@ public class SignUpScreenPanel extends PreGamePanel {
         if (action.equals("login")) {
             game.getCl().show(game.getScreens(), "loadInScreen");
         } else if (action.equals("sign up")) {
+            Login login = Login.getInstance();
             if (!login.signUp(username)) {
                 successMessage.setText("Player name is taken, please try again.");
             } else {
                 game.getCl().show(game.getScreens(), "typingGamePanel");
-                game.getTypingGamePanel().setPlayer(login.getPlayer());
-                game.getTypingGamePanel().getMenuPanel().init(login.getPlayer());
+//                game.getTypingGamePanel().setPlayer(login.getPlayer());
+                game.getTypingGamePanel().getMenuPanel().init();
             }
         }
     }
