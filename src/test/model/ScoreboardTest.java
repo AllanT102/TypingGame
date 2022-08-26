@@ -3,13 +3,12 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreboardTest {
 
     private Scoreboard sbTest;
+    private Scoreboard sb;
     private Score s1;
     private Score s2;
     private Score s3;
@@ -18,6 +17,7 @@ public class ScoreboardTest {
 
     @BeforeEach
     void runBefore(){
+        sb = new Scoreboard();
         sbTest = new Scoreboard();
         s1 = new Score();
         s2 = new Score();
@@ -29,12 +29,26 @@ public class ScoreboardTest {
         s3.setScore(2000);
         s4.setScore(2000);
         s5.setScore(3000);
-
+        sb.addScore(s1);
     }
 
     @Test
     void testConstructor(){
         assertTrue(sbTest.getScoreboardAsList().isEmpty());
+    }
+
+    @Test
+    void testEquals() {
+        assertFalse(sbTest.equals(sb));
+        sbTest.addScore(s1);
+        assertTrue(sbTest.equals(sb));
+        sbTest.addScore(s2);
+        assertFalse(sbTest.equals(sb));
+    }
+
+    @Test
+    void testHashCode() {
+        assertFalse(sb.hashCode() == sbTest.hashCode());
     }
 
     @Test

@@ -4,8 +4,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreTest {
 
@@ -20,6 +19,25 @@ public class ScoreTest {
     @Test
     void testConstructor(){
         assertEquals(0, scoreTest.getScore());
+    }
+
+    @Test
+    void testEquals() {
+        Score s1 = new Score();
+        s1.setAcc(1);
+        Score s2 = new Score();
+        s2.setAcc(1);
+        assertTrue(s1.equals(s2));
+        s2.setScore(1000);
+        assertFalse(s1.equals(s2));
+    }
+
+    @Test
+    void testHashCode() {
+        Score s1 = new Score();
+        Score s2 = new Score();
+        s2.setAcc(1);
+        assertFalse(s1.hashCode() == s2.hashCode());
     }
 
     @Test

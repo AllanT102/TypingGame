@@ -13,8 +13,6 @@ class PlayerTest {
 
     @BeforeEach
     void runBefore() {
-        Player.getPlayerInstance("Allan");
-
         sb = new Scoreboard();
         s1 = new Score();
         s1.setScore(100);
@@ -29,13 +27,17 @@ class PlayerTest {
 
     @Test
     void testSetScoreboard() {
+        assertFalse(Player.playerExist());
+        Player.getPlayerInstance("Allan");
         Player.getPlayerInstance("").setScoreboard(sb);
         assertEquals(sb, Player.getPlayerInstance("").getScoreboard());
     }
 
     @Test
     void testConstructor() {
+        Player.getPlayerInstance("Allan");
         assertEquals("Allan", Player.getPlayerInstance("").getName());
         assertEquals(Player.getPlayerInstance("").getScoreboard().getScoreboardAsList().size(), 2);
     }
+
 }

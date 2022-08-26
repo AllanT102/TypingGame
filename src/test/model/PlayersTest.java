@@ -50,6 +50,7 @@ public class PlayersTest {
         assertTrue(p.contains("Allan"));
         assertFalse(p.contains("cas"));
         assertEquals(p.getSb("Allan"), sb1);
+        assertNull(p.getSb("asdfjasdf"));
     }
 
     @Test

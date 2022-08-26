@@ -61,6 +61,7 @@ public class Scoreboard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scoreboard that = (Scoreboard) o;
+        if (that.getLength() != sb.size()) return false;
         for (int i = 0; i < sb.size(); i++) {
             if (i >= that.sb.size()) return false;
             if (!sb.get(i).equals(that.sb.get(i))) return false;
