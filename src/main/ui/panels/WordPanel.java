@@ -47,29 +47,17 @@ public class WordPanel extends JPanel {
     public void init() {
         countdown.startCountdown();
         countdown.getTimer().start();
-//        // pause main thread until timer is notified
-//        synchronized (this) {
-//            this.wait();
-//            System.out.println("waiting");
-//        }
         startGame();
         createTextField();
         setTimeout(() -> textField.setEditable(true), 3900);
-
-//        try {
-
-//        } catch (InterruptedException exception) {
-//            // do nthing
-//        }
     }
 
-    public static void setTimeout(Runnable runnable, int delay){
+    public static void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
                 Thread.sleep(delay);
                 runnable.run();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.err.println(e);
             }
         }).start();

@@ -68,11 +68,6 @@ public class Countdown {
                     if (sec == 0) {
                         countdownIcons.get(sec).setVisible(false);
                         timer.stop();
-
-//                        // notify your current thread that it can resume execution
-//                        synchronized (this) {
-//                            this.notify();
-//                        }
                     }
                     countdownIcons.get(sec - 1).setVisible(true);
                     if (sec < countdownIcons.size()) {
