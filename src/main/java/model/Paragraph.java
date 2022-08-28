@@ -1,5 +1,7 @@
 package model;
 
+import org.openqa.selenium.WebElement;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,9 +22,11 @@ public class Paragraph {
     private ArrayList<Character> paragraphAsListWithChar;
     private String paragraphAsString;
     private String inputPara;
+    private SentenceScraper scraper;
 
     // EFFECTS: constructs a paragraph as a list and as a string
     public Paragraph() {
+        scraper = new SentenceScraper();
         paragraphAsList = new ArrayList<>();
         this.paragraphAsList = generateParagraph();
         this.paragraphAsString = convertParaToString(paragraphAsList);
@@ -62,11 +66,7 @@ public class Paragraph {
     // EFFECTS: generates and returns a list of words from wordBank, and list has to be of size 25,
     //          (24 by zero based indexing), there can be duplicate words
     public List<String> generateParagraph() {
-        for (int i = 0; i < 25; i++) {
-            int random = (int) Math.floor(Math.random() * (allWords.length));
-            paragraphAsList.add(wordBank.get(random));
-        }
-        return paragraphAsList;
+        return scraper.convertToStringList(scraper.scrape());
     }
 
     // EFFECTS: returns and converts the paragraph that is a list of strings to one string connected by space
