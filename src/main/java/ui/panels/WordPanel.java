@@ -32,14 +32,15 @@ public class WordPanel extends JPanel {
     public WordPanel(TypingGamePanel gamePanel, Player player) {
         super();
         setLayout(null);
-        paragraph = new Paragraph();
         this.gamePanel = gamePanel;
+        this.paragraph = new Paragraph();
         this.countdown = new Countdown();
         for (Component c : countdown.getCountdownIcons()) {
             this.add(c);
         }
         setVisible(true);
     }
+
 
     // MODIFIES: this
     // EFFECTS: initial startup of game including countdown, starting game,
@@ -67,10 +68,10 @@ public class WordPanel extends JPanel {
     // EFFECTS: starts game by displaying words on screen
     public void startGame() {
         wordsToType = new JLabel("");
-        wordsToType.setText("<html><p style=\"width:300px;text-align:center;\">"
+        wordsToType.setText("<html><p style=\"width:300px;height: 500px;text-align:center;border:solid black 2px;\">"
                 + paragraph.getParagraphAsString() + "</p></html>");
         wordsToType.setFont(new Font("Serif", Font.PLAIN, 20));
-        wordsToType.setBounds(35, 50, 400, 150);
+        wordsToType.setBounds(35, -100, 400, 500);
         this.add(wordsToType);
     }
 
@@ -92,7 +93,7 @@ public class WordPanel extends JPanel {
                 }
             }
         });
-        textField.setBounds(35, height / 2, 400, 50);
+        textField.setBounds(35, height - 150, 400, 50);
         textField.setBackground(lightGray);
         textField.setOpaque(true);
         EventQueue.invokeLater(() -> textField.requestFocusInWindow());

@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SentenceScraper {
+public class SentenceScraper implements Runnable {
     private final String url = "https://www.thewordfinder.com/random-sentence-generator/";
     private final ChromeDriver driver;
 
@@ -27,7 +27,7 @@ public class SentenceScraper {
         WebElement numInput = driver.findElement(By.id("sentence_count"));
         WebElement generateBtn = driver.findElement(By.className("btn-lg"));
         numInput.sendKeys(Keys.RIGHT, Keys.BACK_SPACE);
-        numInput.sendKeys("5");
+        numInput.sendKeys("9");
         generateBtn.click();
         List<WebElement> sentences = driver.findElements(By.cssSelector("a[href='#']"));
         List<WebElement> filtered = filter(sentences);
@@ -49,5 +49,10 @@ public class SentenceScraper {
         List<String> sentences = new ArrayList<>();
         elements.forEach(element -> sentences.add(element.getText()));
         return sentences;
+    }
+
+    @Override
+    public void run() {
+        scrape();
     }
 }

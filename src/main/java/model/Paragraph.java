@@ -66,6 +66,7 @@ public class Paragraph {
     // EFFECTS: generates and returns a list of words from wordBank, and list has to be of size 25,
     //          (24 by zero based indexing), there can be duplicate words
     public List<String> generateParagraph() {
+
         return scraper.convertToStringList(scraper.scrape());
     }
 
