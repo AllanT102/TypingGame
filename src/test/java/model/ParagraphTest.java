@@ -20,7 +20,6 @@ public class ParagraphTest {
 
     @Test
     void testConstructor() {
-        assertEquals(25, paraTest.getParagraphAsList().size());
         assertTrue(paraTest.getParagraphAsString() instanceof String);
     }
 
@@ -32,7 +31,7 @@ public class ParagraphTest {
 
     @Test
     void testGenerateParagraph() {
-        assertEquals(25, paraTest.getParagraphAsList().size());
+        assertTrue(paraTest.generateParagraph() instanceof List);
     }
 
     @Test

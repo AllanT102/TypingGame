@@ -76,7 +76,7 @@ public class MenuPanel extends JPanel implements ActionListener {
     // EFFECTS: sets a welcome message at top of screen
     public void setWelcomeMessage() {
         JLabel welcomeMessage = new JLabel("Welcome, "
-                + Player.getPlayerInstance("").getName() + "!", SwingConstants.CENTER);
+                + Player.getPlayerInstance("").getName() + "!  ", SwingConstants.CENTER);
         welcomeMessage.setFont(new Font("Serif", Font.BOLD, 30));
         welcomeMessage.setBounds(0, 0, width, 40);
         welcomeMessage.setForeground(black);

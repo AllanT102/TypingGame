@@ -10,14 +10,6 @@ import java.util.List;
 // Represents the paragraph that the user will be typing and the paragraph that was typed by the user
 public class Paragraph {
 
-    private String[] allWords = {"hello", "cheese", "typing", "game", "final", "excellent", "missile", "configuration",
-            "invaders", "tank", "tired", "bubble tea", "model", "summer", "winter", "spring", "autumn", "sushi", "tree",
-            "Australia", "olympics", "Canada", "Space", "array", "computer", "science", "biology", "paragraph",
-            "these", "are", "my", "words", "it", "doesn't", "make", "any", "sense", "but", "it's", "okay",
-            "Vancouver"};
-
-    private List<String> wordBank = Arrays.asList(allWords);
-
     private List<String> paragraphAsList;
     private ArrayList<Character> paragraphAsListWithChar;
     private String paragraphAsString;
@@ -66,7 +58,6 @@ public class Paragraph {
     // EFFECTS: generates and returns a list of words from wordBank, and list has to be of size 25,
     //          (24 by zero based indexing), there can be duplicate words
     public List<String> generateParagraph() {
-
         return scraper.convertToStringList(scraper.scrape());
     }
 

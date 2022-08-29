@@ -3,6 +3,7 @@ package ui.panels;
 import model.Paragraph;
 import model.Player;
 import model.Score;
+import model.SentenceScraper;
 import ui.gamefunctionality.Countdown;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class WordPanel extends JPanel {
     private TypingGamePanel gamePanel;
     private JLabel wordsToType;
     private EndGamePanel endGamePanel;
+    private SentenceScraper scraper;
 
     // MODIFIES: gamePanel, player
     // EFFECTS: constructs a wordPanel object with paragraph that player will type and a countdown that will display
@@ -32,6 +34,7 @@ public class WordPanel extends JPanel {
     public WordPanel(TypingGamePanel gamePanel, Player player) {
         super();
         setLayout(null);
+        this.scraper = new SentenceScraper();
         this.gamePanel = gamePanel;
         this.paragraph = new Paragraph();
         this.countdown = new Countdown();
@@ -48,8 +51,8 @@ public class WordPanel extends JPanel {
     public void init() {
         countdown.startCountdown();
         countdown.getTimer().start();
-        startGame();
         createTextField();
+        startGame(scraper.getParagraph());
         setTimeout(() -> textField.setEditable(true), 3900);
     }
 
@@ -66,7 +69,7 @@ public class WordPanel extends JPanel {
 
     // MODIFIES: this
     // EFFECTS: starts game by displaying words on screen
-    public void startGame() {
+    public void startGame(String text) {
         wordsToType = new JLabel("");
         wordsToType.setText("<html><p style=\"width:300px;height: 500px;text-align:center;border:solid black 2px;\">"
                 + paragraph.getParagraphAsString() + "</p></html>");

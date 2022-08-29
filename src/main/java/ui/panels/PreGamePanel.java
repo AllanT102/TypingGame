@@ -30,7 +30,7 @@ public abstract class PreGamePanel extends JPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: creates title
     protected void makeTitle() {
-        JLabel title = new JLabel("TYPING GAME", SwingConstants.CENTER);
+        JLabel title = new JLabel("TYPING GAME   ", SwingConstants.CENTER);
         title.setFont(new Font("Serif", Font.BOLD, 50));
         title.setBounds(0, height / 5, width, 100);
         title.setOpaque(true);

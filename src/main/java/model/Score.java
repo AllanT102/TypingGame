@@ -63,7 +63,7 @@ public class Score implements Writable {
     public void setResults(Player p) {
         Date date = new Date();
         this.results = new String("Score: " + getScore()
-                + " Accuracy: " + getAcc() + "%");
+                + " Accuracy: " + getAcc() + "%  ");
         EventLog.getInstance().logEvent(new Event(p.getName()
                 + " scored " + getScore() + " with an accuracy of " + getAcc() + "%" + " at " + date));
     }

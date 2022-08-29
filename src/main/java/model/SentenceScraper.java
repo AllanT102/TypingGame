@@ -14,6 +14,7 @@ import java.util.List;
 public class SentenceScraper implements Runnable {
     private final String url = "https://www.thewordfinder.com/random-sentence-generator/";
     private final ChromeDriver driver;
+    private String paragraph;
 
     public SentenceScraper() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\allan\\chromedriver.exe");
@@ -47,12 +48,24 @@ public class SentenceScraper implements Runnable {
 
     public List<String> convertToStringList(List<WebElement> elements) {
         List<String> sentences = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         elements.forEach(element -> sentences.add(element.getText()));
+        sentences.forEach(sentence -> sb.append(sentence));
+        this.paragraph = sb.toString();
         return sentences;
+    }
+
+    public Runnable init() {
+        run();
+        return this;
+    }
+
+    public String getParagraph() {
+        return paragraph;
     }
 
     @Override
     public void run() {
-        scrape();
+        convertToStringList(scrape());
     }
 }
