@@ -1,5 +1,13 @@
 # Typing Game
 
+![Screenshot 2022-08-29 174412](https://user-images.githubusercontent.com/92118801/187323309-6e91aab4-7d8a-456a-b5a1-5a88b208580c.png)
+![Screenshot 2022-08-29 174048](https://user-images.githubusercontent.com/92118801/187323148-77cd92ce-eb37-4718-a1d9-62f98927d68a.png)
+
+![Screenshot 2022-08-29 174100](https://user-images.githubusercontent.com/92118801/187323150-8e2f994c-4c1c-4ad1-84b5-3434b5b4d8df.png)
+![Screenshot 2022-08-29 174124](https://user-images.githubusercontent.com/92118801/187323214-3d3a7afe-c724-4546-90c9-1b2310801945.png)
+
+![Screenshot 2022-08-29 174140](https://user-images.githubusercontent.com/92118801/187323320-228b1d47-6d0d-4832-8af3-f879f987613e.png)
+
 ### dare to test your typing abilities...
 
 test
@@ -68,5 +76,4 @@ also reuse a lot of code within classes as well, so I could have created helper 
 4. I could have implemented other functions to the game such as a timer countdown, colour matching to words typed 
 correctly, or even a password for users. I could have also fixed the bug about not being able to type before the countdown
 if I knew more about multi-threading and synchronous programming.
-
 
