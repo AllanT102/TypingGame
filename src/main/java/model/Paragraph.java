@@ -1,9 +1,8 @@
 package model;
 
-import org.openqa.selenium.WebElement;
+import ui.gamefunctionality.SentenceScraper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

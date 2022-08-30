@@ -1,9 +1,8 @@
-package model;
+package ui.gamefunctionality;
 
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SentenceScraper implements Runnable {
+public class SentenceScraper {
     private final String url = "https://www.thewordfinder.com/random-sentence-generator/";
     private final ChromeDriver driver;
     private String paragraph;
@@ -55,17 +54,7 @@ public class SentenceScraper implements Runnable {
         return sentences;
     }
 
-    public Runnable init() {
-        run();
-        return this;
-    }
-
     public String getParagraph() {
         return paragraph;
-    }
-
-    @Override
-    public void run() {
-        convertToStringList(scrape());
     }
 }

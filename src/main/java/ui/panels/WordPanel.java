@@ -3,7 +3,7 @@ package ui.panels;
 import model.Paragraph;
 import model.Player;
 import model.Score;
-import model.SentenceScraper;
+import ui.gamefunctionality.SentenceScraper;
 import ui.gamefunctionality.Countdown;
 
 import javax.swing.*;
